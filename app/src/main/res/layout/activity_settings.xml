@@ -44,7 +44,8 @@
                 android:id="@+id/email"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="2"/>
+                android:layout_weight="2"
+                android:inputType="textEmailAddress"/>
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
@@ -61,7 +62,8 @@
                 android:id="@+id/password"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="2"/>
+                android:layout_weight="2"
+                android:inputType="textPassword"/>
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
@@ -75,6 +77,7 @@
                 android:gravity="center_vertical|end"
                 android:text="@string/prefCurrency"/>
             <Spinner
+                android:id="@+id/prefCurrency"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="2"/>
@@ -92,6 +95,7 @@
                 android:gravity="center_vertical|end"
                 android:text="@string/prefExchange"/>
             <Spinner
+                android:id="@+id/prefExchange"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="2"/>
@@ -118,7 +122,8 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:text="@string/save"/>
+            android:text="@string/save"
+            android:onClick="onClick"/>
 
     </LinearLayout>
 

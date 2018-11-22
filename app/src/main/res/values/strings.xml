@@ -13,4 +13,6 @@
     <string name="prefExchange">Preferred exchange:</string>
     <string name="lastUpdated">Last updated:</string>
     <string name="save">Save changes:</string>
+    <string name="noChanges">No changes have been made</string>
+    <string name="exitWithoutSaving">Are you sure you want to exit without saving settings?</string>
 </resources>
