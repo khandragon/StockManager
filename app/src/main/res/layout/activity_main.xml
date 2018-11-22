@@ -23,24 +23,12 @@
             android:weightSum="2"
             android:orientation="horizontal">
             <Button
+                android:id="@+id/foreignExchange"
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="match_parent" />
             <Button
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="match_parent" />
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="2"
-            android:weightSum="2">
-            <Button
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="match_parent" />
-            <Button
+                android:id="@+id/financialHints"
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="match_parent" />
@@ -51,15 +39,34 @@
             android:layout_weight="2"
             android:weightSum="2">
             <Button
+                android:id="@+id/stockQuote"
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="match_parent" />
             <Button
+                android:id="@+id/notes"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="2"
+            android:weightSum="2">
+            <Button
+                android:id="@+id/calculator"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent" />
+            <Button
+                android:id="@+id/stockPortfolioMgmnt"
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="match_parent" />
         </LinearLayout>
         <TextView
+            android:id="@+id/username"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"/>
