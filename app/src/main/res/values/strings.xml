@@ -15,4 +15,7 @@
     <string name="save">Save changes:</string>
     <string name="noChanges">No changes have been made</string>
     <string name="exitWithoutSaving">Are you sure you want to exit without saving settings?</string>
+    <string name="yes">Yes, I do not want to save changes</string>
+    <string name="cancel">Cancel</string>
+    <string name="changesSaved">Settings have been successfully saved</string>
 </resources>

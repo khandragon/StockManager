@@ -1,8 +1,12 @@
 package com.dimitar.fe404sleepnotfound;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -68,8 +72,8 @@ public class SettingsActivity extends MenuActivity {
         usernameTxt = username.getText().toString();
         emailTxt = email.getText().toString();
         passwordTxt = password.getText().toString();
-        prefExchangeTxt = prefExchange.getSelectedItem().toString();
-        prefCurrencyTxt = prefCurrency.getSelectedItem().toString();
+//        prefExchangeTxt = prefExchange.getSelectedItem().toString();
+//        prefCurrencyTxt = prefCurrency.getSelectedItem().toString();
         if(checkIfChangesMade()){
             //Get current date timestamp and save changes in SharedPreferences
             settingsUpdated = true;
@@ -77,13 +81,44 @@ public class SettingsActivity extends MenuActivity {
             settingsEditor.putString("username", usernameTxt);
             settingsEditor.putString("email", emailTxt);
             settingsEditor.putString("password", passwordTxt);
-            settingsEditor.putString("prefCurrency", prefCurrencyTxt);
-            settingsEditor.putString("prefExchange", prefExchangeTxt);
+//            settingsEditor.putString("prefCurrency", prefCurrencyTxt);
+//            settingsEditor.putString("prefExchange", prefExchangeTxt);
             settingsEditor.putString("lastUpdated", lastUpdatedTxt);
+            //Notify user that settings have been saved
+            Toast.makeText(this, getString(R.string.changesSaved), Toast.LENGTH_LONG).show();
+            //Go back to the main activity
+            Intent openMainActivity = new Intent(this, MainActivity.class);
+            startActivity(openMainActivity);
         }
         else{
+            //Notify the user that no changes have been made
             Toast.makeText(this, getString(R.string.noChanges), Toast.LENGTH_SHORT).show();
         }
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK && checkIfChangesMade()) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setMessage(getString(R.string.exitWithoutSaving))
+                    .setCancelable(false)
+                    .setPositiveButton(getString(R.string.yes), new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            //Go back to the main activity
+                            Intent openMainActivity = new Intent(SettingsActivity.this, MainActivity.class);
+                            startActivity(openMainActivity);
+                        }
+                    })
+                    .setNegativeButton(getString(R.string.cancel), new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            //Stay in the settings activity
+                            return;
+                        }
+                    });
+            AlertDialog alert = builder.create();
+            alert.show();
+        }
+        return super.onKeyDown(keyCode, event);
     }
 
     private boolean checkIfChangesMade(){
