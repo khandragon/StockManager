@@ -8,6 +8,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -49,6 +50,15 @@ public class SettingsActivity extends MenuActivity {
         prefExchange = findViewById(R.id.prefExchange);
         lastUpdated = findViewById(R.id.lastUpdated);
 
+        //Set Spinner adapters for preferred currency & stock exchange
+        ArrayAdapter<CharSequence> currencyAdapter = ArrayAdapter.createFromResource(this, R.array.currencies, android.R.layout.simple_spinner_item);
+        currencyAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        prefCurrency.setAdapter(currencyAdapter);
+
+        ArrayAdapter<CharSequence> exchangeAdapter = ArrayAdapter.createFromResource(this, R.array.exchanges, android.R.layout.simple_spinner_item);
+        exchangeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        prefExchange.setAdapter(exchangeAdapter);
+
         //Check if settings have been previously set
         if(!settings.getString("username", "none").equals("none")){
             //Get String values from SharedPreferences
@@ -72,8 +82,8 @@ public class SettingsActivity extends MenuActivity {
         usernameTxt = username.getText().toString();
         emailTxt = email.getText().toString();
         passwordTxt = password.getText().toString();
-//        prefExchangeTxt = prefExchange.getSelectedItem().toString();
-//        prefCurrencyTxt = prefCurrency.getSelectedItem().toString();
+        prefExchangeTxt = prefExchange.getSelectedItem().toString();
+        prefCurrencyTxt = prefCurrency.getSelectedItem().toString();
         if(checkIfChangesMade()){
             //Get current date timestamp and save changes in SharedPreferences
             settingsUpdated = true;
@@ -81,9 +91,11 @@ public class SettingsActivity extends MenuActivity {
             settingsEditor.putString("username", usernameTxt);
             settingsEditor.putString("email", emailTxt);
             settingsEditor.putString("password", passwordTxt);
-//            settingsEditor.putString("prefCurrency", prefCurrencyTxt);
-//            settingsEditor.putString("prefExchange", prefExchangeTxt);
+            settingsEditor.putString("prefCurrency", prefCurrencyTxt);
+            settingsEditor.putString("prefExchange", prefExchangeTxt);
             settingsEditor.putString("lastUpdated", lastUpdatedTxt);
+            //Save all changes
+            settingsEditor.commit();
             //Notify user that settings have been saved
             Toast.makeText(this, getString(R.string.changesSaved), Toast.LENGTH_LONG).show();
             //Go back to the main activity
@@ -122,19 +134,19 @@ public class SettingsActivity extends MenuActivity {
     }
 
     private boolean checkIfChangesMade(){
-        if(!settings.getString("username", "none").equals(usernameTxt)){
+        if(!settings.getString("username", "none").equals(username.getText())){
             return true;
         }
-        else if(!settings.getString("email", "none").equals(emailTxt)){
+        else if(!settings.getString("email", "none").equals(email.getText())){
             return true;
         }
-        else if(!settings.getString("password", "none").equals(passwordTxt)){
+        else if(!settings.getString("password", "none").equals(password.getText())){
             return true;
         }
-        else if(!settings.getString("prefCurrency", "none").equals(prefCurrencyTxt)){
+        else if(!settings.getString("prefCurrency", "none").equals(prefCurrency.getSelectedItem().toString())){
             return true;
         }
-        else if(!settings.getString("prefExchange", "none").equals(prefExchangeTxt)){
+        else if(!settings.getString("prefExchange", "none").equals(prefExchange.getSelectedItem().toString())){
             return true;
         }
         else {
