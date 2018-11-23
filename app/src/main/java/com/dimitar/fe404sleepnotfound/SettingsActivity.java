@@ -69,10 +69,32 @@ public class SettingsActivity extends MenuActivity {
             prefCurrencyTxt = settings.getString("prefCurrency", "none");
             prefExchangeTxt = settings.getString("prefExchange", "none");
             lastUpdatedTxt = settings.getString("lastUpdated", "none");
-            //If settings have been previously set, display them as hints
+            //If settings have been previously set, display them as hints & display appropriate items in Spinners
             username.setHint(usernameTxt);
             email.setHint(emailTxt);
             password.setText(passwordTxt);
+            switch(prefCurrencyTxt){
+                case "CAD":
+                    prefCurrency.setSelection(0);
+                    break;
+                case "USD":
+                    prefCurrency.setSelection(1);
+                    break;
+                case "BTC":
+                    prefCurrency.setSelection(2);
+                    break;
+            }
+            switch(prefExchangeTxt){
+                case "TSX":
+                    prefExchange.setSelection(0);
+                    break;
+                case "NYSE":
+                    prefExchange.setSelection(1);
+                    break;
+                case "NASDAQ":
+                    prefExchange.setSelection(2);
+                    break;
+            }
             lastUpdated.setText(lastUpdatedTxt);
         }
 
@@ -145,43 +167,38 @@ public class SettingsActivity extends MenuActivity {
     }
 
     private boolean checkIfChangesMade(){
-        if(!settings.getString("username", "none").equals(username.getText())){
-            //If settings have already been set, check also the hint if text has not been set
-            if(username.getText().toString().isEmpty() && !username.getHint().toString().isEmpty()){
-                if(!settings.getString("username", "none").equals(username.getHint().toString())){
-                    return true;
-                }
-                else{
-                    return false;
-                }
-            }
-            else {
+        //USER NAME
+        //If settings have already been set and the textview is not modified, check with the hint
+        if(username.getText().toString().isEmpty() && !username.getHint().toString().isEmpty()){
+            if(!settings.getString("username", "none").equals(username.getHint().toString())){
                 return true;
             }
         }
-        else if(!settings.getString("email", "none").equals(email.getText())){
-            //If settings have already been set, check also the hint if text has not been set
-            if(email.getText().toString().isEmpty() && !email.getHint().toString().isEmpty()){
-                if(!settings.getString("email", "none").equals(email.getHint().toString())){
-                    return true;
-                }
-                else{
-                    return false;
-                }
+        else if(!settings.getString("username", "none").equals(username.getText().toString())){
+            return true;
+        }
+        //EMAIL
+        //If settings have already been set and the textview is not modified, check with the hint
+        if(email.getText().toString().isEmpty() && !email.getHint().toString().isEmpty()){
+            if(!settings.getString("email", "none").equals(email.getHint().toString())){
+                return true;
             }
+        }
+        else if(!settings.getString("email", "none").equals(email.getText().toString())){
             return true;
         }
-        else if(!settings.getString("password", "none").equals(password.getText().toString())){
+        //PASSWORD
+        if(!settings.getString("password", "none").equals(password.getText().toString())){
             return true;
         }
-        else if(!settings.getString("prefCurrency", "none").equals(prefCurrency.getSelectedItem().toString())){
+        //PREF CURRENCY
+        if(!settings.getString("prefCurrency", "none").equals(prefCurrency.getSelectedItem().toString())){
             return true;
         }
-        else if(!settings.getString("prefExchange", "none").equals(prefExchange.getSelectedItem().toString())){
+        //PREF EXCHANGE
+        if(!settings.getString("prefExchange", "none").equals(prefExchange.getSelectedItem().toString())){
             return true;
         }
-        else {
-            return false;
-        }
+        return false;
     }
 }
