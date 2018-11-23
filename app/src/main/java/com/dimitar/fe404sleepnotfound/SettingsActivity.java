@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -71,7 +72,7 @@ public class SettingsActivity extends MenuActivity {
             //If settings have been previously set, display them as hints
             username.setHint(usernameTxt);
             email.setHint(emailTxt);
-            password.setHint(passwordTxt);
+            password.setText(passwordTxt);
             lastUpdated.setText(lastUpdatedTxt);
         }
 
@@ -88,8 +89,18 @@ public class SettingsActivity extends MenuActivity {
             //Get current date timestamp and save changes in SharedPreferences
             settingsUpdated = true;
             lastUpdatedTxt = Calendar.getInstance().getTime().toString();
-            settingsEditor.putString("username", usernameTxt);
-            settingsEditor.putString("email", emailTxt);
+            if(usernameTxt.isEmpty() && !username.getHint().toString().isEmpty()){
+                settingsEditor.putString("username", username.getHint().toString());
+            }
+            else {
+                settingsEditor.putString("username", usernameTxt);
+            }
+            if(emailTxt.isEmpty() && !email.getHint().toString().isEmpty()){
+                settingsEditor.putString("email",email.getHint().toString());
+            }
+            else {
+                settingsEditor.putString("email", emailTxt);
+            }
             settingsEditor.putString("password", passwordTxt);
             settingsEditor.putString("prefCurrency", prefCurrencyTxt);
             settingsEditor.putString("prefExchange", prefExchangeTxt);
@@ -135,12 +146,32 @@ public class SettingsActivity extends MenuActivity {
 
     private boolean checkIfChangesMade(){
         if(!settings.getString("username", "none").equals(username.getText())){
-            return true;
+            //If settings have already been set, check also the hint if text has not been set
+            if(username.getText().toString().isEmpty() && !username.getHint().toString().isEmpty()){
+                if(!settings.getString("username", "none").equals(username.getHint().toString())){
+                    return true;
+                }
+                else{
+                    return false;
+                }
+            }
+            else {
+                return true;
+            }
         }
         else if(!settings.getString("email", "none").equals(email.getText())){
+            //If settings have already been set, check also the hint if text has not been set
+            if(email.getText().toString().isEmpty() && !email.getHint().toString().isEmpty()){
+                if(!settings.getString("email", "none").equals(email.getHint().toString())){
+                    return true;
+                }
+                else{
+                    return false;
+                }
+            }
             return true;
         }
-        else if(!settings.getString("password", "none").equals(password.getText())){
+        else if(!settings.getString("password", "none").equals(password.getText().toString())){
             return true;
         }
         else if(!settings.getString("prefCurrency", "none").equals(prefCurrency.getSelectedItem().toString())){
