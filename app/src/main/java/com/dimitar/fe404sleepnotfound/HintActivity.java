@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.dimitar.fe404sleepnotfound.data.CircularArray;
+import com.dimitar.fe404sleepnotfound.data.Hint;
 import com.dimitar.fe404sleepnotfound.persistence.HintDAO;
 import com.dimitar.fe404sleepnotfound.persistence.HintDAOFirebase;
 
@@ -27,12 +28,7 @@ public final class HintActivity extends Activity {
 
         // Manage ImageView with the hint
         hints.onCurrentChange(this::changeHintView);
-        hintView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                openHintSource(hints.getCurrent());
-            }
-        });
+        hintView.setOnClickListener(e -> openHintSource(hints.getCurrent()));
 
         // Manage left/right buttons
         // ImageButton rightArrow
