@@ -34,4 +34,5 @@
     <string name="notes">Notes</string>
     <string name="calculator">Loan/Credit calculator</string>
     <string name="portfolio">Stock portfolio management</string>
+    <string name="noUser">No user has been registered with the app yet - please set it in the settings</string>
 </resources>
