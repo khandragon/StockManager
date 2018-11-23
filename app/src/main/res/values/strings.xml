@@ -28,4 +28,10 @@
         <item>NYSE</item>
         <item>NASDAQ</item>
     </string-array>
+    <string name="foreignExchange">Foreign exchange</string>
+    <string name="financialHints">Financial hints</string>
+    <string name="stockQuotes">Stock quotes</string>
+    <string name="notes">Notes</string>
+    <string name="calculator">Loan/Credit calculator</string>
+    <string name="portfolio">Stock portfolio management</string>
 </resources>

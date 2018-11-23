@@ -26,12 +26,14 @@
                 android:id="@+id/foreignExchange"
                 android:layout_width="0dp"
                 android:layout_weight="1"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"
+                android:text="@string/foreignExchange"/>
             <Button
                 android:id="@+id/financialHints"
                 android:layout_width="0dp"
                 android:layout_weight="1"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"
+                android:text="@string/financialHints"/>
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
@@ -42,12 +44,14 @@
                 android:id="@+id/stockQuote"
                 android:layout_width="0dp"
                 android:layout_weight="1"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"
+                android:text="@string/stockQuotes"/>
             <Button
                 android:id="@+id/notes"
                 android:layout_width="0dp"
                 android:layout_weight="1"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"
+                android:text="@string/notes"/>
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
@@ -58,12 +62,14 @@
                 android:id="@+id/calculator"
                 android:layout_width="0dp"
                 android:layout_weight="1"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"
+                android:text="@string/calculator"/>
             <Button
                 android:id="@+id/stockPortfolioMgmnt"
                 android:layout_width="0dp"
                 android:layout_weight="1"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"
+                android:text="@string/portfolio"/>
         </LinearLayout>
         <TextView
             android:id="@+id/username"
