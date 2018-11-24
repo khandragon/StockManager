@@ -1,13 +1,21 @@
 package com.dimitar.fe404sleepnotfound;
 
 import android.app.Activity;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.widget.TextView;
 
-public class MainActivity extends Activity {
+public class MainActivity extends MenuActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        //Get the username from SharedPreferences and display in bottom TextView
+        SharedPreferences settings = getSharedPreferences("com.dimitar.fe404sleepnotfound", MODE_PRIVATE);
+        String username = settings.getString("username", getString(R.string.noUser));
+        TextView userTxtView = findViewById(R.id.username);
+        userTxtView.setText(username);
     }
 }
