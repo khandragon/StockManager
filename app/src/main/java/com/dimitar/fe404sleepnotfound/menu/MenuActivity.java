@@ -1,12 +1,12 @@
-package com.dimitar.fe404sleepnotfound;
+package com.dimitar.fe404sleepnotfound.menu;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
+
+import com.dimitar.fe404sleepnotfound.R;
 
 /**
  * Contains Menu features. An Activity that wants to display the menu and make its functionality

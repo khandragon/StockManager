@@ -1,4 +1,4 @@
-package com.dimitar.fe404sleepnotfound;
+package com.dimitar.fe404sleepnotfound.menu;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -12,6 +12,9 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.dimitar.fe404sleepnotfound.MainActivity;
+import com.dimitar.fe404sleepnotfound.R;
 
 import java.util.Calendar;
 

@@ -1,6 +1,8 @@
-package com.dimitar.fe404sleepnotfound;
+package com.dimitar.fe404sleepnotfound.menu;
 
 import android.os.Bundle;
+
+import com.dimitar.fe404sleepnotfound.R;
 
 /**
  * Shows the user information about the application, its developers and their pictures.

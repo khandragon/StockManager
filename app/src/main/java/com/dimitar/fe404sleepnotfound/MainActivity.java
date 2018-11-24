@@ -6,6 +6,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
+import com.dimitar.fe404sleepnotfound.menu.AboutActivity;
+import com.dimitar.fe404sleepnotfound.menu.MenuActivity;
+
 /**
  * Shows the user the application logo, a Menu, a list of launcher buttons for
  * each functionality Activities and the current user's name. From here, the user can launch the
