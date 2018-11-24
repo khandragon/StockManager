@@ -11,6 +11,7 @@ public class CircularArray<T> {
             changeCurrentListener.consumeCurrent(backingArray[currIndex]);
         }
     }
+    @FunctionalInterface
     public interface OnChangeCurrentEventListener<T> {
         void consumeCurrent(T newCurrent);
     }
