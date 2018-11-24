@@ -1,8 +1,10 @@
 package com.dimitar.fe404sleepnotfound;
 
-import android.app.Activity;
 import android.os.Bundle;
 
+/**
+ * Shows the user information about the application, its developers and their pictures.
+ */
 public class AboutActivity extends MenuActivity {
 
     @Override
