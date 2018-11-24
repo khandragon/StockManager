@@ -11,21 +11,49 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:weightSum="5">
-        <TextView
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="2"
-            android:text="@string/appDescription"/>
+            android:weightSum="4"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:fontFamily="casual"
+                android:theme="@style/heading"
+                android:text="@string/about"/>
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="3">
+                <TextView
+                    android:padding="15dp"
+                    android:textSize="25sp"
+                    android:textColor="@color/colorPrimary"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/appDescription"/>
+            </ScrollView>
+
+        </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="3"
             android:orientation="vertical"
-            android:weightSum="5">
+            android:weightSum="6">
             <TextView
+                android:padding="9dp"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="1"
+                android:layout_weight="2"
+                android:textColor="@color/colorPrimary"
+                android:fontFamily="sans-serif-condensed"
+                android:textSize="20sp"
+                android:gravity="center"
                 android:text="@string/teamMembers"/>
             <ImageView
                 android:id="@+id/developersImg"
