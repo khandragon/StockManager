@@ -3,8 +3,8 @@
     <string name="settings">Settings</string>
     <string name="dawson">Dawson</string>
     <string name="about">About</string>
-    <string name="appDescription">Welcome to our Stock utilities application. This app provides you with utilities for currency conversion, note taking, calculating credit/loans, view stock quotes, get financial hints and manage your stock portfolio. It was made in the Fall 2018 semester in Dawson College for the Mobile Software Development course (420/-518/-DW)</string>
-    <string name="teamMembers">Dimitar, James, Saad, Jean-Claude</string>
+    <string name="appDescription">This app provides you with utilities for currency conversion, note taking, calculating credit/loans, view stock quotes, get financial hints and manage your stock portfolio. It was made in the Fall 2018 semester in Dawson College for the Mobile Software Development course (420/-518/-DW)</string>
+    <string name="teamMembers">This app was made by Dimitar, James, Saad, Jean-Claude</string>
     <string name="na">Not available</string>
     <string name="username">First and Last name:</string>
     <string name="email">Email address:</string>
@@ -12,7 +12,7 @@
     <string name="prefCurrency">Preferred currency:</string>
     <string name="prefExchange">Preferred exchange:</string>
     <string name="lastUpdated">Last updated:</string>
-    <string name="save">Save changes:</string>
+    <string name="save">Save changes</string>
     <string name="noChanges">No changes have been made</string>
     <string name="exitWithoutSaving">Are you sure you want to exit without saving settings?</string>
     <string name="yes">Yes, I do not want to save changes</string>
@@ -33,6 +33,6 @@
     <string name="stockQuotes">Stock quotes</string>
     <string name="notes">Notes</string>
     <string name="calculator">Loan/Credit calculator</string>
-    <string name="portfolio">Stock portfolio management</string>
+    <string name="portfolio">My Stock Portfolio</string>
     <string name="noUser">No user has been registered with the app yet - please set it in the settings</string>
 </resources>

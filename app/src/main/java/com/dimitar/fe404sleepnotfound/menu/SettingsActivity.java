@@ -1,12 +1,10 @@
-package com.dimitar.fe404sleepnotfound;
+package com.dimitar.fe404sleepnotfound.menu;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -15,10 +13,15 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.dimitar.fe404sleepnotfound.MainActivity;
+import com.dimitar.fe404sleepnotfound.R;
+
 import java.util.Calendar;
 
+/**
+ * Lets the user set application settings used by other Activities in SharedPreferences.
+ */
 public class SettingsActivity extends MenuActivity {
-    private boolean settingsUpdated;
     private SharedPreferences settings;
     private SharedPreferences.Editor settingsEditor;
     private EditText username;
@@ -34,12 +37,16 @@ public class SettingsActivity extends MenuActivity {
     private String prefExchangeTxt;
     private String lastUpdatedTxt;
 
+    /**
+     * Custom implementation of the onCreate lifecycle method that sets references to the necessary
+     * views, SharedPreferences and check if any settings have been previously set.
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
 
-        settingsUpdated = false;
         settings = getSharedPreferences("com.dimitar.fe404sleepnotfound", MODE_PRIVATE);
         settingsEditor = settings.edit();
 
@@ -100,6 +107,11 @@ public class SettingsActivity extends MenuActivity {
 
     }
 
+    /**
+     * Click implementation for the Save Changes button. It saves all changes made and displays a
+     * message regarding save status.
+     * @param v
+     */
     public void onClick(View v){
         //Save all changes to strings values
         usernameTxt = username.getText().toString();
@@ -109,7 +121,6 @@ public class SettingsActivity extends MenuActivity {
         prefCurrencyTxt = prefCurrency.getSelectedItem().toString();
         if(checkIfChangesMade()){
             //Get current date timestamp and save changes in SharedPreferences
-            settingsUpdated = true;
             lastUpdatedTxt = Calendar.getInstance().getTime().toString();
             if(usernameTxt.isEmpty() && !username.getHint().toString().isEmpty()){
                 settingsEditor.putString("username", username.getHint().toString());
@@ -141,6 +152,13 @@ public class SettingsActivity extends MenuActivity {
         }
     }
 
+    /**
+     * Click implementation for the Android back button. If there are any unsaved changes, it prompts
+     * the user to confirm that they want to leave the Activity without saving their changes.
+     * @param keyCode
+     * @param event
+     * @return event status
+     */
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK && checkIfChangesMade()) {
@@ -166,6 +184,10 @@ public class SettingsActivity extends MenuActivity {
         return super.onKeyDown(keyCode, event);
     }
 
+    /**
+     * Utility method that checks if any changes have been made.
+     * @return true if changes have been made to settings
+     */
     private boolean checkIfChangesMade(){
         //USER NAME
         //If settings have already been set and the textview is not modified, check with the hint

@@ -15,6 +15,8 @@
             android:id="@+id/teamLogoImg"
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:src="@drawable/logo"
+            android:onClick="openAbout"
             android:layout_weight="2"/>
         <LinearLayout
             android:layout_width="match_parent"
@@ -27,12 +29,16 @@
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="match_parent"
+                android:theme="@style/navButton"
+                android:drawableEnd="@drawable/exchange"
                 android:text="@string/foreignExchange"/>
             <Button
                 android:id="@+id/financialHints"
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="match_parent"
+                android:theme="@style/navButton"
+                android:drawableEnd="@drawable/hints"
                 android:text="@string/financialHints"/>
         </LinearLayout>
         <LinearLayout
@@ -45,12 +51,16 @@
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="match_parent"
+                android:theme="@style/navButton"
+                android:drawableEnd="@drawable/stocks"
                 android:text="@string/stockQuotes"/>
             <Button
                 android:id="@+id/notes"
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="match_parent"
+                android:theme="@style/navButton"
+                android:drawableEnd="@drawable/notes"
                 android:text="@string/notes"/>
         </LinearLayout>
         <LinearLayout
@@ -63,19 +73,29 @@
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="match_parent"
+                android:theme="@style/navButton"
+                android:drawableEnd="@drawable/calculator"
                 android:text="@string/calculator"/>
             <Button
                 android:id="@+id/stockPortfolioMgmnt"
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="match_parent"
+                android:theme="@style/navButton"
+                android:drawableEnd="@drawable/portfolio"
                 android:text="@string/portfolio"/>
         </LinearLayout>
         <TextView
             android:id="@+id/username"
+            android:background="@color/orange"
+            android:textColor="@color/white"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1"/>
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textSize="20sp"
+            android:textAllCaps="true"
+            android:text="@string/na"/>
     </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>
