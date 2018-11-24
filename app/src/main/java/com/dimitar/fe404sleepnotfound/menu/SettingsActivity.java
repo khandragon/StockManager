@@ -190,7 +190,7 @@ public class SettingsActivity extends MenuActivity {
      */
     private boolean checkIfChangesMade(){
         //If no settings have been set
-        if(username.getText() == null || email.getText() == null || password.getText() == null){
+        if(settings.getString("username", "none").equals("none") || settings.getString("email", "none").equals("none") || settings.getString("password", "none").equals("none")){
             return false;
         }
         //USER NAME
