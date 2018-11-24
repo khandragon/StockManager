@@ -1,8 +1,10 @@
 package com.dimitar.fe404sleepnotfound;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.TextView;
 
 public class MainActivity extends MenuActivity {
@@ -17,5 +19,10 @@ public class MainActivity extends MenuActivity {
         String username = settings.getString("username", getString(R.string.noUser));
         TextView userTxtView = findViewById(R.id.username);
         userTxtView.setText(username);
+    }
+
+    public void openAbout(View v){
+        Intent openAbout = new Intent(this, AboutActivity.class);
+        startActivity(openAbout);
     }
 }
