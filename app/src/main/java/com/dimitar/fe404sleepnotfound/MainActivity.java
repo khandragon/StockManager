@@ -17,14 +17,17 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
+//__________________________________________
+        //This code to start activity
         activityBtn = findViewById(R.id.Temp);
         activityBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(this, DisplayMessageActivity.class);
+                Intent  intent = new Intent(MainActivity.this, ForeignExchangeActivity.class);
+                startActivity(intent);
             }
         });
+//___________________________________________
 
 
     }
