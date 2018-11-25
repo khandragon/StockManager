@@ -8,6 +8,7 @@ import android.widget.TextView;
 
 import com.dimitar.fe404sleepnotfound.menu.AboutActivity;
 import com.dimitar.fe404sleepnotfound.menu.MenuActivity;
+import com.dimitar.fe404sleepnotfound.notes.NotesActivity;
 
 /**
  * Shows the user the application logo, a Menu, a list of launcher buttons for
@@ -19,6 +20,7 @@ public class MainActivity extends MenuActivity {
     /**
      * Custom implementation of the onCreate lifecycle method. It sets the view's contents and gets
      * the username of the current user set in Settings.
+     *
      * @param savedInstanceState
      */
     @Override
@@ -35,10 +37,16 @@ public class MainActivity extends MenuActivity {
 
     /**
      * Implementation of the onClick for the logo ImageView that opens the About Activity.
+     *
      * @param v
      */
-    public void openAbout(View v){
+    public void openAbout(View v) {
         Intent openAbout = new Intent(this, AboutActivity.class);
         startActivity(openAbout);
+    }
+
+    public void openNotes(View view) {
+        Intent openNotes = new Intent(this, NotesActivity.class);
+        startActivity(openNotes);
     }
 }
