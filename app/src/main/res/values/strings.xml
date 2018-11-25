@@ -35,4 +35,6 @@
     <string name="calculator">Loan/Credit calculator</string>
     <string name="portfolio">My Stock Portfolio</string>
     <string name="noUser">No user has been registered with the app yet - please set it in the settings</string>
+    <string name="exampleTicker">AAPL</string>
+    <string name="explainTicker">Enter URI pls</string>
 </resources>

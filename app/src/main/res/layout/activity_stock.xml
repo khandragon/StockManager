@@ -1,9 +1,42 @@
-<?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".quotes.StockActivity">
+    android:orientation="vertical">
 
-</android.support.constraint.ConstraintLayout>
+    <ScrollView
+        android:id="@+id/scrollv"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="10">
+        <TextView
+            android:id="@+id/uriMessage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:context=".HttpExample" />
+    </ScrollView>
+
+    <EditText
+        android:id="@+id/myTicker"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:hint="@string/exampleTicker"
+        android:inputType="textUri"
+        android:autofillHints="" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:onClick="getTickerQuote"
+        android:text="Load It" />
+
+    <TextView
+        android:id="@+id/explain"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:text="@string/explainTicker"
+        tools:context=".HttpExample" />
+</LinearLayout>
