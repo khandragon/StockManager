@@ -28,18 +28,21 @@
                 android:id="@+id/foreignExchange"
                 android:layout_width="0dp"
                 android:layout_weight="1"
+                android:onClick="openAbout"
                 android:layout_height="match_parent"
-                android:theme="@style/navButton"
                 android:drawableEnd="@drawable/exchange"
-                android:text="@string/foreignExchange"/>
+                android:text="@string/foreignExchange"
+                android:backgroundTint="@color/buttonBG"
+                android:textColor="@color/white"/>
             <Button
                 android:id="@+id/financialHints"
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="match_parent"
-                android:theme="@style/navButton"
                 android:drawableEnd="@drawable/hints"
-                android:text="@string/financialHints"/>
+                android:text="@string/financialHints"
+                android:backgroundTint="@color/buttonBG"
+                android:textColor="@color/white"/>
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
@@ -51,17 +54,19 @@
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="match_parent"
-                android:theme="@style/navButton"
                 android:drawableEnd="@drawable/stocks"
-                android:text="@string/stockQuotes"/>
+                android:text="@string/stockQuotes"
+                android:backgroundTint="@color/buttonBG"
+                android:textColor="@color/white"/>
             <Button
                 android:id="@+id/notes"
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="match_parent"
-                android:theme="@style/navButton"
                 android:drawableEnd="@drawable/notes"
-                android:text="@string/notes"/>
+                android:text="@string/notes"
+                android:backgroundTint="@color/buttonBG"
+                android:textColor="@color/white"/>
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
@@ -72,8 +77,9 @@
                 android:id="@+id/calculator"
                 android:layout_width="0dp"
                 android:layout_weight="1"
+                android:backgroundTint="@color/buttonBG"
+                android:textColor="@color/white"
                 android:layout_height="match_parent"
-                android:theme="@style/navButton"
                 android:drawableEnd="@drawable/calculator"
                 android:text="@string/calculator"/>
             <Button
@@ -81,9 +87,10 @@
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="match_parent"
-                android:theme="@style/navButton"
                 android:drawableEnd="@drawable/portfolio"
-                android:text="@string/portfolio"/>
+                android:text="@string/portfolio"
+                android:backgroundTint="@color/buttonBG"
+                android:textColor="@color/white"/>
         </LinearLayout>
         <TextView
             android:id="@+id/username"
