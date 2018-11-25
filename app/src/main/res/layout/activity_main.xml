@@ -28,7 +28,6 @@
                 android:id="@+id/foreignExchange"
                 android:layout_width="0dp"
                 android:layout_weight="1"
-                android:onClick="openAbout"
                 android:layout_height="match_parent"
                 android:drawableEnd="@drawable/exchange"
                 android:text="@string/foreignExchange"
