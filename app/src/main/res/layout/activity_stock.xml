@@ -4,26 +4,38 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <ScrollView
-        android:id="@+id/scrollv"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="10">
-        <TextView
-            android:id="@+id/uriMessage"
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            tools:context=".HttpExample" />
-    </ScrollView>
+            android:orientation="horizontal"
+            android:paddingTop="5dp">
+
+            <TextView
+                android:id="@+id/uriMessage"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="4"
+                android:gravity="center"
+                tools:context=".HttpExample" />
+
+            <Button
+                android:id="@+id/addBtn"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:onClick="addTicker"
+                android:text="Add" />
+        </LinearLayout>
 
     <EditText
         android:id="@+id/myTicker"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
+        android:autofillHints=""
         android:hint="@string/exampleTicker"
-        android:inputType="textUri"
-        android:autofillHints="" />
+        android:inputType="textUri" />
 
     <Button
         android:layout_width="match_parent"
@@ -32,11 +44,9 @@
         android:onClick="getTickerQuote"
         android:text="Load It" />
 
-    <TextView
-        android:id="@+id/explain"
+    <ListView
         android:layout_width="match_parent"
-        android:layout_height="0dp"
         android:layout_weight="1"
-        android:text="@string/explainTicker"
-        tools:context=".HttpExample" />
+        android:layout_height="wrap_content" />
+
 </LinearLayout>

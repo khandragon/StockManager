@@ -1,12 +1,15 @@
 package com.dimitar.fe404sleepnotfound.quotes;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ScrollView;
 import android.widget.TabHost;
@@ -26,6 +29,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 import javax.net.ssl.HttpsURLConnection;
 
@@ -35,24 +41,52 @@ public class StockActivity extends MenuActivity {
     private String apiToken = "gHYVnybcdk2fooQ9INz7b11s23qqG57Xxn4197VPboOUYmO2hB7ra6bmKwoF";
     private EditText urlText;
     private TextView textView;
-    private ScrollView scrollv;
+    private Button addBtn;
+    private Set<String> saved = null;
+    private String lastSearch = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_stock);
-
         urlText = (EditText) findViewById(R.id.myTicker);
         textView = (TextView) findViewById(R.id.uriMessage);
-        scrollv = (ScrollView) findViewById(R.id.scrollv);
-        //scrollv.setVisibility(View.GONE);
+        addBtn = (Button) findViewById(R.id.addBtn);
+        addBtn.setEnabled(false);
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        SharedPreferences.Editor editor = prefs.edit();
+        saved = prefs.getStringSet("savedList", new HashSet<String>());
+        if (saved != null) {
+            //populateList()
+        }
+
     }
 
+    public void addTicker(View view) {
+        Log.i(TAG, lastSearch);
+        saved.add(lastSearch);
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putStringSet("savedList", saved);
+        editor.commit();
+        populateList();
+    }
+    public void removeTicker(String ticker) {
+        Log.i(TAG, ticker);
+        saved.remove(ticker);
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putStringSet("savedList", saved);
+        editor.commit();
+        populateList();
+    }
+
+
     public void getTickerQuote(View view) {
+        addBtn.setEnabled(false);
         InputStream stream = null;
         HttpsURLConnection conn = null;
         String ticker = urlText.getText().toString();
-        scrollv.setVisibility(View.VISIBLE);
         if (ticker.isEmpty()) {
             textView.setText("Gimmey some ticker pleaze.");
         } else {
@@ -90,6 +124,14 @@ public class StockActivity extends MenuActivity {
 
         return new String(byteArrayOutputStream.toString());
     }
+
+
+    private void populateList() {
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        saved = prefs.getStringSet("savedList", new HashSet<String>());
+        Log.i(TAG, "this is from savedlist" + saved.toString());
+    }
+
 
     private class makeRequest extends AsyncTask<String, Void, String> {
 
@@ -139,21 +181,23 @@ public class StockActivity extends MenuActivity {
             String companyName = null;
             String currentPrice = null;
             String currency = null;
+            String ticker = null;
             try {
                 Log.i(TAG, result);
                 JSONObject jsonObject = new JSONObject(result);
                 if (jsonObject.has("Message")) {
                     textView.setText("Unknown Ticker");
                 } else {
+                    addBtn.setEnabled(true);
                     JSONArray jsonArray = jsonObject.getJSONArray("data");
                     for (int i = 0; i < jsonArray.length(); i++) {
                         JSONObject object = jsonArray.getJSONObject(i);
                         companyName = object.getString("name");
                         currentPrice = object.getString("price");
                         currency = object.getString("currency");
+                        lastSearch = object.getString("symbol");
                     }
-                    Log.i(TAG, companyName);
-                    textView.setText("company: " + companyName + " curreny: " + currency + " price: " + currentPrice);
+                    textView.setText(" company: " + companyName + " curreny: " + currency + " price: " + currentPrice);
                 }
             } catch (JSONException e) {
                 e.printStackTrace();
