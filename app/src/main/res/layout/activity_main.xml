@@ -11,91 +11,103 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:weightSum="9">
+
         <ImageView
             android:id="@+id/teamLogoImg"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:src="@drawable/logo"
+            android:layout_weight="2"
             android:onClick="openAbout"
-            android:layout_weight="2"/>
+            android:src="@drawable/logo" />
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="2"
-            android:weightSum="2"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:weightSum="2">
+
             <Button
                 android:id="@+id/foreignExchange"
                 android:layout_width="0dp"
-                android:layout_weight="1"
                 android:layout_height="match_parent"
-                android:theme="@style/navButton"
+                android:layout_weight="1"
                 android:drawableEnd="@drawable/exchange"
-                android:text="@string/foreignExchange"/>
+                android:text="@string/foreignExchange"
+                android:theme="@style/navButton" />
+
             <Button
                 android:id="@+id/financialHints"
                 android:layout_width="0dp"
-                android:layout_weight="1"
                 android:layout_height="match_parent"
-                android:theme="@style/navButton"
+                android:layout_weight="1"
                 android:drawableEnd="@drawable/hints"
-                android:text="@string/financialHints"/>
+                android:text="@string/financialHints"
+                android:theme="@style/navButton" />
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="2"
             android:weightSum="2">
+
             <Button
                 android:id="@+id/stockQuote"
                 android:layout_width="0dp"
-                android:layout_weight="1"
                 android:layout_height="match_parent"
-                android:theme="@style/navButton"
+                android:layout_weight="1"
                 android:drawableEnd="@drawable/stocks"
-                android:text="@string/stockQuotes"/>
+                android:text="@string/stockQuotes"
+                android:theme="@style/navButton" />
+
             <Button
                 android:id="@+id/notes"
                 android:layout_width="0dp"
-                android:layout_weight="1"
                 android:layout_height="match_parent"
-                android:theme="@style/navButton"
+                android:layout_weight="1"
                 android:drawableEnd="@drawable/notes"
+                android:onClick="openNotes"
                 android:text="@string/notes"/>
+                <!--android:theme="@style/navButton" />-->
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="2"
             android:weightSum="2">
+
             <Button
                 android:id="@+id/calculator"
                 android:layout_width="0dp"
-                android:layout_weight="1"
                 android:layout_height="match_parent"
-                android:theme="@style/navButton"
+                android:layout_weight="1"
                 android:drawableEnd="@drawable/calculator"
-                android:text="@string/calculator"/>
+                android:text="@string/calculator"
+                android:theme="@style/navButton" />
+
             <Button
                 android:id="@+id/stockPortfolioMgmnt"
                 android:layout_width="0dp"
-                android:layout_weight="1"
                 android:layout_height="match_parent"
-                android:theme="@style/navButton"
+                android:layout_weight="1"
                 android:drawableEnd="@drawable/portfolio"
-                android:text="@string/portfolio"/>
+                android:text="@string/portfolio"
+                android:theme="@style/navButton" />
         </LinearLayout>
+
         <TextView
             android:id="@+id/username"
-            android:background="@color/orange"
-            android:textColor="@color/white"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
+            android:background="@color/orange"
             android:gravity="center"
-            android:textSize="20sp"
+            android:text="@string/na"
             android:textAllCaps="true"
-            android:text="@string/na"/>
+            android:textColor="@color/white"
+            android:textSize="20sp" />
     </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>
