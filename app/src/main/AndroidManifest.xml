@@ -19,6 +19,7 @@
         <activity android:name=".menu.SettingsActivity" />
         <activity android:name=".menu.AboutActivity" />
         <activity android:name=".notes.NotesActivity" />
+        <activity android:name=".quotes.StockActivity"></activity>
     </application>
 
 </manifest>
