@@ -189,6 +189,10 @@ public class SettingsActivity extends MenuActivity {
      * @return true if changes have been made to settings
      */
     private boolean checkIfChangesMade(){
+        //If no settings have been set
+        if(settings.getString("username", "none").equals("none") || settings.getString("email", "none").equals("none") || settings.getString("password", "none").equals("none")){
+            return false;
+        }
         //USER NAME
         //If settings have already been set and the textview is not modified, check with the hint
         if(username.getText().toString().isEmpty() && !username.getHint().toString().isEmpty()){
