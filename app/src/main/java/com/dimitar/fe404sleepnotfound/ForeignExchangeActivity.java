@@ -24,17 +24,24 @@ public class ForeignExchangeActivity extends Activity {
     String openExchangeString;
     JSONObject openExchangeJson;
 
-    CurrencyFragment currencyFragment;
+    CurrencyFragment currencyFragmentFrom;
+    CurrencyFragment currencyFragmentTo;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_foreignexchange);
 
-        currencyFragment = new CurrencyFragment();
-        FragmentTransaction ft = getFragmentManager().beginTransaction();
-        ft.replace(R.id.foreignExchangeLayout, currencyFragment);
-        ft.commit();
+        currencyFragmentFrom = new CurrencyFragment();
+        FragmentTransaction ftF = getFragmentManager().beginTransaction();
+        ftF.replace(R.id.fromCurrency, currencyFragmentFrom);
+        ftF.commit();
+
+        currencyFragmentTo = new CurrencyFragment();
+        FragmentTransaction ftT = getFragmentManager().beginTransaction();
+        ftT.replace(R.id.toCurrency, currencyFragmentTo);
+        ftT.commit();
 
         currencyListGet();
         //openExchangeGet();
@@ -62,7 +69,8 @@ public class ForeignExchangeActivity extends Activity {
                             @Override
                             public void run() {
                                 try{
-                                    currencyFragment.setFragmentJson(currencyJson);
+                                    currencyFragmentFrom.setFragmentJson(currencyJson);
+                                    currencyFragmentTo.setFragmentJson(currencyJson);
                                     //text.setText(currencyJson.toString());
                                 }catch (Exception e){
                                 }
