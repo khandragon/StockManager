@@ -27,7 +27,7 @@
             android:layout_weight="1"
             android:backgroundTint="@color/buttonBG"
             android:onClick="removeTicker"
-            android:text="Remove"
+            android:text="@string/remove"
             android:textColor="@color/white" />
     </LinearLayout>
 </FrameLayout>

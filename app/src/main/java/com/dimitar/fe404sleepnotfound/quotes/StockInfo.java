@@ -43,7 +43,7 @@ public class StockInfo extends MenuActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_stock_info);
         tickerName = (TextView) findViewById(R.id.tickerName);
-        tickerCompany = (TextView) findViewById(R.id.tickerName);
+        tickerCompany = (TextView) findViewById(R.id.companyName);
         tickerPrice = (TextView) findViewById(R.id.tickerPrice);
         Bundle extra = getIntent().getExtras();
         ticker = extra.getString("ticker");
@@ -125,9 +125,9 @@ public class StockInfo extends MenuActivity {
                     currency = object.getString("currency");
                     ticker = object.getString("symbol");
                 }
-                tickerName.setText(ticker);
-                tickerCompany.setText(" company: " + companyName);
-                tickerPrice.setText("$"+currentPrice+", "+currency);
+                tickerName.setText(tickerName.getText() + ticker);
+                tickerCompany.setText(tickerCompany.getText() + companyName);
+                tickerPrice.setText("$" + currentPrice + ", " + currency);
 
             } catch (JSONException e) {
                 e.printStackTrace();

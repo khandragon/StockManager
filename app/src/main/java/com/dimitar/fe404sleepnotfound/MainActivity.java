@@ -51,6 +51,11 @@ public class MainActivity extends MenuActivity {
         startActivity(openNotes);
     }
 
+    /**
+     * Implementation of the onClick for the Quotes btn that opens the Stock activity
+     *
+     * @param view
+     */
     public void openQuotes(View view) {
         Intent openQuotes = new Intent(this, StockActivity.class);
         startActivity(openQuotes);
