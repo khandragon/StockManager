@@ -1,6 +1,7 @@
 package com.dimitar.fe404sleepnotfound;
 
 import android.app.Activity;
+import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.widget.TextView;
 
@@ -32,9 +33,13 @@ public class ForeignExchangeActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_foreignexchange);
 
-        text = findViewById(R.id.textView);
+        CurrencyFragment currencyFragment = new CurrencyFragment();
+        FragmentTransaction ft = getFragmentManager().beginTransaction();
+        ft.replace(R.id.foreignExchangeLayout, currencyFragment);
+        ft.commit();
+
         currencyListGet();
-        openExchangeGet();
+        //openExchangeGet();
     }
 
     private void currencyListGet(){
@@ -60,7 +65,8 @@ public class ForeignExchangeActivity extends Activity {
                             @Override
                             public void run() {
                                 try{
-                                    text.setText(currencyJson.get("CAD").toString());
+
+                                    //text.setText(currencyJson.toString());
                                 }catch (Exception e){
                                     text.setText("Failed to find CAD");
                                 }
@@ -97,13 +103,17 @@ public class ForeignExchangeActivity extends Activity {
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            text.setText(currencyListString);
+                            //text.setText(currencyListString);
                         }
                     });
                 }else {
-                    text.setText("Faliled to get currency list");
+                    //text.setText("Faliled to get currency list");
                 }
             }
         });
+    }
+
+    private void currencyListDisplay(){
+
     }
 }
