@@ -58,6 +58,6 @@ public class MainActivity extends MenuActivity {
      */
     public void openQuotes(View view) {
         Intent openQuotes = new Intent(this, StockActivity.class);
-        startActivity(openQuotes);
+        startActivity(openQuotes)                               ;
     }
 }
