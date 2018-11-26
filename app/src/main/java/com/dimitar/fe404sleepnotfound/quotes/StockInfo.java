@@ -34,6 +34,7 @@ public class StockInfo extends MenuActivity {
 
     private TextView tickerName;
     private TextView tickerCompany;
+    private TextView tickerPrice;
 
     private String ticker;
 
@@ -43,6 +44,7 @@ public class StockInfo extends MenuActivity {
         setContentView(R.layout.activity_stock_info);
         tickerName = (TextView) findViewById(R.id.tickerName);
         tickerCompany = (TextView) findViewById(R.id.tickerName);
+        tickerPrice = (TextView) findViewById(R.id.tickerPrice);
         Bundle extra = getIntent().getExtras();
         ticker = extra.getString("ticker");
         findTickerInfo(ticker);
@@ -123,7 +125,10 @@ public class StockInfo extends MenuActivity {
                     currency = object.getString("currency");
                     ticker = object.getString("symbol");
                 }
-                tickerCompany.setText("ticker" + ticker + " company: " + companyName + " curreny: " + currency + " price: " + currentPrice);
+                tickerName.setText(ticker);
+                tickerCompany.setText(" company: " + companyName);
+                tickerPrice.setText("$"+currentPrice+", "+currency);
+
             } catch (JSONException e) {
                 e.printStackTrace();
             }
