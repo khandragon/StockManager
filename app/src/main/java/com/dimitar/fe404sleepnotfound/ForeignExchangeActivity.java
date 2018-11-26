@@ -3,7 +3,6 @@ package com.dimitar.fe404sleepnotfound;
 import android.app.Activity;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
-import android.widget.TextView;
 
 import com.squareup.okhttp.Callback;
 import com.squareup.okhttp.OkHttpClient;
@@ -25,15 +24,14 @@ public class ForeignExchangeActivity extends Activity {
     String openExchangeString;
     JSONObject openExchangeJson;
 
-    TextView text;
-    String textContent;
+    CurrencyFragment currencyFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_foreignexchange);
 
-        CurrencyFragment currencyFragment = new CurrencyFragment();
+        currencyFragment = new CurrencyFragment();
         FragmentTransaction ft = getFragmentManager().beginTransaction();
         ft.replace(R.id.foreignExchangeLayout, currencyFragment);
         ft.commit();
@@ -52,7 +50,6 @@ public class ForeignExchangeActivity extends Activity {
             @Override
             public void onFailure(Request request, IOException e) {
                 System.out.println("Fuck fuck fuck fuck fuck");
-                textContent = "Fick adfsadfasdasd";
             }
 
             @Override
@@ -65,19 +62,15 @@ public class ForeignExchangeActivity extends Activity {
                             @Override
                             public void run() {
                                 try{
-
+                                    currencyFragment.setFragmentJson(currencyJson);
                                     //text.setText(currencyJson.toString());
                                 }catch (Exception e){
-                                    text.setText("Failed to find CAD");
                                 }
                             }
                         });
                     }catch (Exception e){
-                        text.setText("Faliled to get currency list");
-
                     }
                 }else {
-                    text.setText("Faliled to get currency list");
                 }
             }
         });
@@ -93,7 +86,6 @@ public class ForeignExchangeActivity extends Activity {
             @Override
             public void onFailure(Request request, IOException e) {
                 System.out.println("Fuck fuck fuck fuck fuck");
-                textContent = "Fick adfsadfasdasd";
             }
 
             @Override
@@ -111,9 +103,5 @@ public class ForeignExchangeActivity extends Activity {
                 }
             }
         });
-    }
-
-    private void currencyListDisplay(){
-
     }
 }

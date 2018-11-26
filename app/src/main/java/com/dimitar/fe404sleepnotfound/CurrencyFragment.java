@@ -2,16 +2,19 @@ package com.dimitar.fe404sleepnotfound;
 
 
 import android.app.Fragment;
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
+
+import com.dimitar.fe404sleepnotfound.adapters.CurrencyAdapter;
 
 import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.List;
 
 
 /**
@@ -20,36 +23,44 @@ import java.util.List;
 public class CurrencyFragment extends Fragment {
 
     JSONObject currencyJson;
-    List<String> currencies;
+    ArrayList<String> currencies;
+
+    Context context;
+    View fragmentView;
+
+    ListView currencyView;
 
     public CurrencyFragment() {
         // Required empty public constructor
     }
 
-    public void setFragmentJson(CurrencyFragment currencyFragment){
+    public void setFragmentJson(JSONObject currencyJson){
         this.currencyJson = currencyJson;
 
         currencies = new ArrayList<>();
         try{
             Iterator currencyIretator = currencyJson.keys();
             while (currencyIretator.hasNext()){
-                currencies.add(currencyIretator.next().toString() + currencyJson.get(currencyIretator.next().toString()));
+                currencies.add(currencyIretator.next().toString() + ":" + currencyJson.get(currencyIretator.next().toString()));
             }
         }catch (Exception e){
 
         }
-
         setFragmentContents();
     }
 
     private void setFragmentContents(){
-
+        CurrencyAdapter adapter = new CurrencyAdapter(this.context, R.layout.currencylistitem, currencies);
+        ListView listData = (ListView) fragmentView.findViewById(R.id.currencyView);
+        listData.setAdapter(adapter);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_currency, container, false);
+        this.fragmentView = inflater.inflate(R.layout.fragment_currency, container, false);
+        this.context = container.getContext();
+        return fragmentView;
     }
 
 }
