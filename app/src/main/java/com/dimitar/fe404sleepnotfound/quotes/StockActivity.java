@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.ScrollView;
 import android.widget.TabHost;
 import android.widget.TextView;
@@ -29,6 +30,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -44,6 +46,7 @@ public class StockActivity extends MenuActivity {
     private Button addBtn;
     private Set<String> saved = null;
     private String lastSearch = null;
+    private ListView listView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,12 +55,13 @@ public class StockActivity extends MenuActivity {
         urlText = (EditText) findViewById(R.id.myTicker);
         textView = (TextView) findViewById(R.id.uriMessage);
         addBtn = (Button) findViewById(R.id.addBtn);
+        listView = (ListView) findViewById(R.id.tickerList);
         addBtn.setEnabled(false);
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
         SharedPreferences.Editor editor = prefs.edit();
         saved = prefs.getStringSet("savedList", new HashSet<String>());
         if (saved != null) {
-            //populateList()
+            populateList();
         }
 
     }
@@ -71,16 +75,17 @@ public class StockActivity extends MenuActivity {
         editor.commit();
         populateList();
     }
-    public void removeTicker(String ticker) {
-        Log.i(TAG, ticker);
-        saved.remove(ticker);
+
+    public void removeTicker(View view) {
+
+        //Log.i(TAG, ticker);
+        //saved.remove(ticker);
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
         SharedPreferences.Editor editor = prefs.edit();
         editor.putStringSet("savedList", saved);
         editor.commit();
         populateList();
     }
-
 
     public void getTickerQuote(View view) {
         addBtn.setEnabled(false);
@@ -129,6 +134,8 @@ public class StockActivity extends MenuActivity {
     private void populateList() {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
         saved = prefs.getStringSet("savedList", new HashSet<String>());
+        StockListAdapter adapter = new StockListAdapter(this, R.layout.adapter_stock_layout, new ArrayList<String>(saved));
+        listView.setAdapter(adapter);
         Log.i(TAG, "this is from savedlist" + saved.toString());
     }
 
@@ -188,7 +195,9 @@ public class StockActivity extends MenuActivity {
                 if (jsonObject.has("Message")) {
                     textView.setText("Unknown Ticker");
                 } else {
-                    addBtn.setEnabled(true);
+                    if(!check5tickers()){
+                        addBtn.setEnabled(true);
+                    }
                     JSONArray jsonArray = jsonObject.getJSONArray("data");
                     for (int i = 0; i < jsonArray.length(); i++) {
                         JSONObject object = jsonArray.getJSONObject(i);
@@ -205,5 +214,11 @@ public class StockActivity extends MenuActivity {
 
         }
 
+    }
+
+    private boolean check5tickers() {
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        saved = prefs.getStringSet("savedList", new HashSet<String>());
+        return saved.size() >= 5;
     }
 }
