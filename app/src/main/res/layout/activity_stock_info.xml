@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -8,23 +8,20 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
+        android:orientation="vertical"
         android:paddingTop="5dp">
 
         <TextView
             android:id="@+id/tickerName"
-            android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="4"
             android:gravity="center"
-            tools:context=".HttpExample" />
-
-        <Button
-            android:id="@+id/removeBtn"
-            android:layout_width="0dp"
+            tools:context=".HttpExample"
+            android:layout_width="match_parent" />
+        <TextView
+            android:id="@+id/companyName"
             android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:onClick="removeTicker"
-            android:text="Remove" />
+            android:gravity="center"
+            tools:context=".HttpExample"
+            android:layout_width="match_parent" />
     </LinearLayout>
-</FrameLayout>
+</LinearLayout>
