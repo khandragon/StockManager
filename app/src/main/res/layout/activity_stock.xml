@@ -5,33 +5,35 @@
     android:orientation="vertical">
 
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:paddingTop="5dp">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingTop="5dp">
 
-            <TextView
-                android:id="@+id/uriMessage"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="4"
-                android:gravity="center"
-                tools:context=".HttpExample" />
+        <TextView
+            android:id="@+id/uriMessage"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="4"
+            android:gravity="center"
+            tools:context=".HttpExample" />
 
-            <Button
-                android:id="@+id/addBtn"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:onClick="addTicker"
-                android:text="Add" />
-        </LinearLayout>
+        <Button
+            android:id="@+id/addBtn"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:backgroundTint="@color/buttonBG"
+            android:onClick="addTicker"
+            android:text="Add"
+            android:textColor="@color/white" />
+    </LinearLayout>
 
     <EditText
         android:id="@+id/myTicker"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:layout_weight="1"
         android:autofillHints=""
         android:hint="@string/exampleTicker"
@@ -39,10 +41,12 @@
 
     <Button
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:layout_weight="1"
+        android:backgroundTint="@color/buttonBG"
         android:onClick="getTickerQuote"
-        android:text="Load It" />
+        android:text="Load It"
+        android:textColor="@color/white" />
 
     <ListView
         android:id="@+id/tickerList"
