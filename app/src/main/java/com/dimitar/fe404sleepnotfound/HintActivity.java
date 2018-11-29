@@ -2,39 +2,97 @@ package com.dimitar.fe404sleepnotfound;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.view.View;
+import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.dimitar.fe404sleepnotfound.data.CircularArray;
 import com.dimitar.fe404sleepnotfound.data.Hint;
-import com.dimitar.fe404sleepnotfound.persistence.HintDAO;
 import com.dimitar.fe404sleepnotfound.persistence.HintDAOFirebase;
+import com.google.firebase.auth.AuthResult;
 
 public final class HintActivity extends Activity {
     private ImageView hintView;
+    private ImageButton right;
+    private ImageButton left;
+
+    private CircularArray<Hint> hints;
+
+    private Bundle appBundle;
+    private final static String HINT_BUNDLE_KEY = "hint_array";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        appBundle = savedInstanceState;
         setContentView(R.layout.activity_hint);
 
-        // HintDAOFirebase.auth()
-        final HintDAO dao = HintDAOFirebase.getInstance();
+        initViews();
 
-        // Fetching data from firebase
-        Hint[] readHints = dao.readAllHints();
-        shuffleArray(readHints);
-        final CircularArray<Hint> hints = new CircularArray<>(readHints);
+        HintDAOFirebase.login()
+                .addOnSuccessListener(this, this::onLoginSuccess)
+                .addOnFailureListener(this::onLoginFailed);
+    }
+
+    /**
+     *
+     * @param exc
+     */
+    private void onLoginFailed(Exception exc) {
+        Toast.makeText(getApplicationContext(), "Login Error : Try again later", Toast.LENGTH_LONG).show();
+    }
+
+    /**
+     *
+     * @param result
+     */
+    private void onLoginSuccess(AuthResult result) {
+        if(appBundle.containsKey(HINT_BUNDLE_KEY)) {
+            hints = appBundle.getParcelable(HINT_BUNDLE_KEY);
+
+            setupHintCircularArray();
+        }
+        else {
+            HintDAOFirebase.getInstance().readAllHints(this::initHints);
+        }
+    }
+
+    /**
+     *
+     */
+    private void initViews() {
+        hintView = findViewById(R.id.hint);
+        right = findViewById(R.id.right);
+        left = findViewById(R.id.left);
+    }
+
+    /**
+     *
+     * @param hintArr
+     */
+    private void initHints(Hint[] hintArr) {
+        // init the hint circular array
+        shuffleArray(hintArr);
+        hints = new CircularArray<>(hintArr);
+
+        setupHintCircularArray();
+    }
+
+    private void setupHintCircularArray() {
+        right.setOnClickListener(hints::next);
+        left.setOnClickListener(hints::prev);
 
         // Manage ImageView with the hint
+        changeHintView(hints.getCurrent());
         hints.onCurrentChange(this::changeHintView);
         hintView.setOnClickListener(e -> openHintSource(hints.getCurrent()));
+    }
 
-        // Manage left/right buttons
-        // ImageButton rightArrow
-        rightArrow.setOnClickListener(hints::next);
-        // ImageButton leftArrow
-        leftArrow.setOnClickListener(hints::prev);
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        // save my counter
+        outState.putParcelable(HINT_BUNDLE_KEY, hints);
     }
 
     /**

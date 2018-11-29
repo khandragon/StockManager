@@ -1,7 +1,38 @@
 package com.dimitar.fe404sleepnotfound.data;
 
 
-public class CircularArray<T> {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class CircularArray<T extends Parcelable> implements Parcelable {
+    protected CircularArray(Parcel in) {
+        backingArray = (T[]) in.readArray(Parcelable.class.getClassLoader());
+        currIndex = in.readInt();
+    }
+
+    public static final Creator<CircularArray> CREATOR = new Creator<CircularArray>() {
+        @Override
+        public CircularArray createFromParcel(Parcel in) {
+            return new CircularArray(in);
+        }
+
+        @Override
+        public CircularArray[] newArray(int size) {
+            return new CircularArray[size];
+        }
+    };
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(currIndex);
+        dest.writeArray(backingArray);
+    }
+
     private final T[] backingArray;
     private int currIndex;
 
@@ -11,6 +42,7 @@ public class CircularArray<T> {
             changeCurrentListener.consumeCurrent(backingArray[currIndex]);
         }
     }
+
     @FunctionalInterface
     public interface OnChangeCurrentEventListener<T> {
         void consumeCurrent(T newCurrent);
@@ -24,13 +56,13 @@ public class CircularArray<T> {
         currIndex = 0;
     }
 
-    public void next() {
+    public void next(Object context) {
         currIndex = (currIndex + 1) % backingArray.length;
 
         fireChangeCurrentEvent();
     }
 
-    public void prev() {
+    public void prev(Object context) {
         currIndex--;
         while(currIndex < 0) {
             currIndex = backingArray.length - currIndex;
