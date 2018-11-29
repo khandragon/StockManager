@@ -32,6 +32,7 @@
             <Button
                 android:id="@+id/foreignExchange"
                 android:layout_width="0dp"
+                android:layout_weight="1"
                 android:layout_height="match_parent"
                 android:drawableEnd="@drawable/exchange"
                 android:text="@string/foreignExchange"
@@ -40,6 +41,7 @@
             <Button
                 android:id="@+id/financialHints"
                 android:layout_width="0dp"
+                android:layout_weight="1"
                 android:layout_height="match_parent"
                 android:drawableEnd="@drawable/hints"
                 android:text="@string/financialHints"
@@ -56,6 +58,7 @@
             <Button
                 android:id="@+id/stockQuote"
                 android:layout_width="0dp"
+                android:layout_weight="1"
                 android:layout_height="match_parent"
                 android:drawableEnd="@drawable/stocks"
                 android:text="@string/stockQuotes"
@@ -64,6 +67,7 @@
             <Button
                 android:id="@+id/notes"
                 android:layout_width="0dp"
+                android:layout_weight="1"
                 android:layout_height="match_parent"
                 android:drawableEnd="@drawable/notes"
                 android:text="@string/notes"
@@ -85,12 +89,12 @@
                 android:textColor="@color/white"
                 android:layout_height="match_parent"
                 android:drawableEnd="@drawable/calculator"
-                android:text="@string/calculator"
-                android:theme="@style/navButton" />
+                android:text="@string/calculator" />
 
             <Button
                 android:id="@+id/stockPortfolioMgmnt"
                 android:layout_width="0dp"
+                android:layout_weight="1"
                 android:layout_height="match_parent"
                 android:drawableEnd="@drawable/portfolio"
                 android:text="@string/portfolio"
