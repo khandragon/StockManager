@@ -4,8 +4,10 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.KeyEvent;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
@@ -227,5 +229,25 @@ public class SettingsActivity extends MenuActivity {
             return true;
         }
         return false;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item){
+        //Open Dawson Computer Science web page
+        if(item.getItemId() == R.id.dawson){
+            Intent openDawsonPage = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.dawsoncollege.qc.ca/computer-science-technology/"));
+            startActivity(openDawsonPage);
+            return true;
+        }
+        //Open AboutActivity
+        else if(item.getItemId() == R.id.about){
+            Intent openAbout = new Intent(this, AboutActivity.class);
+            startActivity(openAbout);
+            finish();
+            return true;
+        }
+        else{
+            return false;
+        }
     }
 }
