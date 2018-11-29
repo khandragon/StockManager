@@ -116,7 +116,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:gravity="center|start"
-                android:text="@string/about"
+                android:text="@string/na"
                 android:paddingStart="10dp"
                 android:layout_weight="2"/>
         </LinearLayout>

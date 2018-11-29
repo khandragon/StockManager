@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
+import com.dimitar.fe404sleepnotfound.calculator.CalculatorActivity;
 import com.dimitar.fe404sleepnotfound.menu.AboutActivity;
 import com.dimitar.fe404sleepnotfound.menu.MenuActivity;
 import com.dimitar.fe404sleepnotfound.notes.NotesActivity;
@@ -48,5 +49,10 @@ public class MainActivity extends MenuActivity {
     public void openNotes(View view) {
         Intent openNotes = new Intent(this, NotesActivity.class);
         startActivity(openNotes);
+    }
+
+    public void openCalculator(View v){
+        Intent openCalculator = new Intent(this, CalculatorActivity.class);
+        startActivity(openCalculator);
     }
 }

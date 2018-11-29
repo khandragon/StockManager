@@ -14,4 +14,10 @@ public class AboutActivity extends MenuActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about);
     }
+
+//    @Override
+//    protected void onPause() {
+////        super.onPause();
+////        finish();
+//    }
 }

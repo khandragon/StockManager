@@ -161,6 +161,7 @@ public class SettingsActivity extends MenuActivity {
      */
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
+//        super(keyCode, event);
         if (keyCode == KeyEvent.KEYCODE_BACK && checkIfChangesMade()) {
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
             builder.setMessage(getString(R.string.exitWithoutSaving))
@@ -189,9 +190,9 @@ public class SettingsActivity extends MenuActivity {
      * @return true if changes have been made to settings
      */
     private boolean checkIfChangesMade(){
-        //If no settings have been set
+        //If no settings have been set previously
         if(settings.getString("username", "none").equals("none") || settings.getString("email", "none").equals("none") || settings.getString("password", "none").equals("none")){
-            return false;
+            return true;
         }
         //USER NAME
         //If settings have already been set and the textview is not modified, check with the hint

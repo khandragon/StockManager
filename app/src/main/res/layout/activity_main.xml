@@ -89,6 +89,7 @@
                 android:textColor="@color/white"
                 android:layout_height="match_parent"
                 android:drawableEnd="@drawable/calculator"
+                android:onClick="openCalculator"
                 android:text="@string/calculator" />
 
             <Button
