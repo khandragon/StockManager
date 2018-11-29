@@ -7,6 +7,8 @@ import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -50,11 +52,13 @@ public class StockActivity extends MenuActivity {
     private EditText urlText;
     private TextView textView;
     private Button addBtn;
-    private ListView listView;
+    private RecyclerView listView;
 
     //list of saved tickers and last searched ticker
     private Set<String> saved = null;
     private String lastSearch = null;
+    private LinearLayoutManager mLayoutManager;
+    private RecyclerView.Adapter adapter;
 
     /**
      * Custom impelmentation fo the onCreate lifecycle method. disables the add btn by default
@@ -69,14 +73,18 @@ public class StockActivity extends MenuActivity {
         urlText = (EditText) findViewById(R.id.myTicker);
         textView = (TextView) findViewById(R.id.uriMessage);
         addBtn = (Button) findViewById(R.id.addBtn);
-        listView = (ListView) findViewById(R.id.tickerList);
+        listView = (RecyclerView) findViewById(R.id.tickerList);
+
+        listView.setHasFixedSize(true);
+        mLayoutManager = new LinearLayoutManager(this);
+        listView.setLayoutManager(mLayoutManager);
         addBtn.setEnabled(false);
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
         SharedPreferences.Editor editor = prefs.edit();
         saved = prefs.getStringSet("savedList", new HashSet<String>());
-        if (saved != null) {
-            populateList();
-        }
+        adapter = new StockListAdapter(saved,this);
+        populateList();
+        listView.setAdapter(adapter);
 
     }
 
@@ -86,7 +94,6 @@ public class StockActivity extends MenuActivity {
      * @param view
      */
     public void addTicker(View view) {
-        addBtn.setEnabled(false);
         //check if the save list is not greater than 5
         if (!check5tickers()) {
             Log.i(TAG, lastSearch);
@@ -132,7 +139,6 @@ public class StockActivity extends MenuActivity {
      * @param view
      */
     public void getTickerQuote(View view) {
-        addBtn.setEnabled(false);
         InputStream stream = null;
         HttpsURLConnection conn = null;
         String ticker = urlText.getText().toString();
@@ -178,7 +184,7 @@ public class StockActivity extends MenuActivity {
         Log.d(TAG, "Bytes read: " + totalRead
                 + "(-1 means end of reader so max of)");
 
-        return new String(byteArrayOutputStream.toString());
+        return byteArrayOutputStream.toString();
     }
 
     /**
@@ -187,7 +193,10 @@ public class StockActivity extends MenuActivity {
     private void populateList() {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
         saved = prefs.getStringSet("savedList", new HashSet<String>());
-        StockListAdapter adapter = new StockListAdapter(this, R.layout.adapter_stock_layout, new ArrayList<String>(saved));
+        adapter = new StockListAdapter(saved,this);
+        //adapter.changeList(saved);
+        Log.i(TAG, "in saved is cureently ****: " + saved.toString());
+        //adapter.notifyDataSetChanged();
         listView.setAdapter(adapter);
     }
 
