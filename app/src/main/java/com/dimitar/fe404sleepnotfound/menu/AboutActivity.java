@@ -18,9 +18,15 @@ public class AboutActivity extends MenuActivity {
         setContentView(R.layout.activity_about);
     }
 
+    /**
+     * Menu functionality in AboutActivity. It doesn't allow About to be opened again and finishes
+     * the activity if About is opened.
+     * @param item
+     * @return true if an option was successfully selected
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item){
-        //Open SettingsActivity
+        //Open SettingsActivity and finish AboutActivity
         if(item.getItemId() == R.id.settings){
 
             Intent openSettings = new Intent(this, SettingsActivity.class);

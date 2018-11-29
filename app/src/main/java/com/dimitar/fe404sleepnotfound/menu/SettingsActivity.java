@@ -231,6 +231,12 @@ public class SettingsActivity extends MenuActivity {
         return false;
     }
 
+    /**
+     * Menu functionality in SettingsActivity. It doesn't allow for settings to be opened again and
+     * opening About finishes the actvity.
+     * @param item
+     * @return true if an option was successfully selected
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item){
         //Open Dawson Computer Science web page
@@ -239,7 +245,7 @@ public class SettingsActivity extends MenuActivity {
             startActivity(openDawsonPage);
             return true;
         }
-        //Open AboutActivity
+        //Open AboutActivity and finish SettingsActivity
         else if(item.getItemId() == R.id.about){
             Intent openAbout = new Intent(this, AboutActivity.class);
             startActivity(openAbout);
