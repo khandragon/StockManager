@@ -55,10 +55,10 @@ public class StockActivity extends MenuActivity {
     private RecyclerView listView;
 
     //list of saved tickers and last searched ticker
-    private Set<String> saved = null;
+    private ArrayList<String> saved = new ArrayList<>();
     private String lastSearch = null;
     private LinearLayoutManager mLayoutManager;
-    private RecyclerView.Adapter adapter;
+    private StockListAdapter adapter;
 
     /**
      * Custom impelmentation fo the onCreate lifecycle method. disables the add btn by default
@@ -79,11 +79,10 @@ public class StockActivity extends MenuActivity {
         mLayoutManager = new LinearLayoutManager(this);
         listView.setLayoutManager(mLayoutManager);
         addBtn.setEnabled(false);
+
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-        SharedPreferences.Editor editor = prefs.edit();
-        saved = prefs.getStringSet("savedList", new HashSet<String>());
-        adapter = new StockListAdapter(saved,this);
-        populateList();
+        saved.addAll(prefs.getStringSet("savedList", new HashSet<String>()));
+        adapter = new StockListAdapter(saved, this);
         listView.setAdapter(adapter);
 
     }
@@ -98,13 +97,15 @@ public class StockActivity extends MenuActivity {
         if (!check5tickers()) {
             Log.i(TAG, lastSearch);
             //add to list and shared preferences
-            saved.add(lastSearch);
-            SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-            SharedPreferences.Editor editor = prefs.edit();
-            editor.putStringSet("savedList", saved);
-            editor.commit();
-            // populate the list with the saved list
-            populateList();
+            adapter.add(lastSearch);
+            //adapter.add(lastSearch);
+            //adapter.notifyDataSetChanged();
+            Log.i(TAG, "currently saved the list " + adapter.mDataset.toString());
+//            SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+//            SharedPreferences.Editor editor = prefs.edit();
+//            editor.putStringSet("savedList", new HashSet<String>(saved));
+//            editor.commit();
+            //adapter.updateSaved(saved);
         }
     }
 
@@ -123,13 +124,8 @@ public class StockActivity extends MenuActivity {
         saved.remove(ticker);
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
         SharedPreferences.Editor editor = prefs.edit();
-        editor.putStringSet("savedList", saved);
+        editor.putStringSet("savedList", new HashSet<String>(saved));
         editor.commit();
-        populateList();
-        //check the list size
-        if (!check5tickers()) {
-            addBtn.setEnabled(true);
-        }
     }
 
     /**
@@ -185,19 +181,6 @@ public class StockActivity extends MenuActivity {
                 + "(-1 means end of reader so max of)");
 
         return byteArrayOutputStream.toString();
-    }
-
-    /**
-     * take list of saved tickers and populate the list
-     */
-    private void populateList() {
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-        saved = prefs.getStringSet("savedList", new HashSet<String>());
-        adapter = new StockListAdapter(saved,this);
-        //adapter.changeList(saved);
-        Log.i(TAG, "in saved is cureently ****: " + saved.toString());
-        //adapter.notifyDataSetChanged();
-        listView.setAdapter(adapter);
     }
 
 
@@ -298,7 +281,7 @@ public class StockActivity extends MenuActivity {
      */
     private boolean check5tickers() {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-        saved = prefs.getStringSet("savedList", new HashSet<String>());
-        return saved.size() >= 5;
+        Set<String> inSaveList = prefs.getStringSet("savedList", new HashSet<String>());
+        return inSaveList.size() >= 5;
     }
 }

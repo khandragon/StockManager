@@ -17,19 +17,19 @@ import java.util.Set;
 
 public class StockListAdapter extends RecyclerView.Adapter<StockListAdapter.StockAdapterViewHolder> {
 
-    private List<String> mDataset;
-    private Context context;
+    public List<String> mDataset;
+    private LayoutInflater mInflater;
 
-    public StockListAdapter(Set<String> myDataset, Context context) {
-        this.mDataset = new ArrayList<>(myDataset);
-        this.context = context;
+    public StockListAdapter(ArrayList<String> myDataset, Context context) {
+        this.mDataset = myDataset;
+        this.mInflater = LayoutInflater.from(context);
     }
+
 
     @NonNull
     @Override
-    public StockListAdapter.StockAdapterViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        LayoutInflater layout = LayoutInflater.from(viewGroup.getContext());
-        View view = layout.inflate(R.layout.adapter_stock_layout, viewGroup, false);
+    public StockAdapterViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+        View view = mInflater.inflate(R.layout.adapter_stock_layout, viewGroup, false);
         return new StockAdapterViewHolder(view);
 
     }
@@ -40,6 +40,12 @@ public class StockListAdapter extends RecyclerView.Adapter<StockListAdapter.Stoc
         holder.tickerName.setText(ticker);
     }
 
+//    public void updateSaved(List<String> newlist) {
+//        mDataset.clear();
+//        mDataset.addAll(newlist);
+//        this.notifyDataSetChanged();
+//    }
+
 
     // Return the size of your dataset (invoked by the layout manager)
     @Override
@@ -47,8 +53,9 @@ public class StockListAdapter extends RecyclerView.Adapter<StockListAdapter.Stoc
         return mDataset.size();
     }
 
-    public void changeList(Set<String> newList) {
-        mDataset = new ArrayList<>(newList);
+    public void add(String lastSearch) {
+        mDataset.add(lastSearch);
+        this.notifyDataSetChanged();
     }
 
     public class StockAdapterViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
