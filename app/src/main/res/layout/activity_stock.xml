@@ -10,6 +10,7 @@
         android:layout_height="wrap_content"
         android:autofillHints=""
         android:hint="@string/exampleTicker"
+        android:layout_marginTop="5dp"
         android:inputType="textUri" />
 
     <Button
