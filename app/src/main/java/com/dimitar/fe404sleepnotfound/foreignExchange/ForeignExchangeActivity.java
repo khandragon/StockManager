@@ -22,13 +22,16 @@ public class ForeignExchangeActivity extends MenuActivity {
         setFragments();
     }
 
+    /**
+     * Will set the fragments of the activity to there correct postion
+     */
     private void setFragments(){
 
         optionsFragment = new OptionFragment();
         FragmentTransaction ftO = getFragmentManager().beginTransaction();
         ftO.replace(R.id.optionsLayout, optionsFragment);
         ftO.commit();
-/*
+
         currencyFragmentFrom = new CurrencyFragment();
         FragmentTransaction ftF = getFragmentManager().beginTransaction();
         ftF.replace(R.id.fromCurrency, currencyFragmentFrom);
@@ -38,7 +41,6 @@ public class ForeignExchangeActivity extends MenuActivity {
         FragmentTransaction ftT = getFragmentManager().beginTransaction();
         ftT.replace(R.id.toCurrency, currencyFragmentTo);
         ftT.commit();
-        */
     }
 
 }
