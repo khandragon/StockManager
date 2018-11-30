@@ -1,13 +1,13 @@
-package com.dimitar.fe404sleepnotfound;
+package com.dimitar.fe404sleepnotfound.menu;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.KeyEvent;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
@@ -15,10 +15,15 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.dimitar.fe404sleepnotfound.MainActivity;
+import com.dimitar.fe404sleepnotfound.R;
+
 import java.util.Calendar;
 
+/**
+ * Lets the user set application settings used by other Activities in SharedPreferences.
+ */
 public class SettingsActivity extends MenuActivity {
-    private boolean settingsUpdated;
     private SharedPreferences settings;
     private SharedPreferences.Editor settingsEditor;
     private EditText username;
@@ -34,12 +39,16 @@ public class SettingsActivity extends MenuActivity {
     private String prefExchangeTxt;
     private String lastUpdatedTxt;
 
+    /**
+     * Custom implementation of the onCreate lifecycle method that sets references to the necessary
+     * views, SharedPreferences and check if any settings have been previously set.
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
 
-        settingsUpdated = false;
         settings = getSharedPreferences("com.dimitar.fe404sleepnotfound", MODE_PRIVATE);
         settingsEditor = settings.edit();
 
@@ -100,6 +109,11 @@ public class SettingsActivity extends MenuActivity {
 
     }
 
+    /**
+     * Click implementation for the Save Changes button. It saves all changes made and displays a
+     * message regarding save status.
+     * @param v
+     */
     public void onClick(View v){
         //Save all changes to strings values
         usernameTxt = username.getText().toString();
@@ -109,7 +123,6 @@ public class SettingsActivity extends MenuActivity {
         prefCurrencyTxt = prefCurrency.getSelectedItem().toString();
         if(checkIfChangesMade()){
             //Get current date timestamp and save changes in SharedPreferences
-            settingsUpdated = true;
             lastUpdatedTxt = Calendar.getInstance().getTime().toString();
             if(usernameTxt.isEmpty() && !username.getHint().toString().isEmpty()){
                 settingsEditor.putString("username", username.getHint().toString());
@@ -141,8 +154,16 @@ public class SettingsActivity extends MenuActivity {
         }
     }
 
+    /**
+     * Click implementation for the Android back button. If there are any unsaved changes, it prompts
+     * the user to confirm that they want to leave the Activity without saving their changes.
+     * @param keyCode
+     * @param event
+     * @return event status
+     */
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
+//        super(keyCode, event);
         if (keyCode == KeyEvent.KEYCODE_BACK && checkIfChangesMade()) {
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
             builder.setMessage(getString(R.string.exitWithoutSaving))
@@ -166,7 +187,15 @@ public class SettingsActivity extends MenuActivity {
         return super.onKeyDown(keyCode, event);
     }
 
+    /**
+     * Utility method that checks if any changes have been made.
+     * @return true if changes have been made to settings
+     */
     private boolean checkIfChangesMade(){
+        //If no settings have been set previously
+        if(settings.getString("username", "none").equals("none") || settings.getString("email", "none").equals("none") || settings.getString("password", "none").equals("none")){
+            return true;
+        }
         //USER NAME
         //If settings have already been set and the textview is not modified, check with the hint
         if(username.getText().toString().isEmpty() && !username.getHint().toString().isEmpty()){
@@ -200,5 +229,31 @@ public class SettingsActivity extends MenuActivity {
             return true;
         }
         return false;
+    }
+
+    /**
+     * Menu functionality in SettingsActivity. It doesn't allow for settings to be opened again and
+     * opening About finishes the actvity.
+     * @param item
+     * @return true if an option was successfully selected
+     */
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item){
+        //Open Dawson Computer Science web page
+        if(item.getItemId() == R.id.dawson){
+            Intent openDawsonPage = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.dawsoncollege.qc.ca/computer-science-technology/"));
+            startActivity(openDawsonPage);
+            return true;
+        }
+        //Open AboutActivity and finish SettingsActivity
+        else if(item.getItemId() == R.id.about){
+            Intent openAbout = new Intent(this, AboutActivity.class);
+            startActivity(openAbout);
+            finish();
+            return true;
+        }
+        else{
+            return false;
+        }
     }
 }
