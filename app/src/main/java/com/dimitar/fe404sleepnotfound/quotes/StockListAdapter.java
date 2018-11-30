@@ -1,10 +1,12 @@
 package com.dimitar.fe404sleepnotfound.quotes;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,15 +18,17 @@ import com.dimitar.fe404sleepnotfound.R;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 public class StockListAdapter extends RecyclerView.Adapter<StockListAdapter.StockAdapterViewHolder> {
 
+    private static final String TAG = "StockListAdapter";
+    private final Context myContext;
     public List<String> mDataset;
     private LayoutInflater mInflater;
 
     public StockListAdapter(ArrayList<String> myDataset, Context context) {
         this.mDataset = myDataset;
+        this.myContext = context;
         this.mInflater = LayoutInflater.from(context);
     }
 
@@ -53,15 +57,19 @@ public class StockListAdapter extends RecyclerView.Adapter<StockListAdapter.Stoc
     public void add(String lastSearch) {
         mDataset.add(lastSearch);
         this.notifyDataSetChanged();
-//        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(con);
-//        SharedPreferences.Editor editor = prefs.edit();
-//        editor.putStringSet("savedList", new HashSet<String>(saved));
-//        editor.commit();
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(myContext);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putStringSet("savedList", new HashSet<String>(mDataset));
+        editor.commit();
     }
 
     public void remove(String ticker) {
         mDataset.remove(ticker);
         this.notifyDataSetChanged();
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(myContext);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putStringSet("savedList", new HashSet<String>(mDataset));
+        editor.commit();
     }
 
     public boolean contains(String lastSearch) {
@@ -76,16 +84,24 @@ public class StockListAdapter extends RecyclerView.Adapter<StockListAdapter.Stoc
             super(itemView);
             tickerName = itemView.findViewById(R.id.tickerName);
             removeBtn = itemView.findViewById(R.id.removeBtn);
+            itemView.setOnClickListener(this);
 //            removeBtn.setOnClickListener(this);
         }
 
-        public TextView getTickerName() {
-            return tickerName;
+        public String getTickerName() {
+            return tickerName.getText().toString();
         }
 
         @Override
         public void onClick(View view) {
+            Intent intent = new Intent(myContext, StockInfo.class);
 
+            String ticker = getTickerName();
+            Log.i(TAG, "here we go lets see if this works" + ticker);
+            intent.putExtra("ticker", ticker);
+            myContext.startActivity(intent);
+
+            Log.i(TAG, getTickerName());
         }
     }
 

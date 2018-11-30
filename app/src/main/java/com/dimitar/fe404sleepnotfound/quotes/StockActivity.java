@@ -14,7 +14,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import com.dimitar.fe404sleepnotfound.R;
@@ -123,10 +122,6 @@ public class StockActivity extends MenuActivity {
         Log.i(TAG, "removing " + ticker);
         //remove from the list
         adapter.remove(ticker);
-//        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-//        SharedPreferences.Editor editor = prefs.edit();
-//        editor.putStringSet("savedList", new HashSet<String>(saved));
-//        editor.commit();
     }
 
     /**
