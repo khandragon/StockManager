@@ -1,34 +1,64 @@
 package com.dimitar.fe404sleepnotfound;
 
-import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
+import android.widget.TextView;
 
-public class MainActivity extends Activity {
+import com.dimitar.fe404sleepnotfound.calculator.CalculatorActivity;
+import com.dimitar.fe404sleepnotfound.foreignExchange.ForeignExchangeActivity;
+import com.dimitar.fe404sleepnotfound.menu.AboutActivity;
+import com.dimitar.fe404sleepnotfound.menu.MenuActivity;
+import com.dimitar.fe404sleepnotfound.notes.NotesActivity;
 
+/**
+ * Shows the user the application logo, a Menu, a list of launcher buttons for
+ * each functionality Activities and the current user's name. From here, the user can launch the
+ * Activity related to the function described by the buttons.
+ */
+public class MainActivity extends MenuActivity {
 
-    Button activityBtn;
-
-
+    /**
+     * Custom implementation of the onCreate lifecycle method. It sets the view's contents and gets
+     * the username of the current user set in Settings.
+     *
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-//__________________________________________
-        //This code to start activity
-        activityBtn = findViewById(R.id.Temp);
-        activityBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent  intent = new Intent(MainActivity.this, ForeignExchangeActivity.class);
-                startActivity(intent);
-            }
-        });
-//___________________________________________
+        //Get the username from SharedPreferences and display in bottom TextView
+        SharedPreferences settings = getSharedPreferences("com.dimitar.fe404sleepnotfound", MODE_PRIVATE);
+        String username = settings.getString("username", getString(R.string.noUser));
+        TextView userTxtView = findViewById(R.id.username);
+        userTxtView.setText(username);
+    }
 
+    /**
+     * Implementation of the onClick for the logo ImageView that opens the About Activity.
+     *
+     * @param v
+     */
+    public void openAbout(View v) {
+        Intent openAbout = new Intent(this, AboutActivity.class);
+        startActivity(openAbout);
+    }
 
+    public void openNotes(View view) {
+        Intent openNotes = new Intent(this, NotesActivity.class);
+        startActivity(openNotes);
+    }
+
+    public void openCalculator(View v){
+        Intent openCalculator = new Intent(this, CalculatorActivity.class);
+        startActivity(openCalculator);
+    }
+
+    public void openForeignExchange(View v){
+        Intent openForeignExchange = new Intent(this, ForeignExchangeActivity.class);
+        startActivity(openForeignExchange);
     }
 }
