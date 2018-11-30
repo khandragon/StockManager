@@ -1,6 +1,5 @@
 package com.dimitar.fe404sleepnotfound;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.ImageButton;
@@ -9,26 +8,40 @@ import android.widget.Toast;
 
 import com.dimitar.fe404sleepnotfound.data.CircularArray;
 import com.dimitar.fe404sleepnotfound.data.Hint;
+import com.dimitar.fe404sleepnotfound.menu.MenuActivity;
 import com.dimitar.fe404sleepnotfound.persistence.HintDAOFirebase;
 import com.google.firebase.auth.AuthResult;
 
 import java.util.Arrays;
 
-public final class HintActivity extends Activity {
+public final class HintActivity extends MenuActivity {
     private final static String TAG = "HintActivity";
     private ImageView hintView;
     private ImageButton right;
     private ImageButton left;
 
-    private CircularArray<Hint> hints;
+    private CircularArray<Hint> hints = null;
 
-    private Bundle appBundle;
     private final static String HINT_BUNDLE_KEY = "hint_array";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        if(savedInstanceState == null) {
+            Log.d(TAG, "onCreate[0] : null");
+        }
+        else {
+            Log.d(TAG, "onCreate[0] : " + savedInstanceState.toString());
+        }
+
         super.onCreate(savedInstanceState);
-        appBundle = savedInstanceState;
+
+        if(savedInstanceState == null) {
+            Log.d(TAG, "onCreate[1] : null");
+        }
+        else {
+            Log.d(TAG, "onCreate[1] : " + savedInstanceState.toString());
+        }
+
         setContentView(R.layout.activity_hint);
 
         initViews();
@@ -51,12 +64,12 @@ public final class HintActivity extends Activity {
      * @param result
      */
     private void onLoginSuccess(AuthResult result) {
-        if(appBundle != null && appBundle.containsKey(HINT_BUNDLE_KEY)) {
-            hints = appBundle.getParcelable(HINT_BUNDLE_KEY);
-
+        if(hints != null) {
+            Log.d(TAG, "onLoginSuccess : hints are downloaded");
             setupHintCircularArray();
         }
         else {
+            Log.d(TAG, "onLoginSuccess : no hints found");
             HintDAOFirebase.getInstance().readAllHints(this::initHints);
         }
     }
@@ -95,9 +108,65 @@ public final class HintActivity extends Activity {
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
+        if(outState == null) {
+            Log.d(TAG, "onSaveInstanceState[0] : null");
+        }
+        else {
+            Log.d(TAG, "onSaveInstanceState[0] : " + outState.toString());
+        }
+
         super.onSaveInstanceState(outState);
-        // save my counter
+
+        if(outState == null) {
+            Log.d(TAG, "onSaveInstanceState[1] : null");
+        }
+        else {
+            Log.d(TAG, "onSaveInstanceState[1] : " + outState.toString());
+        }
+
         outState.putParcelable(HINT_BUNDLE_KEY, hints);
+
+        if(outState == null) {
+            Log.d(TAG, "onSaveInstanceState[2] : null");
+        }
+        else {
+            Log.d(TAG, "onSaveInstanceState[2] : " + outState.toString());
+        }
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+
+
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        if(savedInstanceState == null) {
+            Log.d(TAG, "onRestoreInstanceState[0] : null");
+        }
+        else {
+            Log.d(TAG, "onRestoreInstanceState[0] : " + savedInstanceState.toString());
+        }
+
+        super.onRestoreInstanceState(savedInstanceState);
+
+        if(savedInstanceState == null) {
+            Log.d(TAG, "onRestoreInstanceState[1] : null");
+        }
+        else {
+            Log.d(TAG, "onRestoreInstanceState[1] : " + savedInstanceState.toString());
+        }
+
+        hints = savedInstanceState.getParcelable(HINT_BUNDLE_KEY);
+
+        if(savedInstanceState == null) {
+            Log.d(TAG, "onRestoreInstanceState[2] : null");
+        }
+        else {
+            Log.d(TAG, "onRestoreInstanceState[2] : " + savedInstanceState.toString());
+        }
     }
 
     /**
