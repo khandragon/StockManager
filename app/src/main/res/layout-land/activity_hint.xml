@@ -18,6 +18,7 @@
 
         <ImageButton
             android:id="@+id/left"
+            android:src="@drawable/left"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:scaleType="centerInside"
@@ -51,6 +52,7 @@
 
         <ImageButton
             android:id="@+id/right"
+            android:src="@drawable/right"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:scaleType="centerInside"
