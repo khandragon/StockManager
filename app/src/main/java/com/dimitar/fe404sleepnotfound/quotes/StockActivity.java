@@ -94,19 +94,20 @@ public class StockActivity extends MenuActivity {
      */
     public void addTicker(View view) {
         //check if the save list is not greater than 5
-        if (!check5tickers()) {
+        if (!moreThan5tickers() && !checkIfRepeat()) {
             Log.i(TAG, lastSearch);
             //add to list and shared preferences
             adapter.add(lastSearch);
-            //adapter.add(lastSearch);
-            //adapter.notifyDataSetChanged();
             Log.i(TAG, "currently saved the list " + adapter.mDataset.toString());
-//            SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-//            SharedPreferences.Editor editor = prefs.edit();
-//            editor.putStringSet("savedList", new HashSet<String>(saved));
-//            editor.commit();
-            //adapter.updateSaved(saved);
         }
+    }
+
+    /**
+     * checks if the ticker is already in the list
+     * @return true if it is  false if not
+     */
+    private boolean checkIfRepeat() {
+        return adapter.contains(lastSearch);
     }
 
     /**
@@ -121,11 +122,11 @@ public class StockActivity extends MenuActivity {
         String ticker = (String) textView.getText();
         Log.i(TAG, "removing " + ticker);
         //remove from the list
-        saved.remove(ticker);
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-        SharedPreferences.Editor editor = prefs.edit();
-        editor.putStringSet("savedList", new HashSet<String>(saved));
-        editor.commit();
+        adapter.remove(ticker);
+//        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+//        SharedPreferences.Editor editor = prefs.edit();
+//        editor.putStringSet("savedList", new HashSet<String>(saved));
+//        editor.commit();
     }
 
     /**
@@ -253,7 +254,7 @@ public class StockActivity extends MenuActivity {
                 if (jsonObject.has("Message")) {
                     textView.setText("Unknown Ticker");
                 } else {
-                    if (!check5tickers()) {
+                    if (!moreThan5tickers()) {
                         addBtn.setEnabled(true);
                     }
                     JSONArray jsonArray = jsonObject.getJSONArray("data");
@@ -279,9 +280,7 @@ public class StockActivity extends MenuActivity {
      *
      * @return true if greater false if less
      */
-    private boolean check5tickers() {
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-        Set<String> inSaveList = prefs.getStringSet("savedList", new HashSet<String>());
-        return inSaveList.size() >= 5;
+    private boolean moreThan5tickers() {
+         return adapter.getItemCount() >= 5;
     }
 }

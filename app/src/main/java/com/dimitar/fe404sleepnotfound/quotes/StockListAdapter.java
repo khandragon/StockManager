@@ -1,6 +1,8 @@
 package com.dimitar.fe404sleepnotfound.quotes;
 
 import android.content.Context;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -12,6 +14,7 @@ import android.widget.TextView;
 import com.dimitar.fe404sleepnotfound.R;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -40,12 +43,6 @@ public class StockListAdapter extends RecyclerView.Adapter<StockListAdapter.Stoc
         holder.tickerName.setText(ticker);
     }
 
-//    public void updateSaved(List<String> newlist) {
-//        mDataset.clear();
-//        mDataset.addAll(newlist);
-//        this.notifyDataSetChanged();
-//    }
-
 
     // Return the size of your dataset (invoked by the layout manager)
     @Override
@@ -56,6 +53,19 @@ public class StockListAdapter extends RecyclerView.Adapter<StockListAdapter.Stoc
     public void add(String lastSearch) {
         mDataset.add(lastSearch);
         this.notifyDataSetChanged();
+//        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(con);
+//        SharedPreferences.Editor editor = prefs.edit();
+//        editor.putStringSet("savedList", new HashSet<String>(saved));
+//        editor.commit();
+    }
+
+    public void remove(String ticker) {
+        mDataset.remove(ticker);
+        this.notifyDataSetChanged();
+    }
+
+    public boolean contains(String lastSearch) {
+        return mDataset.contains(lastSearch);
     }
 
     public class StockAdapterViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
