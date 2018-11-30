@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
+import com.dimitar.fe404sleepnotfound.calculator.CalculatorActivity;
 import com.dimitar.fe404sleepnotfound.menu.AboutActivity;
 import com.dimitar.fe404sleepnotfound.menu.MenuActivity;
 import com.dimitar.fe404sleepnotfound.notes.NotesActivity;
