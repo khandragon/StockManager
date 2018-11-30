@@ -1,5 +1,6 @@
 package com.dimitar.fe404sleepnotfound;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.ImageButton;
@@ -26,22 +27,7 @@ public final class HintActivity extends MenuActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        if(savedInstanceState == null) {
-            Log.d(TAG, "onCreate[0] : null");
-        }
-        else {
-            Log.d(TAG, "onCreate[0] : " + savedInstanceState.toString());
-        }
-
         super.onCreate(savedInstanceState);
-
-        if(savedInstanceState == null) {
-            Log.d(TAG, "onCreate[1] : null");
-        }
-        else {
-            Log.d(TAG, "onCreate[1] : " + savedInstanceState.toString());
-        }
-
         setContentView(R.layout.activity_hint);
 
         initViews();
@@ -69,7 +55,6 @@ public final class HintActivity extends MenuActivity {
             setupHintCircularArray();
         }
         else {
-            Log.d(TAG, "onLoginSuccess : no hints found");
             HintDAOFirebase.getInstance().readAllHints(this::initHints);
         }
     }
@@ -108,65 +93,18 @@ public final class HintActivity extends MenuActivity {
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
-        if(outState == null) {
-            Log.d(TAG, "onSaveInstanceState[0] : null");
-        }
-        else {
-            Log.d(TAG, "onSaveInstanceState[0] : " + outState.toString());
-        }
-
         super.onSaveInstanceState(outState);
 
-        if(outState == null) {
-            Log.d(TAG, "onSaveInstanceState[1] : null");
+        if(hints != null) {
+            outState.putParcelable(HINT_BUNDLE_KEY, hints);
         }
-        else {
-            Log.d(TAG, "onSaveInstanceState[1] : " + outState.toString());
-        }
-
-        outState.putParcelable(HINT_BUNDLE_KEY, hints);
-
-        if(outState == null) {
-            Log.d(TAG, "onSaveInstanceState[2] : null");
-        }
-        else {
-            Log.d(TAG, "onSaveInstanceState[2] : " + outState.toString());
-        }
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-
-
     }
 
     @Override
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
-        if(savedInstanceState == null) {
-            Log.d(TAG, "onRestoreInstanceState[0] : null");
-        }
-        else {
-            Log.d(TAG, "onRestoreInstanceState[0] : " + savedInstanceState.toString());
-        }
-
         super.onRestoreInstanceState(savedInstanceState);
 
-        if(savedInstanceState == null) {
-            Log.d(TAG, "onRestoreInstanceState[1] : null");
-        }
-        else {
-            Log.d(TAG, "onRestoreInstanceState[1] : " + savedInstanceState.toString());
-        }
-
         hints = savedInstanceState.getParcelable(HINT_BUNDLE_KEY);
-
-        if(savedInstanceState == null) {
-            Log.d(TAG, "onRestoreInstanceState[2] : null");
-        }
-        else {
-            Log.d(TAG, "onRestoreInstanceState[2] : " + savedInstanceState.toString());
-        }
     }
 
     /**

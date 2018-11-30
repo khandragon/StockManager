@@ -1,10 +1,20 @@
 package com.dimitar.fe404sleepnotfound.data;
 
 
+import android.content.SharedPreferences;
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.util.JsonWriter;
+import android.util.Log;
+
+import com.google.android.gms.common.util.JsonUtils;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 public class CircularArray<T extends Parcelable> implements Parcelable {
+    private final static String TAG = "CircularArray";
     protected CircularArray(Parcel in) {
         backingArray = (T[]) in.readArray(Parcelable.class.getClassLoader());
         currIndex = in.readInt();
@@ -49,7 +59,10 @@ public class CircularArray<T extends Parcelable> implements Parcelable {
     }
 
     public CircularArray(T... backingArray) {
-        this.backingArray = backingArray;
+        T[] copy = (T[]) new Parcelable[backingArray.length];
+        System.arraycopy(backingArray, 0, copy, 0, backingArray.length);
+
+        this.backingArray = copy;
         currIndex = 0;
     }
 

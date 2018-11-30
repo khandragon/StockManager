@@ -77,12 +77,13 @@ public class HintDAOFirebase implements HintDAO {
                     Map<String, String> hintMap = hintMaps.get(i);
 
                     hints[i].url = hintMap.get("url");
+                    hints[i].imgName = hintMap.get("img");
 
                     if(previousTask == null) {
-                        previousTask = getBitmapTask(hintMap.get("img"), hints[i]);
+                        previousTask = getBitmapTask(hints[i].imgName, hints[i]);
                     }
                     else {
-                        Task newTask = getBitmapTask(hintMap.get("img"), hints[i]);
+                        Task newTask = getBitmapTask(hints[i].imgName, hints[i]);
 
                         previousTask.continueWithTask(task -> newTask);
                         previousTask = newTask;
