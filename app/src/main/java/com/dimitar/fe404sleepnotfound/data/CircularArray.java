@@ -49,10 +49,7 @@ public class CircularArray<T extends Parcelable> implements Parcelable {
     }
 
     public CircularArray(T... backingArray) {
-        Object[] newBackingArray = new Object[backingArray.length];
-        System.arraycopy(backingArray, 0, newBackingArray, 0, backingArray.length);
-
-        this.backingArray = (T[]) newBackingArray;
+        this.backingArray = backingArray;
         currIndex = 0;
     }
 
@@ -64,8 +61,8 @@ public class CircularArray<T extends Parcelable> implements Parcelable {
 
     public void prev(Object context) {
         currIndex--;
-        while(currIndex < 0) {
-            currIndex = backingArray.length - currIndex;
+        if(currIndex < 0) {
+            currIndex = backingArray.length - 1;
         }
 
         fireChangeCurrentEvent();
