@@ -1,10 +1,15 @@
 package com.dimitar.fe404sleepnotfound;
 
+import android.Manifest;
+import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.dimitar.fe404sleepnotfound.calculator.CalculatorActivity;
 import com.dimitar.fe404sleepnotfound.foreignExchange.ForeignExchangeActivity;
@@ -28,6 +33,7 @@ public class MainActivity extends MenuActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_main);
 
         //Get the username from SharedPreferences and display in bottom TextView
