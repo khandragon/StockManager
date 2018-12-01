@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -37,6 +38,8 @@ public class OptionFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         this.fragmentView = inflater.inflate(R.layout.fragment_options, container, false);
         this.context = container.getContext();
+        //To Stop the input Keyboard from showing on launch
+        getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
         amountInput = fragmentView.findViewById(R.id.amountInput);
         fromView = fragmentView.findViewById(R.id.fromCur);
@@ -65,6 +68,18 @@ public class OptionFragment extends Fragment {
     }
 
     public void updateText(String newCurrency){
-        Log.wtf(TAG, newCurrency);
+        String[] updateText = newCurrency.split(",");
+        String type = updateText[1];
+        switch (type){
+            case "To":
+                toView.setText(updateText[0]);
+                break;
+            case "From":
+                fromView.setText(updateText[0]);
+                break;
+            default:
+
+                break;
+        }
     }
 }

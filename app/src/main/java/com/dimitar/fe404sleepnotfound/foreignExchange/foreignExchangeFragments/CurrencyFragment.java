@@ -74,7 +74,7 @@ public class CurrencyFragment extends Fragment {
         adapter.setRecyclerAdapterListener(new RecyclerAdapter.RecyclerAdapterListener() {
             @Override
             public void onItemClick(String item) {
-                mListner.onCurrencySent(item);
+                mListner.onCurrencySent(item + "," + type);
             }
         });
     }

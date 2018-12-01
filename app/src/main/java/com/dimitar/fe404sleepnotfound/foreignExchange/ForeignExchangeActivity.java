@@ -49,5 +49,6 @@ public class ForeignExchangeActivity extends MenuActivity implements CurrencyFra
     @Override
     public void onCurrencySent(String selected) {
         Log.wtf("TestFrag", selected);
+        optionsFragment.updateText(selected);
     }
 }
