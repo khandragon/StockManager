@@ -189,6 +189,10 @@ public class CalculatorActivity extends MenuActivity {
         yearsLeft.setText("");
     }
 
+    /**
+     * Lookup a contact by name provided by user via input to get their email address.
+     * @param v
+     */
     public void lookupContactEmail(View v){
         contactEmail = null;
         if(!contactName.getText().toString().isEmpty()) {
@@ -212,16 +216,25 @@ public class CalculatorActivity extends MenuActivity {
         }
     }
 
+    /**
+     * Send an email to the selected contact's email address with the calculation results.
+     * @param v
+     */
     public void sendEmailWInfo(View v){
-        String contents = "Balance left to pay: "+balanceLeft.getText().toString() + "\nTotal interest paid so far: "+interestPaid.getText().toString() + "\nYears left until the balance is paid off: "+yearsLeft.getText().toString();
-        String[] to = {contactEmail};
-        Intent sendEmail = new Intent(Intent.ACTION_SENDTO);
-        sendEmail.setData(Uri.parse("mailto:"));
-        sendEmail.putExtra(Intent.EXTRA_EMAIL, to);
-        sendEmail.putExtra(Intent.EXTRA_SUBJECT, "My credit card calculator results");
-        sendEmail.putExtra(Intent.EXTRA_TEXT, contents);
-        if(sendEmail.resolveActivity(getPackageManager()) != null){
-            startActivity(sendEmail);
+        if(contactEmail != null) {
+            String contents = "Balance left to pay: " + balanceLeft.getText().toString() + "\nTotal interest paid so far: " + interestPaid.getText().toString() + "\nYears left until the balance is paid off: " + yearsLeft.getText().toString();
+            String[] to = {contactEmail};
+            Intent sendEmail = new Intent(Intent.ACTION_SENDTO);
+            sendEmail.setData(Uri.parse("mailto:"));
+            sendEmail.putExtra(Intent.EXTRA_EMAIL, to);
+            sendEmail.putExtra(Intent.EXTRA_SUBJECT, "My credit card calculator results");
+            sendEmail.putExtra(Intent.EXTRA_TEXT, contents);
+            if (sendEmail.resolveActivity(getPackageManager()) != null) {
+                startActivity(sendEmail);
+            }
+        }
+        else{
+            Toast.makeText(this, getString(R.string.noEmail), Toast.LENGTH_SHORT).show();
         }
     }
 }
