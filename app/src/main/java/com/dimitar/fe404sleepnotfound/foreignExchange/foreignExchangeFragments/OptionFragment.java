@@ -85,16 +85,16 @@ public class OptionFragment extends Fragment {
         }
     }
 
-    public void updateText(String newCurrency){
-        String[] updateText = newCurrency.split(",");
-        String type = updateText[1];
+    public void updateText(CurrencySelect newCurrency){
+        //String[] updateText = newCurrency.split(",");
+        String type = newCurrency.getType();
         switch (type){
             case "To":
-                toView.setText(updateText[0]);
+                toView.setText(newCurrency.getCurrency());
                 calTotal();
                 break;
             case "From":
-                fromView.setText(updateText[0]);
+                fromView.setText(newCurrency.getCurrency());
                 calTotal();
                 break;
             default:

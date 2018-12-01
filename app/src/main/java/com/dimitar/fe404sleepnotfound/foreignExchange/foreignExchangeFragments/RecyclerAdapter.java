@@ -1,6 +1,7 @@
 package com.dimitar.fe404sleepnotfound.foreignExchange.foreignExchangeFragments;
 
 import android.content.Context;
+import android.nfc.Tag;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -14,23 +15,42 @@ import com.dimitar.fe404sleepnotfound.R;
 
 import java.util.ArrayList;
 
+/**
+ * Custom RecyclerView Adapter for the currency fragments
+ * will fill the recyclerView with the data
+ * will set up a onClick listener using a custom interface
+ *
+ * @author Jamroa
+ */
 public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHolder>{
 
     private String TAG = "RecycleAdapter";
 
     private ArrayList<String> currencys;
     private Context mContext;
-
     private RecyclerAdapterListener mListener;
 
+    /**
+     *Custom listener for a click on a the RecyclerView
+     */
     public interface RecyclerAdapterListener{
         void onItemClick(String item);
     }
 
+    /**
+     * Sets the listener for the recyclerView adapter
+     * @param listener
+     */
     public void setRecyclerAdapterListener(RecyclerAdapterListener listener){
         mListener = listener;
     }
 
+    /**
+     * Creates the recyclerView adapter
+     *
+     * @param currencys a array list of string that contain the currencies and ticker symbol
+     * @param mContext
+     */
     public RecyclerAdapter(ArrayList<String> currencys, Context mContext) {
         this.currencys = currencys;
         this.mContext = mContext;
@@ -45,7 +65,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
-        Log.wtf(TAG,"viewHolderCalled");
+        Log.d(TAG,"viewHolderCalled");
         holder.currencyTicker.setText(currencys.get(position).split(",")[0] + ":");
         holder.currencyName.setText(currencys.get(position).split(",")[1]);
 
@@ -53,16 +73,22 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
             @Override
             public void onClick(View view) {
                 if(mListener != null){
-                    mListener.onItemClick(currencys.get(position).split(",")[0]);
+                    mListener.onItemClick(currencys.get(position).split(":")[0]);
                 }
                 Toast.makeText(mContext, currencys.get(position), Toast.LENGTH_SHORT).show();
             }
         });
     }
 
+    /**
+     * Used to find the number of holderView that should be created in the recyclerView
+     *
+     * @return int with the number of holder objects
+     */
     @Override
     public int getItemCount() {
         int i = currencys.size();
+        Log.d(TAG, String.valueOf(i));
         return i;
     }
 

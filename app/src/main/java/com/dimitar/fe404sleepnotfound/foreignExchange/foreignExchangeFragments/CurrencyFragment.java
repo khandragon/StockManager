@@ -28,7 +28,7 @@ public class CurrencyFragment extends Fragment {
     private String type;
 
     public interface currencyListner{
-        void onCurrencySent(String selected);
+        void onCurrencySent(CurrencySelect selected);
     }
 
     @Override
@@ -39,32 +39,49 @@ public class CurrencyFragment extends Fragment {
         return fragmentView;
     }
 
+    /**
+     *Calls the Async task to get the string of currencies from the api
+     *Will call createCurrenciesList if task returns a string to convert the sting into a arrayList
+     */
     private void getCurrencyList(){
         try{
             RetreveCurrencies retreveCurrencies = new RetreveCurrencies();
             String currencyListString = retreveCurrencies.execute().get().toString();
-            //Log.wtf(TAG, currencyListString);
+            Log.d(TAG, currencyListString);
             createCurrenciesList(currencyListString);
         }catch (ConcurrentModificationException e){
-            Log.wtf(TAG, "ConcurrentModificationException");
+            Log.e(TAG, "ConcurrentModificationException");
         }catch (InterruptedException e){
-            Log.wtf(TAG, "InterruptedException");
+            Log.e(TAG, "InterruptedException");
         }catch (ExecutionException e){
-            Log.wtf(TAG, "ExecutionException");
+            Log.e(TAG, "ExecutionException");
         }
     }
 
+    /**
+     * Takes the String of currencys and splits it into a arrayList
+     * Takes a string and not a json object because to dispay it it needs to be a string
+     *
+     * @param currencyListString String of all currencis that is returned from the api call
+     */
     private void createCurrenciesList(String currencyListString) {
         ArrayList<String> currencies = new ArrayList<>();
-        String[] temp = currencyListString.split(",");
-        for(String row : temp){
+        //Each row of the string is split
+        String[] rows = currencyListString.split(",");
+        for(String row : rows){
+            //Splits the row into 
             String[] brokenRow = row.split("\"");
-            String cur = brokenRow[1] + "," + brokenRow[3];
+            String cur = brokenRow[1] + " : " + brokenRow[3];
             currencies.add(cur);
         }
         displayCurrencies(currencies);
     }
 
+    /**
+     * Displays the Sets the Recycler view adapter onto the Recycler view in the Fragment
+     *
+     * @param currencies A array List of all the currencies and there ticker symbol for the adapter
+     */
     private void displayCurrencies(ArrayList<String> currencies){
         RecyclerView recyclerView = fragmentView.findViewById(R.id.currencyView);
         adapter = new RecyclerAdapter(currencies, context);
@@ -74,11 +91,16 @@ public class CurrencyFragment extends Fragment {
         adapter.setRecyclerAdapterListener(new RecyclerAdapter.RecyclerAdapterListener() {
             @Override
             public void onItemClick(String item) {
-                mListner.onCurrencySent(item + "," + type);
+                mListner.onCurrencySent(new CurrencySelect(item, type));
             }
         });
     }
 
+    /**
+     * Attaches the listner for the click lister in the recycler view
+     *
+     * @param context currency Listner
+     */
     @Override
     public void onAttach(Context context){
         super.onAttach(context);
@@ -87,12 +109,20 @@ public class CurrencyFragment extends Fragment {
         }
     }
 
+    /**
+     * Detaches the listener of the click listener
+     */
     @Override
     public void onDetach(){
         super.onDetach();
         mListner = null;
     }
 
+    /**
+     * Allows you to set the type of the currency fragment to be able to identify the fragment object
+     *
+     * @param type String of what type you want to set the fragment to
+     */
     public void setType(String type){
         this.type = type;
     }

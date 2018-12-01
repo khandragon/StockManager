@@ -18,41 +18,58 @@ import java.net.URL;
 public class RetreveRates extends AsyncTask {
 
     private static final String TAG = "RetreveRatesAsync";
+
     private static final int NETIOBUFFER = 1024;
 
-    private String currencyListUrl = "https://openexchangerates.org/api/latest.json?app_id=7b0dc9c3d41b40989a3bafcea4683d5f";
+    private String currencyListUrl = "https://openexchangerates.org/api/latest.json?app_id=";
+    private String openExchangeratesKey = "7b0dc9c3d41b40989a3bafcea4683d5f";
     private String currencyListString;
 
+    /**
+     *Does a http request on the openexchangerates api to get a list of all currencies rate
+     * based off of USD
+     * Must have a api key to retreive the data
+     *
+     * @param objects for the override of doInBachground for a async task
+     * @return a string of all currencies ticker and rates relative to 1 USD
+     */
     @Override
     protected Object doInBackground(Object[] objects) {
         InputStream is = null;
         HttpURLConnection conn = null;
         try {
-            URL url = new URL(currencyListUrl);
+            URL url = new URL(currencyListUrl + openExchangeratesKey);
             conn = (HttpURLConnection) url.openConnection();
             conn.setReadTimeout(10000);
             conn.setConnectTimeout(15000);
             conn.setRequestMethod("GET");
             conn.connect();
             int response = conn.getResponseCode();
-            if (response != HttpURLConnection.HTTP_OK){
-            }else {
+            if (response == HttpURLConnection.HTTP_OK){
                 is = conn.getInputStream();
                 currencyListString = readInputStream(is);
+                //Create json object to only get a array of the rates values
                 JSONObject temp = new JSONObject(currencyListString);
                 currencyListString = temp.get("rates").toString();
             }
         }catch (MalformedURLException e){
-            Log.wtf(TAG,"Wrong URL");
+            Log.e(TAG,"Wrong URL");
         }catch (IOException e){
-            Log.wtf(TAG,"IO Exception");
+            Log.e(TAG,"IO Exception");
         }catch (JSONException e) {
-
+            Log.e(TAG,"JSONException");
         }
 
         return currencyListString;
     }
 
+    /**
+     * Convers the Input stream into a String
+     *
+     * @param stream The passed inputStream
+     * @return A string of what was in the inputStream
+     * @throws IOException if there is a invalid inputStream
+     */
     public String readInputStream(InputStream stream)  throws IOException{
         int bytesRead, totalRead=0;
         byte[] buffer = new byte[NETIOBUFFER];

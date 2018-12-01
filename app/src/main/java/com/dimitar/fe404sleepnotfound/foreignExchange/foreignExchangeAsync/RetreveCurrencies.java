@@ -16,14 +16,26 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+/**
+ * Class responsible for retreving the list of currencys
+ * Will return a String of
+ */
 public class RetreveCurrencies extends AsyncTask {
 
     private static final String TAG = "RetreveCurrenciesAsync";
     private static final int NETIOBUFFER = 1024;
 
+    //url for the list of Currencies
     private String currencyListUrl = "https://openexchangerates.org/api/currencies.json";
     private String currencyListString;
 
+    /**
+     *Does a http request on the openexchangerates api to get a list of all currencies
+     *
+     *
+     * @param objects for the override of doInBachground for a async task
+     * @return a string of all currencies ticker and name
+     */
     @Override
     protected String doInBackground(Object[] objects) {
         InputStream is = null;
@@ -36,24 +48,25 @@ public class RetreveCurrencies extends AsyncTask {
         conn.setRequestMethod("GET");
         conn.connect();
         int response = conn.getResponseCode();
-        if (response != HttpURLConnection.HTTP_OK){
-        }else {
+        if (response == HttpURLConnection.HTTP_OK){
             is = conn.getInputStream();
             currencyListString = readInputStream(is);
-            JSONObject jsonObj = new JSONObject(currencyListString);
-            currencyListString = jsonObj.get("rates").toString();
         }
         }catch (MalformedURLException e){
             Log.wtf(TAG,"Wrong URL");
         }catch (IOException e){
             Log.wtf(TAG,"IO Exception");
-        }catch (JSONException e){
-            Log.wtf(TAG, "JSONException");
         }
-
         return currencyListString;
     }
 
+    /**
+     * Convers the Input stream into a String
+     *
+     * @param stream The passed inputStream
+     * @return A string of what was in the inputStream
+     * @throws IOException if there is a invalid inputStream
+     */
     public String readInputStream(InputStream stream)  throws IOException{
         int bytesRead, totalRead=0;
         byte[] buffer = new byte[NETIOBUFFER];
