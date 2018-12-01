@@ -1,7 +1,10 @@
 package com.dimitar.fe404sleepnotfound.calculator;
 
+import android.database.Cursor;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -23,6 +26,8 @@ public class CalculatorActivity extends MenuActivity {
 
     private EditText contactName;
     private Button sendToBtn;
+
+    private String contactEmail;
 
     /**
      * Custom implementation of the onCreate lifecycle method. Sets the content of the view and
@@ -183,7 +188,20 @@ public class CalculatorActivity extends MenuActivity {
     }
 
     public void lookupContactEmail(View v){
-
+        contactName.onEditorAction(EditorInfo.IME_ACTION_DONE);
+        String query = ContactsContract.Contacts.DISPLAY_NAME+" like '%"+contactName.getText().toString()+"%'";
+        String[] projection = {ContactsContract.CommonDataKinds.Email.ADDRESS};
+        Cursor c = this.getContentResolver().query(ContactsContract.CommonDataKinds.Email.CONTENT_URI, projection, query, null, null);
+        if(c.moveToFirst()){
+            contactEmail = c.getString(0);
+        }
+        c.close();
+        if(contactEmail == null){
+            Toast.makeText(this, getString(R.string.notFound), Toast.LENGTH_SHORT).show();
+        }
+        else{
+            sendToBtn.setText(getString(R.string.sendEmail) +" "+ contactEmail);
+        }
     }
 
     public void sendEmailWInfo(View v){
