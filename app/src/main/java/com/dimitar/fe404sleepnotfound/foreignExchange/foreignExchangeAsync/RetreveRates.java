@@ -1,9 +1,7 @@
-package com.dimitar.fe404sleepnotfound.foreignExchange;
+package com.dimitar.fe404sleepnotfound.foreignExchange.foreignExchangeAsync;
 
 import android.os.AsyncTask;
 import android.util.Log;
-
-import org.json.JSONException;
 
 import java.io.BufferedInputStream;
 import java.io.ByteArrayOutputStream;
@@ -14,33 +12,31 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-public class RetreveCurrencies extends AsyncTask {
+public class RetreveRates extends AsyncTask {
 
-    private static final String TAG = "RetreveCurrenciesAsync";
+    private static final String TAG = "RetreveRatesAsync";
     private static final int NETIOBUFFER = 1024;
 
-
-    private String currencyListUrl = "https://openexchangerates.org/api/currencies.json";
+    private String currencyListUrl = "https://openexchangerates.org/api/latest.json?app_id=7b0dc9c3d41b40989a3bafcea4683d5f";
     private String currencyListString;
 
     @Override
-    protected String doInBackground(Object[] objects) {
+    protected Object doInBackground(Object[] objects) {
         InputStream is = null;
         HttpURLConnection conn = null;
         try {
-        URL url = new URL(currencyListUrl);
-        conn = (HttpURLConnection) url.openConnection();
-        conn.setReadTimeout(10000);
-        conn.setConnectTimeout(15000);
-        conn.setRequestMethod("GET");
-        conn.connect();
-        int response = conn.getResponseCode();
-        if (response != HttpURLConnection.HTTP_OK){
-
-        }else {
-            is = conn.getInputStream();
-            currencyListString = readInputStream(is);
-        }
+            URL url = new URL(currencyListUrl);
+            conn = (HttpURLConnection) url.openConnection();
+            conn.setReadTimeout(10000);
+            conn.setConnectTimeout(15000);
+            conn.setRequestMethod("GET");
+            conn.connect();
+            int response = conn.getResponseCode();
+            if (response != HttpURLConnection.HTTP_OK){
+            }else {
+                is = conn.getInputStream();
+                currencyListString = readInputStream(is);
+            }
         }catch (MalformedURLException e){
             Log.wtf(TAG,"Wrong URL");
         }catch (IOException e){
@@ -65,4 +61,3 @@ public class RetreveCurrencies extends AsyncTask {
         return new String(byteArrayOutputStream.toString());
     }
 }
-
