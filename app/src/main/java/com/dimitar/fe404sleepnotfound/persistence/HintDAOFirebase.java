@@ -25,6 +25,9 @@ import java.util.List;
 import java.util.Map;
 
 public class HintDAOFirebase implements HintDAO {
+    /**
+     * Number of bytes in a kibi
+     */
     private final static int KIBI = 1024;
     private final static String TAG = "HintDAOFirebase";
     private static HintDAO instance;
@@ -56,10 +59,20 @@ public class HintDAOFirebase implements HintDAO {
         return FirebaseDatabase.getInstance().getReference();
     }
 
+    /**
+     * Shortcut to get entire database reference of images
+     *
+     * @return a storage reference
+     */
     private StorageReference img() {
         return FirebaseStorage.getInstance().getReference();
     }
 
+    /**
+     * @see HintDAO#readAllHints(Consumer)
+     *
+     * @param consumer uses the result asynchronously
+     */
     public void readAllHints(Consumer<Hint[]> consumer) {
         db().addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -108,6 +121,12 @@ public class HintDAOFirebase implements HintDAO {
         });
     }
 
+    /**
+     * Downloads an image from firebase storage
+     * @param imageName which image to download
+     * @param hint where to put it
+     * @return an async task, which consists of the image download
+     */
     private Task<byte[]> getBitmapTask(String imageName, Hint hint) {
         return img().child(imageName)
                 .getBytes(250 * KIBI)
