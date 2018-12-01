@@ -23,6 +23,11 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal" >
 
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1" />
+
         <ImageButton
             android:id="@+id/left"
             android:src="@drawable/left"
@@ -31,6 +36,11 @@
             android:scaleType="centerInside"
             android:adjustViewBounds="true" />
 
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1" />
+
         <ImageButton
             android:id="@+id/right"
             android:src="@drawable/right"
@@ -38,6 +48,11 @@
             android:layout_height="match_parent"
             android:scaleType="centerInside"
             android:adjustViewBounds="true" />
+
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1" />
 
     </LinearLayout>
 

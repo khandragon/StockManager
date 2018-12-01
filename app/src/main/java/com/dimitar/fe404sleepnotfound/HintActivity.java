@@ -1,6 +1,7 @@
 package com.dimitar.fe404sleepnotfound;
 
 import android.content.SharedPreferences;
+import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.ImageButton;
@@ -17,6 +18,9 @@ import java.util.Arrays;
 
 public final class HintActivity extends MenuActivity {
     private final static String TAG = "HintActivity";
+
+    private AnimationDrawable downloadAnimation;
+
     private ImageView hintView;
     private ImageButton right;
     private ImageButton left;
@@ -31,6 +35,8 @@ public final class HintActivity extends MenuActivity {
         setContentView(R.layout.activity_hint);
 
         initViews();
+
+        startDownloadAnimation();
 
         HintDAOFirebase.login()
                 .addOnSuccessListener(this, this::onLoginSuccess)
@@ -86,6 +92,8 @@ public final class HintActivity extends MenuActivity {
         left.setOnClickListener(hints::prev);
 
         // Manage ImageView with the hint
+        stopDownloadAnimation();
+
         changeHintView(hints.getCurrent());
         hints.onCurrentChange(this::changeHintView);
         hintView.setOnClickListener(e -> openHintSource(hints.getCurrent()));
@@ -132,5 +140,15 @@ public final class HintActivity extends MenuActivity {
      */
     private void openHintSource(Hint hint) {
         Toast.makeText(getApplicationContext(), hint.url, Toast.LENGTH_SHORT).show();
+    }
+
+    private void startDownloadAnimation() {
+        hintView.setImageResource(R.drawable.download_animation);
+        downloadAnimation = (AnimationDrawable) hintView.getDrawable();
+        downloadAnimation.start();
+    }
+
+    private void stopDownloadAnimation() {
+        downloadAnimation.stop();
     }
 }
