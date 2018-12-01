@@ -24,6 +24,11 @@ public class CalculatorActivity extends MenuActivity {
     private EditText contactName;
     private Button sendToBtn;
 
+    /**
+     * Custom implementation of the onCreate lifecycle method. Sets the content of the view and
+     * acquires references to all Views required by the class.
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,6 +46,10 @@ public class CalculatorActivity extends MenuActivity {
         sendToBtn = findViewById(R.id.sendTo);
     }
 
+    /**
+     * Save the calculated information in the Bundle.
+     * @param savedInstanceState
+     */
     @Override
     public void onSaveInstanceState(Bundle savedInstanceState){
         super.onSaveInstanceState(savedInstanceState);
@@ -49,6 +58,10 @@ public class CalculatorActivity extends MenuActivity {
         savedInstanceState.putString("yearsLeft", yearsLeft.getText().toString());
     }
 
+    /**
+     * Restore the saved information from the Bundle.
+     * @param savedInstanceState
+     */
     @Override
     public void onRestoreInstanceState(Bundle savedInstanceState){
         super.onRestoreInstanceState(savedInstanceState);
@@ -58,6 +71,11 @@ public class CalculatorActivity extends MenuActivity {
         yearsLeft.setText(savedInstanceState.getString("yearsLeft", ""));
     }
 
+    /**
+     * Click handler for the calculate button. It validates that all required fields have been set
+     * and calls the method to calculate if they have been set.
+     * @param v
+     */
     public void calculate(View v){
         //Validate that all input fields have been set
         if(amount.getText().toString().isEmpty() || interestRate.getText().toString().isEmpty() || monthlyMinimum.getText().toString().isEmpty() || years.getText().toString().isEmpty()){
@@ -67,6 +85,12 @@ public class CalculatorActivity extends MenuActivity {
             calculateAndDisplayCreditInfo();
         }
     }
+
+    /**
+     * Calculates the balance left to pay, the total amount of interest paid so far and how many
+     * years are left to pay off the full balance with the provided information. Once calculated
+     * sucessfully, all the information is displayed in the appropriate Views.
+     */
     private void calculateAndDisplayCreditInfo(){
         //Get all data provided
         double balance = Double.parseDouble(amount.getText().toString());
@@ -143,6 +167,11 @@ public class CalculatorActivity extends MenuActivity {
         }
     }
 
+    /**
+     * Click handler for the clear button. It clears all input and all information calculated from
+     * the appropriate Views.
+     * @param v
+     */
     public void clear(View v){
         amount.getText().clear();
         interestRate.getText().clear();
