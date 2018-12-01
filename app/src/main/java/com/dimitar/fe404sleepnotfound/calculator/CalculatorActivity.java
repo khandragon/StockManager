@@ -39,7 +39,23 @@ public class CalculatorActivity extends MenuActivity {
         yearsLeft = findViewById(R.id.timeLeft);
         contactName = findViewById(R.id.contactName);
         sendToBtn = findViewById(R.id.sendTo);
+    }
 
+    @Override
+    public void onSaveInstanceState(Bundle savedInstanceState){
+        super.onSaveInstanceState(savedInstanceState);
+        savedInstanceState.putString("balance", balanceLeft.getText().toString());
+        savedInstanceState.putString("interest", interestPaid.getText().toString());
+        savedInstanceState.putString("yearsLeft", yearsLeft.getText().toString());
+    }
+
+    @Override
+    public void onRestoreInstanceState(Bundle savedInstanceState){
+        super.onRestoreInstanceState(savedInstanceState);
+        //Restore the values calculated from the Bundle after e.g a screen rotation
+        balanceLeft.setText(savedInstanceState.getString("balance", ""));
+        interestPaid.setText(savedInstanceState.getString("interest", ""));
+        yearsLeft.setText(savedInstanceState.getString("yearsLeft", ""));
     }
 
     public void calculate(View v){
