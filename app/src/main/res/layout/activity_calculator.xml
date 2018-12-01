@@ -42,6 +42,7 @@
                     android:focusable="true"
                     android:focusableInTouchMode="true">
                     <EditText
+                        android:id="@+id/amount"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:inputType="numberDecimal"/>
@@ -69,6 +70,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="2">
                     <EditText
+                        android:id="@+id/interestRate"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:inputType="numberDecimal"/>
@@ -96,6 +98,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="2">
                     <EditText
+                        android:id="@+id/monthlyMinimum"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:inputType="numberDecimal"/>
@@ -123,6 +126,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="2">
                     <EditText
+                        android:id="@+id/yearsPaying"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:inputType="number"/>
@@ -240,6 +244,7 @@
                     android:paddingEnd="10dp"
                     />
                 <EditText
+                    android:id="@+id/contactName"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="2"
@@ -250,15 +255,18 @@
                     android:layout_weight="1"
                     android:backgroundTint="@color/buttonBG"
                     android:textColor="@color/white"
-                    android:text="@string/lookup"/>
+                    android:text="@string/lookup"
+                    android:onClick="lookupContactEmail"/>
             </LinearLayout>
             <Button
+                android:id="@+id/sendTo"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
                 android:backgroundTint="@color/orange"
                 android:textColor="@color/white"
-                android:text="@string/sendEmail"/>
+                android:text="@string/sendEmail"
+                android:onClick="sendEmailWInfo"/>
         </LinearLayout>
     </LinearLayout>
 
