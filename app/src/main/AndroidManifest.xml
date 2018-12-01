@@ -21,7 +21,13 @@
         <activity android:name=".menu.SettingsActivity" />
         <activity android:name=".menu.AboutActivity" />
         <activity android:name=".notes.NotesActivity" />
-        <activity android:name=".calculator.CalculatorActivity"></activity>
+        <activity android:name=".calculator.CalculatorActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.SENDTO" />
+                <data android:scheme="mailto" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
     </application>
 
 

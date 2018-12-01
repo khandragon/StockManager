@@ -1,6 +1,8 @@
 package com.dimitar.fe404sleepnotfound.calculator;
 
+import android.content.Intent;
 import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.view.View;
@@ -211,6 +213,15 @@ public class CalculatorActivity extends MenuActivity {
     }
 
     public void sendEmailWInfo(View v){
-
+        String contents = "Balance left to pay: "+balanceLeft.getText().toString() + "\nTotal interest paid so far: "+interestPaid.getText().toString() + "\nYears left until the balance is paid off: "+yearsLeft.getText().toString();
+        String[] to = {contactEmail};
+        Intent sendEmail = new Intent(Intent.ACTION_SENDTO);
+        sendEmail.setData(Uri.parse("mailto:"));
+        sendEmail.putExtra(Intent.EXTRA_EMAIL, to);
+        sendEmail.putExtra(Intent.EXTRA_SUBJECT, "My credit card calculator results");
+        sendEmail.putExtra(Intent.EXTRA_TEXT, contents);
+        if(sendEmail.resolveActivity(getPackageManager()) != null){
+            startActivity(sendEmail);
+        }
     }
 }
