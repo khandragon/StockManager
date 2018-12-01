@@ -34,7 +34,8 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:scaleType="centerInside"
-            android:adjustViewBounds="true" />
+            android:adjustViewBounds="true"
+            android:background="@null" />
 
         <Space
             android:layout_width="0dp"
@@ -47,7 +48,8 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:scaleType="centerInside"
-            android:adjustViewBounds="true" />
+            android:adjustViewBounds="true"
+            android:background="@null" />
 
         <Space
             android:layout_width="0dp"
