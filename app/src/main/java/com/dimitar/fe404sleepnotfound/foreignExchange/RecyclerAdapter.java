@@ -18,7 +18,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
 
     private String TAG = "RecycleAdapter";
 
-    private ArrayList<String> currencys = new ArrayList<>();
+    private ArrayList<String> currencys;
     private Context mContext;
 
     public RecyclerAdapter(ArrayList<String> currencys, Context mContext) {
