@@ -48,4 +48,5 @@
     <string name="contactName">Name: </string>
     <string name="lookup">Lookup in contacts</string>
     <string name="sendEmail">Send email to </string>
+    <string name="paymentTooSmall">Monthly payment is too small, this will take forever to pay off! Please increase your monthly payment.</string>
 </resources>

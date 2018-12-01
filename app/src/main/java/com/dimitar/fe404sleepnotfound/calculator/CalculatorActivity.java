@@ -1,11 +1,11 @@
 package com.dimitar.fe404sleepnotfound.calculator;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.dimitar.fe404sleepnotfound.R;
 import com.dimitar.fe404sleepnotfound.menu.MenuActivity;
@@ -55,21 +55,64 @@ public class CalculatorActivity extends MenuActivity {
         double amountLeft;
         double dailyInterest = rate / 365;
 
+        int monthsToPayOff = 0;
+        double yearsToPayoff = 0;
+        double finalBalance = 0;
+        double finalInterest = 0;
+
+        int i;
         //Calculate the balance left + the total interest paid on a month per month basis (compound interest)
-        for(int i=0, j=0; i<numMonths; i++, j++){
+        for(i=0; i<1000; i++){
             //Calculate compounded interest for that month
             monthlyInterest = balance * (Math.pow((1 + dailyInterest), 30) - 1);
 
-            Log.wtf("INTEREST", ""+monthlyInterest);
-            //Remove monthly payment from interest and add to balance
+            //Remove monthly payment from interest and apply what is left to the balance
             amountLeft = monthlyPayment - monthlyInterest;
             balance -= amountLeft;
 
+            //Add the interest paid for that month to the total interest
             interestPaidSoFar += monthlyInterest;
+
+            //When the specified number of months is reached
+            if(i == numMonths){
+                //If the balance is already paid off at this point
+                if(balance < 0) {
+                    finalBalance = 0;
+                }
+                //Otherwise display remaining balance
+                else{
+                    finalBalance = balance;
+                }
+                //Display interest paid so far
+                finalInterest = interestPaidSoFar;
+            }
+            //When the number of months required to pay off the balance is reached
+            if(balance <= 0){
+                //Get the number of months that is left to pay
+                monthsToPayOff = i - numMonths;
+
+                //If the balance is already paid off
+                if(monthsToPayOff < 0){
+                    yearsToPayoff = 0;
+                    finalInterest = interestPaidSoFar;
+                }
+                //If there is still time left to pay off
+                else{
+                    yearsToPayoff = monthsToPayOff / 12.0;
+                }
+                break;
+            }
         }
-        //Set the values
-        balanceLeft.setText(Double.toString(balance));
-        interestPaid.setText(Double.toString(interestPaidSoFar));
+        //If the payment is too small for that amount of interest, tell the user to raise their monthly payment
+        if(i == 1000){
+            Toast.makeText(this, getString(R.string.paymentTooSmall), Toast.LENGTH_LONG).show();
+        }
+        else {
+            //Display the values
+            balanceLeft.setText(Double.toString(finalBalance));
+            interestPaid.setText(Double.toString(finalInterest));
+            yearsLeft.setText(Double.toString(yearsToPayoff));
+        }
     }
 
     public void lookupContactEmail(View v){
