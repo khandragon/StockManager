@@ -152,7 +152,8 @@
                         android:layout_height="match_parent"
                         android:text="@string/clear"
                         android:backgroundTint="@color/buttonBG"
-                        android:textColor="@color/white" />
+                        android:textColor="@color/white"
+                        android:onClick="clear"/>
             </LinearLayout>
         </LinearLayout>
 

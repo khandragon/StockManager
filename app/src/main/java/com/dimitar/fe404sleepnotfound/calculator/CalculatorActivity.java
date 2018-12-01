@@ -55,7 +55,7 @@ public class CalculatorActivity extends MenuActivity {
         double amountLeft;
         double dailyInterest = rate / 365;
 
-        int monthsToPayOff = 0;
+        int monthsToPayOff ;
         double yearsToPayoff = 0;
         double finalBalance = 0;
         double finalInterest = 0;
@@ -105,6 +105,9 @@ public class CalculatorActivity extends MenuActivity {
         }
         //If the payment is too small for that amount of interest, tell the user to raise their monthly payment
         if(i == 1000){
+            balanceLeft.setText("");
+            interestPaid.setText("");
+            yearsLeft.setText("");
             Toast.makeText(this, getString(R.string.paymentTooSmall), Toast.LENGTH_LONG).show();
         }
         else {
@@ -113,6 +116,16 @@ public class CalculatorActivity extends MenuActivity {
             interestPaid.setText(Double.toString(finalInterest));
             yearsLeft.setText(Double.toString(yearsToPayoff));
         }
+    }
+
+    public void clear(View v){
+        amount.getText().clear();
+        interestRate.getText().clear();
+        monthlyMinimum.getText().clear();
+        years.getText().clear();
+        balanceLeft.setText("");
+        interestPaid.setText("");
+        yearsLeft.setText("");
     }
 
     public void lookupContactEmail(View v){
