@@ -35,4 +35,17 @@
     <string name="calculator">Loan/Credit calculator</string>
     <string name="portfolio">My Stock Portfolio</string>
     <string name="noUser">No user has been registered with the app yet - please set it in the settings</string>
+    <string name="amount">Amount</string>
+    <string name="minimumPayment">Minimum payment</string>
+    <string name="interestRate">Interest rate (%)</string>
+    <string name="years">Years</string>
+    <string name="calculate">Calculate</string>
+    <string name="clear">Clear</string>
+    <string name="amountLeft">Balance left to pay</string>
+    <string name="interestPaid">Amount of interest paid</string>
+    <string name="timeLeft">Years left to pay off</string>
+    <string name="sendEmailHeading">Send this information inside an email to</string>
+    <string name="contactName">Name: </string>
+    <string name="lookup">Lookup in contacts</string>
+    <string name="sendEmail">Send email to </string>
 </resources>
