@@ -188,19 +188,25 @@ public class CalculatorActivity extends MenuActivity {
     }
 
     public void lookupContactEmail(View v){
-        contactName.onEditorAction(EditorInfo.IME_ACTION_DONE);
-        String query = ContactsContract.Contacts.DISPLAY_NAME+" like '%"+contactName.getText().toString()+"%'";
-        String[] projection = {ContactsContract.CommonDataKinds.Email.ADDRESS};
-        Cursor c = this.getContentResolver().query(ContactsContract.CommonDataKinds.Email.CONTENT_URI, projection, query, null, null);
-        if(c.moveToFirst()){
-            contactEmail = c.getString(0);
-        }
-        c.close();
-        if(contactEmail == null){
-            Toast.makeText(this, getString(R.string.notFound), Toast.LENGTH_SHORT).show();
+        contactEmail = null;
+        if(!contactName.getText().toString().isEmpty()) {
+            contactName.onEditorAction(EditorInfo.IME_ACTION_DONE);
+            String query = ContactsContract.Contacts.DISPLAY_NAME + " like '%" + contactName.getText().toString() + "%'";
+            String[] projection = {ContactsContract.CommonDataKinds.Email.ADDRESS};
+            Cursor c = this.getContentResolver().query(ContactsContract.CommonDataKinds.Email.CONTENT_URI, projection, query, null, null);
+            if (c.moveToFirst()) {
+                contactEmail = c.getString(0);
+            }
+            c.close();
+            if (contactEmail == null) {
+                Toast.makeText(this, getString(R.string.notFound), Toast.LENGTH_SHORT).show();
+            }
+            else {
+                sendToBtn.setText(getString(R.string.sendEmail) + " " + contactEmail);
+            }
         }
         else{
-            sendToBtn.setText(getString(R.string.sendEmail) +" "+ contactEmail);
+            Toast.makeText(this, getString(R.string.noContactInput), Toast.LENGTH_SHORT).show();
         }
     }
 
