@@ -3,6 +3,9 @@ package com.dimitar.fe404sleepnotfound.foreignExchange.foreignExchangeAsync;
 import android.os.AsyncTask;
 import android.util.Log;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.BufferedInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
@@ -36,11 +39,15 @@ public class RetreveRates extends AsyncTask {
             }else {
                 is = conn.getInputStream();
                 currencyListString = readInputStream(is);
+                JSONObject temp = new JSONObject(currencyListString);
+                currencyListString = temp.get("rates").toString();
             }
         }catch (MalformedURLException e){
             Log.wtf(TAG,"Wrong URL");
         }catch (IOException e){
             Log.wtf(TAG,"IO Exception");
+        }catch (JSONException e) {
+
         }
 
         return currencyListString;
