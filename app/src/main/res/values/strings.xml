@@ -49,4 +49,5 @@
     <string name="lookup">Lookup in contacts</string>
     <string name="sendEmail">Send email with results to </string>
     <string name="paymentTooSmall">Monthly payment is too small for this interest rate, this will take forever to pay off! Please increase your monthly payment or lower the APR.</string>
+    <string name="emptyFields">Please fill out all the fields before calculating</string>
 </resources>

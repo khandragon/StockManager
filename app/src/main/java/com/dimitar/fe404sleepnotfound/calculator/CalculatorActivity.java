@@ -42,7 +42,16 @@ public class CalculatorActivity extends MenuActivity {
 
     }
 
-    public void calculateAndDisplayCreditInfo(View v){
+    public void calculate(View v){
+        //Validate that all input fields have been set
+        if(amount.getText().toString().isEmpty() || interestRate.getText().toString().isEmpty() || monthlyMinimum.getText().toString().isEmpty() || years.getText().toString().isEmpty()){
+            Toast.makeText(this, getString(R.string.emptyFields), Toast.LENGTH_SHORT).show();
+        }
+        else{
+            calculateAndDisplayCreditInfo();
+        }
+    }
+    private void calculateAndDisplayCreditInfo(){
         //Get all data provided
         double balance = Double.parseDouble(amount.getText().toString());
         double rate = Double.parseDouble(interestRate.getText().toString()) / 100;

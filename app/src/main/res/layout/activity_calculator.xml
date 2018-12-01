@@ -145,7 +145,7 @@
                         android:text="@string/calculate"
                         android:backgroundTint="@color/buttonBG"
                         android:textColor="@color/white"
-                        android:onClick="calculateAndDisplayCreditInfo"/>
+                        android:onClick="calculate"/>
                     <Button
                         android:layout_width="0dp"
                         android:layout_weight="1"
