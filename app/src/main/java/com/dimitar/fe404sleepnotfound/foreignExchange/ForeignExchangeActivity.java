@@ -57,7 +57,7 @@ public class ForeignExchangeActivity extends MenuActivity implements CurrencyFra
     }
 
     /**
-     * Custom event listner for the 2 currencyFragment objects
+     * Custom event listener for the 2 currencyFragment objects
      * Passes the sent information to the options fragment
      *
      * @param selected a object of the type of currency fragment and currency selected

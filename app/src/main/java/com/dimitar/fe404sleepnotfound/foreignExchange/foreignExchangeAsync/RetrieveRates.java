@@ -15,7 +15,7 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-public class RetreveRates extends AsyncTask {
+public class RetrieveRates extends AsyncTask {
 
     private static final String TAG = "RetreveRatesAsync";
 

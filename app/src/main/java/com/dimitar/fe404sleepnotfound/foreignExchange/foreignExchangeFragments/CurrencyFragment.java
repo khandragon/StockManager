@@ -17,6 +17,11 @@ import java.util.ArrayList;
 import java.util.ConcurrentModificationException;
 import java.util.concurrent.ExecutionException;
 
+/**
+ * Fragment to display a recyclerView with all the currencies from the openExchange api
+ *
+ * @author Jamroa
+ */
 public class CurrencyFragment extends Fragment {
 
     private static final String TAG = "CurrencyFragment";
@@ -69,9 +74,9 @@ public class CurrencyFragment extends Fragment {
         //Each row of the string is split
         String[] rows = currencyListString.split(",");
         for(String row : rows){
-            //Splits the row into 
+            //Splits each row into there Ticker symbol and there name
             String[] brokenRow = row.split("\"");
-            String cur = brokenRow[1] + " : " + brokenRow[3];
+            String cur = brokenRow[1] + "," + brokenRow[3];
             currencies.add(cur);
         }
         displayCurrencies(currencies);

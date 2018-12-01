@@ -63,6 +63,13 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
         return holder;
     }
 
+    /**
+     * Binds a View Holer to each item in the list of items and sets a onclick listener to
+     * each of the holder in the recyclerView.
+     *
+     * @param holder new Holder in each item in the arraylist
+     * @param position the position of the holder in the recyclerView
+     */
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
         Log.d(TAG,"viewHolderCalled");
@@ -73,7 +80,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
             @Override
             public void onClick(View view) {
                 if(mListener != null){
-                    mListener.onItemClick(currencys.get(position).split(":")[0]);
+                    mListener.onItemClick(currencys.get(position).split(",")[0]);
                 }
                 Toast.makeText(mContext, currencys.get(position), Toast.LENGTH_SHORT).show();
             }
@@ -92,6 +99,9 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
         return i;
     }
 
+    /**
+     * Custom holder for the Items contents in the recyclerView
+     */
     public class ViewHolder extends RecyclerView.ViewHolder{
 
         TextView currencyTicker;
