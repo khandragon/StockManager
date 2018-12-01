@@ -5,13 +5,17 @@ import android.content.Context;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.dimitar.fe404sleepnotfound.R;
+import com.dimitar.fe404sleepnotfound.foreignExchange.RecyclerAdapter;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -22,14 +26,17 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
+import java.lang.reflect.Array;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
+import java.util.ArrayList;
+import java.util.Iterator;
 
 public class CurrencyFragment extends Fragment {
 
-    private static final String TAG = "HttpURLConn";
+    private static final String TAG = "CurrencyFragment";
     private static final int NETIOBUFFER = 1024;
 
     private View fragmentView;
@@ -37,7 +44,8 @@ public class CurrencyFragment extends Fragment {
 
     private String currencyListUrl = "https://openexchangerates.org/api/currencies.json";
     private String currencyListString;
-    private JSONObject currencyJson;
+    //private JSONObject currencyJson;
+    private ArrayList<String> currencies;
 
 
     @Override
@@ -74,7 +82,9 @@ public class CurrencyFragment extends Fragment {
                     }else {
                         is = conn.getInputStream();
                         currencyListString = readInputStream(is);
-                        currencyJson = new JSONObject(currencyListString);
+                        Log.wtf(TAG, currencyListString);
+                        //currencyJson = new JSONObject(currencyListString);
+                        createCurrenciesList();
                     }
                 }catch (MalformedURLException e){
                     Log.wtf(TAG,"Wrong URL");
@@ -101,5 +111,27 @@ public class CurrencyFragment extends Fragment {
         writer.flush();
         Log.d(TAG, "Bytes read: " + totalRead + "(-1 means end of reader so max of)");
         return new String(byteArrayOutputStream.toString());
+    }
+
+    private void createCurrenciesList() throws JSONException {
+        currencies = new ArrayList<>();
+        String[] temp = currencyListString.split(",");
+        for(int x = 0; x < temp.length; x++){
+
+        }
+        //Iterator currencyIretator = currencyJson.keys();
+        //while (currencyIretator.hasNext()){
+        //    currencies.add("test,test");
+        //    //currencies.add(currencyIretator.next().toString() + "," + currencyJson.get(currencyIretator.next().toString()));
+        //}
+        //Log.wtf(TAG, "Array List created");
+        displayCurrencies();
+    }
+
+    private void displayCurrencies(){
+        RecyclerView recyclerView = fragmentView.findViewById(R.id.currencyView);
+        RecyclerAdapter adapter = new RecyclerAdapter(currencies, this.context);
+        recyclerView.setAdapter(adapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this.context));
     }
 }
