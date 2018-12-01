@@ -15,6 +15,7 @@ import com.dimitar.fe404sleepnotfound.menu.MenuActivity;
 import com.dimitar.fe404sleepnotfound.persistence.HintDAOFirebase;
 import com.google.firebase.auth.AuthResult;
 
+import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.Random;
 
@@ -87,7 +88,7 @@ public final class HintActivity extends MenuActivity {
      */
     private void initHints(Hint[] hintArr) {
         // init the hint circular array
-        hintArr = shuffleArray(hintArr);
+        hintArr = shuffleArray(Hint.class, hintArr);
         Log.d(TAG, "Received Hints : " + Arrays.toString(hintArr));
         hints = new CircularArray<>(hintArr);
 
@@ -146,13 +147,14 @@ public final class HintActivity extends MenuActivity {
     /**
      * Shuffles the array using the Fisher-Yates algorithm
      *
+     * @param arrayClass class of the array type, used to create a generic array, thanks Java
      * @param array array to shuffle
      * @param <T> type of elements in the array
      *
      * @return the shuffled version of the input array
      */
-    private <T> T[] shuffleArray(T[] array) {
-        T[] outArray = (T[]) new Object[array.length];
+    private <T> T[] shuffleArray(Class<T> arrayClass, T[] array) {
+        T[] outArray = (T[]) Array.newInstance(arrayClass, array.length);
 
         int[] scratch = range(0, array.length);
         int limit = array.length - 1;
