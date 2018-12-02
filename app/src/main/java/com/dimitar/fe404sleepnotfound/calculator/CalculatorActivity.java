@@ -6,6 +6,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.view.View;
+import android.view.animation.TranslateAnimation;
 import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
@@ -51,6 +52,8 @@ public class CalculatorActivity extends MenuActivity {
         yearsLeft = findViewById(R.id.timeLeft);
         contactName = findViewById(R.id.contactName);
         sendToBtn = findViewById(R.id.sendTo);
+
+        sendToBtn.setVisibility(View.INVISIBLE);
     }
 
     /**
@@ -214,6 +217,11 @@ public class CalculatorActivity extends MenuActivity {
                 Toast.makeText(this, getString(R.string.notFound), Toast.LENGTH_SHORT).show();
             }
             else {
+                sendToBtn.setVisibility(View.VISIBLE);
+                TranslateAnimation animate = new TranslateAnimation(0, 0, sendToBtn.getHeight(), 0);
+                animate.setDuration(500);
+                animate.setFillAfter(true);
+                sendToBtn.startAnimation(animate);
                 sendToBtn.setText(getString(R.string.sendEmail) + " " + contactEmail);
             }
         }
