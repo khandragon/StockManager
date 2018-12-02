@@ -1,6 +1,7 @@
-package com.dimitar.fe404sleepnotfound.notes;
+package com.dimitar.fe404sleepnotfound.notes.viewModel;
 
 import android.content.Context;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,7 +20,7 @@ public class NotesListAdapter extends RecyclerView.Adapter<NotesListAdapter.Note
 
         private NotesViewHolder(View itemView) {
             super(itemView);
-            NotesItemView = itemView.findViewById(R.id.note_item);
+            NotesItemView = itemView.findViewById(R.id.noteItem);
         }
     }
 
@@ -32,7 +33,7 @@ public class NotesListAdapter extends RecyclerView.Adapter<NotesListAdapter.Note
 
     @Override
     public NotesViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View itemView = mInflater.inflate(R.layout.recyclerview, parent, false);
+        View itemView = mInflater.inflate(R.layout.activity_note, parent, false);
         return new NotesViewHolder(itemView);
     }
 

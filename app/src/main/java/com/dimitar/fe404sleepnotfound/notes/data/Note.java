@@ -13,7 +13,7 @@ public class Note {
     private int noteId;
 
     @NonNull
-    @ColumnInfo(name = "noteId")
+    @ColumnInfo(name = "noteText")
     private String text;
 
     public Note(String text) {

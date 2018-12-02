@@ -40,4 +40,5 @@
     <string name="remove">Remove</string>
     <string name="ticker">Ticker</string>
     <string name="company">Company:</string>
+    <string name="title_activity_notes">NotesActivity</string>
 </resources>

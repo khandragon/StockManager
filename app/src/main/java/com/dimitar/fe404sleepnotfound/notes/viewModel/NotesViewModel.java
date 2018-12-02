@@ -1,4 +1,4 @@
-package com.dimitar.fe404sleepnotfound.notes;
+package com.dimitar.fe404sleepnotfound.notes.viewModel;
 
 import android.app.Application;
 import android.arch.lifecycle.AndroidViewModel;
@@ -19,7 +19,7 @@ public class NotesViewModel extends AndroidViewModel {
         mAllNotes = mRepository.getAllNotes();
     }
 
-    LiveData<List<Note>> getmAllNotes() {
+    public LiveData<List<Note>> getAllNotes() {
         return mAllNotes;
     }
 

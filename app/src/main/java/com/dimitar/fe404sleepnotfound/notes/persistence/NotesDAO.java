@@ -24,13 +24,10 @@ public interface NotesDAO {
     @Query("SELECT * FROM notes_table WHERE noteId = :noteId")
     Note getNote(int noteId);
 
-    @Update
-    void updateNote(Note note);
+    @Query("UPDATE notes_table SET noteText = :noteText WHERE noteId = :oldId")
+    void updateNote(int oldId, String noteText);
 
     @Delete
-    void deleteAll();
-
-    @Delete
-    void deleteNote(int noteId);
+    void deleteNote(Note... notes);
 
 }
