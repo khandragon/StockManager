@@ -120,7 +120,7 @@ public class CalculatorActivity extends MenuActivity {
         //Calculate the balance left + the total interest paid on a month per month basis (compound interest)
         for(i=0; i<1000; i++){
             //Calculate compounded interest for that month
-            monthlyInterest = balance * (Math.pow((1 + dailyInterest), 30) - 1);
+            monthlyInterest = balance * (Math.pow((1 + dailyInterest), 30.175) - 1);
 
             //Remove monthly payment from interest and apply what is left to the balance
             amountLeft = monthlyPayment - monthlyInterest;
@@ -145,7 +145,7 @@ public class CalculatorActivity extends MenuActivity {
             //When the number of months required to pay off the balance is reached
             if(balance <= 0){
                 //Get the number of months that is left to pay
-                monthsToPayOff = i - numMonths;
+                monthsToPayOff = i - numMonths +1;
 
                 //If the balance is already paid off
                 if(monthsToPayOff < 0){
