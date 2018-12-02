@@ -9,14 +9,14 @@
         android:id="@+id/notesList"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@android:color/darker_gray"
+        android:background="@android:color/white"
         tools:listitem="@layout/notesview_item" />
 
     <android.support.design.widget.FloatingActionButton
 
         android:id="@+id/fab"
-        android:layout_width="76dp"
-        android:layout_height="56dp"
+        android:layout_width="80dp"
+        android:layout_height="60dp"
         android:layout_gravity="bottom|end"
         android:layout_margin="16dp"
         android:src="@drawable/ic_add_black_24dp"/>

@@ -18,7 +18,6 @@ import java.util.List;
 
 import com.dimitar.fe404sleepnotfound.R;
 import com.dimitar.fe404sleepnotfound.notes.data.Note;
-import com.dimitar.fe404sleepnotfound.notes.viewModel.NewNoteActivity;
 import com.dimitar.fe404sleepnotfound.notes.viewModel.NotesListAdapter;
 import com.dimitar.fe404sleepnotfound.notes.viewModel.NotesViewModel;
 
