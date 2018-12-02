@@ -32,6 +32,8 @@ public class CalculatorActivity extends MenuActivity {
 
     private String contactEmail;
 
+    private boolean hasResults = false;
+
     /**
      * Custom implementation of the onCreate lifecycle method. Sets the content of the view and
      * acquires references to all Views required by the class.
@@ -174,6 +176,7 @@ public class CalculatorActivity extends MenuActivity {
             balanceLeft.setText(Double.toString(finalBalance));
             interestPaid.setText(Double.toString(finalInterest));
             yearsLeft.setText(Double.toString(yearsToPayoff));
+            hasResults = true;
         }
 
         //Unfocus all input fields to hide the keyboard
@@ -196,6 +199,8 @@ public class CalculatorActivity extends MenuActivity {
         balanceLeft.setText("");
         interestPaid.setText("");
         yearsLeft.setText("");
+
+        hasResults = false;
     }
 
     /**
@@ -235,7 +240,10 @@ public class CalculatorActivity extends MenuActivity {
      * @param v
      */
     public void sendEmailWInfo(View v){
-        if(contactEmail != null) {
+        if(!hasResults){
+            Toast.makeText(this,getString(R.string.notResults), Toast.LENGTH_LONG).show();
+        }
+        else if(contactEmail != null) {
             String contents = "Balance left to pay: " + balanceLeft.getText().toString() + "\nTotal interest paid so far: " + interestPaid.getText().toString() + "\nYears left until the balance is paid off: " + yearsLeft.getText().toString();
             String[] to = {contactEmail};
             Intent sendEmail = new Intent(Intent.ACTION_SENDTO);
