@@ -52,7 +52,7 @@ public abstract class NotesRoomDatabase extends RoomDatabase {
         protected Void doInBackground(final Void... params) {
             // Start the app with a clean database every time.
             // Not needed if you only populate on creation.
-
+            mDao.deleteAll();
             Note word = new Note("Hello");
             mDao.insert(word);
             word = new Note("World");
