@@ -172,6 +172,12 @@ public class CalculatorActivity extends MenuActivity {
             interestPaid.setText(Double.toString(finalInterest));
             yearsLeft.setText(Double.toString(yearsToPayoff));
         }
+
+        //Unfocus all input fields to hide the keyboard
+        amount.onEditorAction(EditorInfo.IME_ACTION_DONE);
+        interestRate.onEditorAction(EditorInfo.IME_ACTION_DONE);
+        monthlyMinimum.onEditorAction(EditorInfo.IME_ACTION_DONE);
+        years.onEditorAction(EditorInfo.IME_ACTION_DONE);
     }
 
     /**
