@@ -65,6 +65,7 @@ public class RetrieveRates extends AsyncTask {
 
     /**
      * Convers the Input stream into a String
+     * source from https://gitlab.com/Android518-2018/topic12-02-http-get/blob/master/app/src/main/java/ca/campbell/httpexample/HttpExample.java
      *
      * @param stream The passed inputStream
      * @return A string of what was in the inputStream
