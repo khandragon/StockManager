@@ -21,9 +21,6 @@ import com.dimitar.fe404sleepnotfound.notes.data.Note;
 import com.dimitar.fe404sleepnotfound.notes.viewModel.NotesListAdapter;
 import com.dimitar.fe404sleepnotfound.notes.viewModel.NotesViewModel;
 
-
-
-
 public class NotesActivity extends AppCompatActivity {
     public static final int NEW_WORD_ACTIVITY_REQUEST_CODE = 1;
     private NotesViewModel mNoteViewModel;
@@ -33,12 +30,14 @@ public class NotesActivity extends AppCompatActivity {
         setTheme(R.style.Theme_AppCompat);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_note);
+
+        mNoteViewModel = ViewModelProviders.of(this).get(NotesViewModel.class);
+
         RecyclerView recyclerView = findViewById(R.id.notesList);
-        final NotesListAdapter adapter = new NotesListAdapter(this);
+        final NotesListAdapter adapter = new NotesListAdapter(this, mNoteViewModel);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        mNoteViewModel = ViewModelProviders.of(this).get(NotesViewModel.class);
 
         mNoteViewModel.getAllNotes().observe(this, new Observer<List<Note>>() {
             @Override

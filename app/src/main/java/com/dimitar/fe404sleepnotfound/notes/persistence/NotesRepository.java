@@ -12,26 +12,28 @@ public class NotesRepository {
     private NotesDAO mNotesDao;
     private LiveData<List<Note>> mAllNotes;
 
-    public NotesRepository(Application application){
+    public NotesRepository(Application application) {
         NotesRoomDatabase db = NotesRoomDatabase.getDatabase(application);
         mNotesDao = db.notesDAO();
         mAllNotes = mNotesDao.getAllNotes();
     }
 
-    public LiveData<List<Note>> getAllNotes(){
+    public LiveData<List<Note>> getAllNotes() {
         return mAllNotes;
     }
 
-    public void insert (Note note){
+    public void insert(Note note) {
         new insertAsyncTask(mNotesDao).execute(note);
     }
 
-    public void delete(Note note) { new deleteAsyncTask(mNotesDao).execute(note);}
+    public void delete(String note) {
+        new deleteAsyncTask(mNotesDao).execute(note);
+    }
 
-    public  static class insertAsyncTask extends AsyncTask<Note, Void, Void>{
+    public static class insertAsyncTask extends AsyncTask<Note, Void, Void> {
         private NotesDAO mAsyncTaskDao;
 
-        insertAsyncTask(NotesDAO notesDAO){
+        insertAsyncTask(NotesDAO notesDAO) {
             mAsyncTaskDao = notesDAO;
         }
 
@@ -42,16 +44,17 @@ public class NotesRepository {
         }
     }
 
-    public  static class deleteAsyncTask extends AsyncTask<Note, Void, Void>{
+    public static class deleteAsyncTask extends AsyncTask<String, Void, Void> {
         private NotesDAO mAsyncTaskDao;
 
-        deleteAsyncTask(NotesDAO notesDAO){
+        deleteAsyncTask(NotesDAO notesDAO) {
             mAsyncTaskDao = notesDAO;
         }
 
         @Override
-        protected Void doInBackground(Note... notes) {
-            mAsyncTaskDao.deleteNote(notes);
+        protected Void doInBackground(String... text) {
+            Note n = mAsyncTaskDao.getNote(text[0]);
+            mAsyncTaskDao.deleteNote(n);
             return null;
         }
     }

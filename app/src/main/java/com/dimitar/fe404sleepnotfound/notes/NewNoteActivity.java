@@ -11,25 +11,25 @@ import android.widget.EditText;
 import com.dimitar.fe404sleepnotfound.R;
 
 public class NewNoteActivity extends AppCompatActivity {
-    public static final String EXTRA_REPLY = "com.example.android.wordlistsql.REPLY";
-    private EditText mEditWordView;
+    public static final String EXTRA_REPLY = "com.example.android.notelistsql.REPLY";
+    private EditText mEditnoteView;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         setTheme(R.style.Theme_AppCompat);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_note_editor);
-        mEditWordView = findViewById(R.id.edit_word);
+        mEditnoteView = findViewById(R.id.edit_word);
 
         final Button button = findViewById(R.id.button_save);
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 Intent replyIntent = new Intent();
-                if (TextUtils.isEmpty(mEditWordView.getText())) {
+                if (TextUtils.isEmpty(mEditnoteView.getText())) {
                     setResult(RESULT_CANCELED, replyIntent);
                 } else {
-                    String word = mEditWordView.getText().toString();
-                    replyIntent.putExtra(EXTRA_REPLY, word);
+                    String note = mEditnoteView.getText().toString();
+                    replyIntent.putExtra(EXTRA_REPLY, note);
                     setResult(RESULT_OK, replyIntent);
                 }
                 finish();

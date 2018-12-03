@@ -1,30 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical">
+    android:orientation="horizontal"
+    android:weightSum="100">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:paddingTop="5dp">
+        android:background="@color/textBG"
+        android:layout_marginTop="5dp"
+        android:padding="5dp">
 
         <TextView
             android:id="@+id/noteItem"
             style="@style/note_item"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/buttonBG" />
+            android:layout_width="0dp"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:layout_height="match_parent"
+            android:layout_weight="4"
+            android:gravity="center" />
 
         <Button
-            android:id="@+id/removeBtn"
+            android:id="@+id/removeNoteBtn"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:onClick="removeTicker"
+            android:backgroundTint="@color/buttonBG"
+            android:onClick="removeNote"
             android:text="@string/remove"
             android:textColor="@color/white" />
     </LinearLayout>
-
-</LinearLayout>
+</FrameLayout>

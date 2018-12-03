@@ -24,6 +24,9 @@ public interface NotesDAO {
     @Query("SELECT * FROM notes_table WHERE noteId = :noteId")
     Note getNote(int noteId);
 
+    @Query("SELECT * FROM notes_table WHERE noteText = :text")
+    Note getNote(String text);
+
     @Query("UPDATE notes_table SET noteText = :noteText WHERE noteId = :oldId")
     void updateNote(int oldId, String noteText);
 
