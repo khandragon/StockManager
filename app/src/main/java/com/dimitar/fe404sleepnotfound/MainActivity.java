@@ -10,7 +10,6 @@ import com.dimitar.fe404sleepnotfound.calculator.CalculatorActivity;
 import com.dimitar.fe404sleepnotfound.menu.AboutActivity;
 import com.dimitar.fe404sleepnotfound.menu.MenuActivity;
 import com.dimitar.fe404sleepnotfound.notes.NotesActivity;
-import com.dimitar.fe404sleepnotfound.quotes.StockActivity;
 
 /**
  * Shows the user the application logo, a Menu, a list of launcher buttons for
@@ -47,23 +46,13 @@ public class MainActivity extends MenuActivity {
         startActivity(openAbout);
     }
 
-    /**
-     * Implementation of the onClick for the Notes btn that opens the NotesActivity
-     *
-     * @param view
-     */
     public void openNotes(View view) {
         Intent openNotes = new Intent(this, NotesActivity.class);
         startActivity(openNotes);
     }
 
-    /**
-     * Implementation of the onClick for the Quotes btn that opens the Stock activity
-     *
-     * @param view
-     */
-    public void openQuotes(View view) {
-        Intent openQuotes = new Intent(this, StockActivity.class);
-        startActivity(openQuotes);
+    public void openCalculator(View v){
+        Intent openCalculator = new Intent(this, CalculatorActivity.class);
+        startActivity(openCalculator);
     }
 }
