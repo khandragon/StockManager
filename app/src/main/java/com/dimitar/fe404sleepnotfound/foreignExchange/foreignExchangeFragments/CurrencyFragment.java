@@ -40,6 +40,7 @@ public class CurrencyFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         this.fragmentView = inflater.inflate(R.layout.fragment_currency, container, false);
         this.context = container.getContext();
+        mListner = (currencyListner) context;
         getCurrencyList();
         return fragmentView;
     }
@@ -96,7 +97,14 @@ public class CurrencyFragment extends Fragment {
         adapter.setRecyclerAdapterListener(new RecyclerAdapter.RecyclerAdapterListener() {
             @Override
             public void onItemClick(String item) {
-                mListner.onCurrencySent(new CurrencySelect(item, type));
+                if(mListner != null){
+                    mListner.onCurrencySent(new CurrencySelect(item, type));
+                }else{
+                    //If mListner was not set for any reason
+                    mListner = (currencyListner) context;
+                    Log.d(TAG, "listner was null");
+                    mListner.onCurrencySent(new CurrencySelect(item, type));
+                }
             }
         });
     }
