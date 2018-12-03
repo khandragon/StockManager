@@ -78,7 +78,6 @@ public class StockActivity extends MenuActivity {
         listView.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager(this);
         listView.setLayoutManager(mLayoutManager);
-        //addBtn.setEnabled(false);
 
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
         saved.addAll(prefs.getStringSet("savedList", new HashSet<String>()));
@@ -99,17 +98,18 @@ public class StockActivity extends MenuActivity {
             //add to list and shared preferences
             adapter.add(lastSearch);
             Log.i(TAG, "currently saved the list " + adapter.mDataset.toString());
-        }else if(checkIfRepeat()){
+        } else if (checkIfRepeat()) {
             Log.i(TAG, "repeat");
-            Toast.makeText(this,"Already Added", Toast.LENGTH_LONG).show();
-        }else if (moreThan5tickers()){
+            Toast.makeText(this, "Already Added", Toast.LENGTH_LONG).show();
+        } else if (moreThan5tickers()) {
             Log.i(TAG, "more than 5");
-            Toast.makeText(this,"More Than 5 Tickers", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "More Than 5 Tickers", Toast.LENGTH_LONG).show();
         }
     }
 
     /**
      * checks if the ticker is already in the list
+     *
      * @return true if it is  false if not
      */
     private boolean checkIfRepeat() {
@@ -211,9 +211,7 @@ public class StockActivity extends MenuActivity {
                 conn.setRequestMethod("GET");
                 conn.setDoInput(true);
                 conn.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
-                Log.i(TAG, "welp");
                 conn.connect();
-                Log.i(TAG, "ayy");
                 int response = conn.getResponseCode();
                 Log.d(TAG, "Server returned: " + response + " aborting read.");
                 if (response != HttpURLConnection.HTTP_OK) {
@@ -255,9 +253,6 @@ public class StockActivity extends MenuActivity {
                 if (jsonObject.has("Message")) {
                     textView.setText("Unknown Ticker");
                 } else {
-//                    if (!moreThan5tickers()) {
-//                        addBtn.setEnabled(true);
-//                    }
                     JSONArray jsonArray = jsonObject.getJSONArray("data");
                     for (int i = 0; i < jsonArray.length(); i++) {
                         JSONObject object = jsonArray.getJSONObject(i);
@@ -282,6 +277,6 @@ public class StockActivity extends MenuActivity {
      * @return true if greater false if less
      */
     private boolean moreThan5tickers() {
-         return adapter.getItemCount() >= 5;
+        return adapter.getItemCount() >= 5;
     }
 }
