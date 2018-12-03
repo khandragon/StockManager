@@ -15,6 +15,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.dimitar.fe404sleepnotfound.R;
 import com.dimitar.fe404sleepnotfound.menu.MenuActivity;
@@ -77,7 +78,7 @@ public class StockActivity extends MenuActivity {
         listView.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager(this);
         listView.setLayoutManager(mLayoutManager);
-        addBtn.setEnabled(false);
+        //addBtn.setEnabled(false);
 
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
         saved.addAll(prefs.getStringSet("savedList", new HashSet<String>()));
@@ -98,6 +99,12 @@ public class StockActivity extends MenuActivity {
             //add to list and shared preferences
             adapter.add(lastSearch);
             Log.i(TAG, "currently saved the list " + adapter.mDataset.toString());
+        }else if(checkIfRepeat()){
+            Log.i(TAG, "repeat");
+            Toast.makeText(this,"Already Added", Toast.LENGTH_LONG).show();
+        }else if (moreThan5tickers()){
+            Log.i(TAG, "more than 5");
+            Toast.makeText(this,"More Than 5 Tickers", Toast.LENGTH_LONG).show();
         }
     }
 
@@ -242,16 +249,15 @@ public class StockActivity extends MenuActivity {
             String companyName = null;
             String currentPrice = null;
             String currency = null;
-            String ticker = null;
             try {
                 Log.i(TAG, result);
                 JSONObject jsonObject = new JSONObject(result);
                 if (jsonObject.has("Message")) {
                     textView.setText("Unknown Ticker");
                 } else {
-                    if (!moreThan5tickers()) {
-                        addBtn.setEnabled(true);
-                    }
+//                    if (!moreThan5tickers()) {
+//                        addBtn.setEnabled(true);
+//                    }
                     JSONArray jsonArray = jsonObject.getJSONArray("data");
                     for (int i = 0; i < jsonArray.length(); i++) {
                         JSONObject object = jsonArray.getJSONObject(i);

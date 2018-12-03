@@ -58,7 +58,6 @@
             <Button
                 android:id="@+id/stockQuote"
                 android:layout_width="0dp"
-                android:layout_weight="1"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:backgroundTint="@color/buttonBG"
@@ -72,7 +71,6 @@
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
                 android:backgroundTint="@color/buttonBG"
                 android:drawableEnd="@drawable/notes"
                 android:onClick="openNotes"
