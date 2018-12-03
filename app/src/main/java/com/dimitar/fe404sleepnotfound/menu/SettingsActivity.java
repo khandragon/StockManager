@@ -4,8 +4,10 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.KeyEvent;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
@@ -161,6 +163,7 @@ public class SettingsActivity extends MenuActivity {
      */
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
+//        super(keyCode, event);
         if (keyCode == KeyEvent.KEYCODE_BACK && checkIfChangesMade()) {
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
             builder.setMessage(getString(R.string.exitWithoutSaving))
@@ -189,9 +192,9 @@ public class SettingsActivity extends MenuActivity {
      * @return true if changes have been made to settings
      */
     private boolean checkIfChangesMade(){
-        //If no settings have been set
+        //If no settings have been set previously
         if(settings.getString("username", "none").equals("none") || settings.getString("email", "none").equals("none") || settings.getString("password", "none").equals("none")){
-            return false;
+            return true;
         }
         //USER NAME
         //If settings have already been set and the textview is not modified, check with the hint
@@ -226,5 +229,31 @@ public class SettingsActivity extends MenuActivity {
             return true;
         }
         return false;
+    }
+
+    /**
+     * Menu functionality in SettingsActivity. It doesn't allow for settings to be opened again and
+     * opening About finishes the actvity.
+     * @param item
+     * @return true if an option was successfully selected
+     */
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item){
+        //Open Dawson Computer Science web page
+        if(item.getItemId() == R.id.dawson){
+            Intent openDawsonPage = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.dawsoncollege.qc.ca/computer-science-technology/"));
+            startActivity(openDawsonPage);
+            return true;
+        }
+        //Open AboutActivity and finish SettingsActivity
+        else if(item.getItemId() == R.id.about){
+            Intent openAbout = new Intent(this, AboutActivity.class);
+            startActivity(openAbout);
+            finish();
+            return true;
+        }
+        else{
+            return false;
+        }
     }
 }
