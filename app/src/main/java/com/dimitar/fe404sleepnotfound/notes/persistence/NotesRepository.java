@@ -3,6 +3,7 @@ package com.dimitar.fe404sleepnotfound.notes.persistence;
 import android.app.Application;
 import android.arch.lifecycle.LiveData;
 import android.os.AsyncTask;
+import android.util.Log;
 
 import com.dimitar.fe404sleepnotfound.notes.data.Note;
 
@@ -26,8 +27,12 @@ public class NotesRepository {
         new insertAsyncTask(mNotesDao).execute(note);
     }
 
-    public void delete(String note) {
-        new deleteAsyncTask(mNotesDao).execute(note);
+    public void delete(int noteId) {
+        new deleteAsyncTask(mNotesDao).execute(noteId);
+    }
+
+    public void update(Note note) {
+        new updateAsyncTask(mNotesDao).execute(note);
     }
 
     public static class insertAsyncTask extends AsyncTask<Note, Void, Void> {
@@ -44,7 +49,7 @@ public class NotesRepository {
         }
     }
 
-    public static class deleteAsyncTask extends AsyncTask<String, Void, Void> {
+    public static class deleteAsyncTask extends AsyncTask<Integer, Void, Void> {
         private NotesDAO mAsyncTaskDao;
 
         deleteAsyncTask(NotesDAO notesDAO) {
@@ -52,9 +57,25 @@ public class NotesRepository {
         }
 
         @Override
-        protected Void doInBackground(String... text) {
-            Note n = mAsyncTaskDao.getNote(text[0]);
+        protected Void doInBackground(Integer... noteId) {
+            Note n = mAsyncTaskDao.getNote(noteId[0]);
             mAsyncTaskDao.deleteNote(n);
+            return null;
+        }
+    }
+
+    public static class updateAsyncTask extends AsyncTask<Note, Void, Void> {
+        private NotesDAO mAsyncTaskDao;
+
+        updateAsyncTask(NotesDAO notesDAO) {
+            mAsyncTaskDao = notesDAO;
+        }
+
+        @Override
+        protected Void doInBackground(Note... notes) {
+            String text = notes[0].getText();
+            int id = notes[0].getNoteId();
+            mAsyncTaskDao.updateNote(id, text);
             return null;
         }
     }

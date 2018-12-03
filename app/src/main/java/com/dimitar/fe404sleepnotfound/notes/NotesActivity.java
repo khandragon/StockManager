@@ -24,6 +24,7 @@ import com.dimitar.fe404sleepnotfound.notes.viewModel.NotesViewModel;
 public class NotesActivity extends AppCompatActivity {
     public static final int NEW_WORD_ACTIVITY_REQUEST_CODE = 1;
     private NotesViewModel mNoteViewModel;
+    private NotesListAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,7 +35,7 @@ public class NotesActivity extends AppCompatActivity {
         mNoteViewModel = ViewModelProviders.of(this).get(NotesViewModel.class);
 
         RecyclerView recyclerView = findViewById(R.id.notesList);
-        final NotesListAdapter adapter = new NotesListAdapter(this, mNoteViewModel);
+        this.adapter = new NotesListAdapter(this, mNoteViewModel);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
@@ -57,18 +58,9 @@ public class NotesActivity extends AppCompatActivity {
         });
     }
 
+    @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        if (requestCode == NEW_WORD_ACTIVITY_REQUEST_CODE && resultCode == RESULT_OK) {
-            Note note = new Note(data.getStringExtra(NewNoteActivity.EXTRA_REPLY));
-            mNoteViewModel.insert(note);
-        } else {
-            Toast.makeText(
-                    getApplicationContext(),
-                    R.string.empty_not_saved,
-                    Toast.LENGTH_LONG).show();
-        }
+        adapter.onActivityResult(requestCode, resultCode, data);
     }
 }
 
