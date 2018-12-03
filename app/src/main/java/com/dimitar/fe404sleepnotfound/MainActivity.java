@@ -46,6 +46,11 @@ public class MainActivity extends MenuActivity {
         startActivity(openAbout);
     }
 
+    /**
+     * Implementation of the onClick for the Notes btn that opens the NotesActivity
+     *
+     * @param view
+     */
     public void openNotes(View view) {
         Intent openNotes = new Intent(this, NotesActivity.class);
         startActivity(openNotes);
@@ -58,6 +63,6 @@ public class MainActivity extends MenuActivity {
      */
     public void openQuotes(View view) {
         Intent openQuotes = new Intent(this, StockActivity.class);
-        startActivity(openQuotes)                               ;
+        startActivity(openQuotes);
     }
 }

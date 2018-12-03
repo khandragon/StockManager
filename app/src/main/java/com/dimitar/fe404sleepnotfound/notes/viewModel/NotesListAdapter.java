@@ -24,6 +24,10 @@ import java.util.List;
 import static android.app.Activity.RESULT_OK;
 import static android.support.v4.app.ActivityCompat.startActivityForResult;
 
+/**
+ * class to handle the recycler view and the update and delete methods in the recycler items
+ * @Author: Saad Khan
+ */
 public class NotesListAdapter extends RecyclerView.Adapter<NotesListAdapter.NotesViewHolder> {
 
     public static final int NEW_NOTE_ACTIVITY_REQUEST_CODE = 1;
@@ -39,6 +43,10 @@ public class NotesListAdapter extends RecyclerView.Adapter<NotesListAdapter.Note
             super(itemView);
             NotesItemView = itemView.findViewById(R.id.noteItem);
             NotesItemView.setOnClickListener(new View.OnClickListener() {
+                /**
+                 * handles the update of the notes
+                 * @param view
+                 */
                 @Override
                 public void onClick(View view) {
                     Intent intent = new Intent(mContext, NewNoteActivity.class);
@@ -49,25 +57,36 @@ public class NotesListAdapter extends RecyclerView.Adapter<NotesListAdapter.Note
                 }
             });
             removeBtn = itemView.findViewById(R.id.removeNoteBtn);
+            //attach the remove event
             removeBtn.setOnClickListener(this);
 
         }
 
-        public String getNoteText() {
-            return NotesItemView.getText().toString();
-        }
+        /**
+         * gets the id of the specific note
+         * @return
+         */
 
         public int getNoteId(){
             return noteId;
         }
 
+        /**
+         * event to remove from the notes list the note that was clicked
+         * @param view
+         */
         @Override
         public void onClick(View view) {
-            Log.i("removing this", String.valueOf(getNoteId()));
             mNoteViewModel.delete(getNoteId());
         }
     }
 
+    /**
+     * secoundary onActivityResult method handles both update and new note creation
+     * @param requestCode
+     * @param resultCode
+     * @param data
+     */
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == NEW_NOTE_ACTIVITY_REQUEST_CODE && resultCode == RESULT_OK) {
             Log.i("hello there", "new");

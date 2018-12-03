@@ -12,6 +12,10 @@ import com.dimitar.fe404sleepnotfound.notes.data.Note;
 
 import java.util.List;
 
+/**
+ * interface that handles the crud methods for the database
+ * @Author: Saad Khan
+ */
 @Dao
 public interface NotesDAO {
 
@@ -23,9 +27,6 @@ public interface NotesDAO {
 
     @Query("SELECT * FROM notes_table WHERE noteId = :noteId")
     Note getNote(int noteId);
-
-    @Query("SELECT * FROM notes_table WHERE noteText = :text")
-    Note getNote(String text);
 
     @Query("UPDATE notes_table SET noteText = :noteText WHERE noteId = :oldId")
     void updateNote(int oldId, String noteText);

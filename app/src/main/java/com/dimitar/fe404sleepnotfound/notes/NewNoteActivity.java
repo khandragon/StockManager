@@ -11,6 +11,10 @@ import android.widget.EditText;
 
 import com.dimitar.fe404sleepnotfound.R;
 
+/**
+ * NewNoteActivity class to handle all functions of creating a new note or editing a previous one
+ * @@Author Saad Khan
+ */
 public class NewNoteActivity extends AppCompatActivity {
     public static final String EXTRA_REPLY = "com.example.android.notelistsql.REPLY";
     private EditText mEditnoteView;
@@ -23,19 +27,22 @@ public class NewNoteActivity extends AppCompatActivity {
         setContentView(R.layout.activity_note_editor);
         mEditnoteView = findViewById(R.id.edit_word);
         final Button button = findViewById(R.id.button_save);
+
+        //check to see if we are updating
         final String type = getIntent().getStringExtra("type");
         if (type != null) {
             mEditnoteView.setText(getIntent().getStringExtra("text"));
             noteId = getIntent().getIntExtra("noteId", 0);
         }
+
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 Intent replyIntent = new Intent();
                 if (TextUtils.isEmpty(mEditnoteView.getText())) {
                     setResult(RESULT_CANCELED, replyIntent);
                 } else {
+                    //if we are updating then supply the id
                     if (type != null) {
-                        Log.i("get id here", String.valueOf(noteId));
                         replyIntent.putExtra("noteId", noteId);
                     }
                     String note = mEditnoteView.getText().toString();

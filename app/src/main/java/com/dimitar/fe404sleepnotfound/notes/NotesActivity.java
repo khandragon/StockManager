@@ -21,6 +21,10 @@ import com.dimitar.fe404sleepnotfound.notes.data.Note;
 import com.dimitar.fe404sleepnotfound.notes.viewModel.NotesListAdapter;
 import com.dimitar.fe404sleepnotfound.notes.viewModel.NotesViewModel;
 
+/**
+ * main activity for the NoteActivities handles the creation and deletion of NotesActivity
+ * @Athor: Saad Khan
+ */
 public class NotesActivity extends AppCompatActivity {
     public static final int NEW_WORD_ACTIVITY_REQUEST_CODE = 1;
     private NotesViewModel mNoteViewModel;
@@ -32,6 +36,7 @@ public class NotesActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_note);
 
+        //create model
         mNoteViewModel = ViewModelProviders.of(this).get(NotesViewModel.class);
 
         RecyclerView recyclerView = findViewById(R.id.notesList);
@@ -39,7 +44,7 @@ public class NotesActivity extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-
+        //display all notes in the db
         mNoteViewModel.getAllNotes().observe(this, new Observer<List<Note>>() {
             @Override
             public void onChanged(@Nullable final List<Note> notes) {
@@ -49,6 +54,7 @@ public class NotesActivity extends AppCompatActivity {
         });
 
         FloatingActionButton fab = findViewById(R.id.fab);
+        //calls the new note activity to create a new note
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -58,6 +64,13 @@ public class NotesActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * calls the onActivity Result method in the adapter
+     *
+     * @param requestCode
+     * @param resultCode
+     * @param data
+     */
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         adapter.onActivityResult(requestCode, resultCode, data);
