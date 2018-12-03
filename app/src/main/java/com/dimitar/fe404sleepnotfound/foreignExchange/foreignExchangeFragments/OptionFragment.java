@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -46,6 +47,10 @@ public class OptionFragment extends Fragment {
     private TextView toView;
     private TextView totalView;
 
+    private String fromAmount;
+    private String toAmount;
+    private String curAmount;
+
     /**
      * default on create of a fragment
      * disables the openSoftKeyboard to on the launch of the fragment
@@ -65,6 +70,7 @@ public class OptionFragment extends Fragment {
         getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
         amountInput = fragmentView.findViewById(R.id.amountInput);
         //Sets the Default value of the amount
+        if(curAmount.)
         amountInput.setText("1");
         amountInput.addTextChangedListener(new TextWatcher() {
             @Override
@@ -93,6 +99,45 @@ public class OptionFragment extends Fragment {
         getRatesList();
         calTotal();
         return fragmentView;
+    }
+
+    /**
+     * Will set the values in the options fragment to default values if no instanceState values are present
+     *
+     * @param savedInstanceState
+     */
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        if(savedInstanceState != null){
+            if(savedInstanceState.getString("Amount") != null){
+                fromAmount = savedInstanceState.getString("Amount");
+            }else {
+                fromAmount = "";
+            }
+            if(savedInstanceState.getString("From") != null){
+                toAmount = savedInstanceState.getString("From");
+            }else {
+                toAmount = "";
+            }
+            if(savedInstanceState.getString("To") != null){
+                curAmount = savedInstanceState.getString("To");
+            }else {
+                curAmount = "";
+            }
+        }else{
+            fromAmount = "";
+            toAmount = "";
+            curAmount = "";
+        }
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putString("Amount", amountInput.getText().toString());
+        outState.putString("From", fromView.getText().toString());
+        outState.putString("To", toView.getText().toString());
     }
 
     /**
