@@ -64,14 +64,19 @@ public class OptionFragment extends Fragment {
      */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        Log.wtf(TAG, fromAmount +":"+ toAmount +":"+ curAmount);
+
         this.fragmentView = inflater.inflate(R.layout.fragment_options, container, false);
         this.context = container.getContext();
         //To Stop the input Keyboard from showing on launch
         getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
         amountInput = fragmentView.findViewById(R.id.amountInput);
         //Sets the Default value of the amount
-        if(curAmount.)
-        amountInput.setText("1");
+        if( curAmount == null || curAmount.matches("") ){
+            amountInput.setText("1");
+        }else {
+            amountInput.setText(curAmount);
+        }
         amountInput.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -92,43 +97,38 @@ public class OptionFragment extends Fragment {
         toView = fragmentView.findViewById(R.id.toCur);
         totalView = fragmentView.findViewById(R.id.amountTotal);
         settings = context.getSharedPreferences("com.dimitar.fe404sleepnotfound",  Context.MODE_PRIVATE);
-        if(!settings.getString("prefCurrency", "none").equals("none")){
-            fromView.setText(settings.getString("prefCurrency", "none"));
+        if(fromAmount == null || fromAmount.matches("")){
+            if(!settings.getString("prefCurrency", "none").equals("none")){
+                fromAmount = settings.getString("prefCurrency", "none");
+            }else {
+                fromAmount = "Please Select one";
+            }
         }
-        toView.setText("Please Select");
+
+        if(toAmount == null || toAmount.matches("")){
+            toAmount = "Please Select one";
+        }
+
+        fromView.setText(fromAmount);
+        toView.setText(toAmount);
         getRatesList();
-        calTotal();
         return fragmentView;
     }
 
-    /**
-     * Will set the values in the options fragment to default values if no instanceState values are present
-     *
-     * @param savedInstanceState
-     */
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if(savedInstanceState != null){
-            if(savedInstanceState.getString("Amount") != null){
-                fromAmount = savedInstanceState.getString("Amount");
-            }else {
-                fromAmount = "";
+            if(savedInstanceState.getString("Amount") != null) {
+                fromAmount = savedInstanceState.getString("From");
             }
             if(savedInstanceState.getString("From") != null){
-                toAmount = savedInstanceState.getString("From");
-            }else {
-                toAmount = "";
+                toAmount = savedInstanceState.getString("To");
             }
             if(savedInstanceState.getString("To") != null){
-                curAmount = savedInstanceState.getString("To");
-            }else {
-                curAmount = "";
+                curAmount = savedInstanceState.getString("Amount");
             }
-        }else{
-            fromAmount = "";
-            toAmount = "";
-            curAmount = "";
         }
     }
 
@@ -149,13 +149,13 @@ public class OptionFragment extends Fragment {
             String currencyListString = retreveRates.execute().get().toString();
             this.currencyRates = new JSONObject(currencyListString);
         }catch (ConcurrentModificationException e){
-            Log.wtf(TAG, "ConcurrentModificationException");
+            Log.d(TAG, "ConcurrentModificationException");
         }catch (InterruptedException e){
-            Log.wtf(TAG, "InterruptedException");
+            Log.d(TAG, "InterruptedException");
         }catch (ExecutionException e){
-            Log.wtf(TAG, "ExecutionException");
+            Log.d(TAG, "ExecutionException");
         }catch (JSONException e){
-            Log.wtf(TAG, "JSONException");
+            Log.d(TAG, "JSONException");
         }
     }
 
@@ -165,19 +165,23 @@ public class OptionFragment extends Fragment {
      * @param newCurrency new CurrencySelect object that is send from the RecyclerView
      */
     public void updateText(CurrencySelect newCurrency){
-        String type = newCurrency.getType();
-        switch (type){
-            case "To":
-                toView.setText(newCurrency.getCurrency());
-                calTotal();
-                break;
-            case "From":
-                fromView.setText(newCurrency.getCurrency());
-                calTotal();
-                break;
-            default:
-                Log.e(TAG, "Wrong currency type");
-                break;
+        if(newCurrency == null){
+            Log.wtf(TAG, "MOMO");
+        }else {
+            String type = newCurrency.getType();
+            switch (type) {
+                case "To":
+                    toView.setText(newCurrency.getCurrency());
+                    calTotal();
+                    break;
+                case "From":
+                    fromView.setText(newCurrency.getCurrency());
+                    calTotal();
+                    break;
+                default:
+                    Log.e(TAG, "Wrong currency type");
+                    break;
+            }
         }
     }
 
@@ -197,14 +201,13 @@ public class OptionFragment extends Fragment {
                         Double to = Double.parseDouble(currencyRates.get(toView.getText().toString()).toString());
 
                         Double temp = val/from;
-                        Log.wtf("this", String.valueOf(temp*to));
+                        Log.d("this", String.valueOf(temp*to));
                         totalView.setText(String.valueOf(temp*to));
                     } catch (Exception e) {
-                        Log.wtf("test", e.toString());
+                        Log.d("test", e.toString());
                     }
                 }
             }
         }
     }
-
 }

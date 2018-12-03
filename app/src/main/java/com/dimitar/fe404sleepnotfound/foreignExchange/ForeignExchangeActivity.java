@@ -1,6 +1,7 @@
 package com.dimitar.fe404sleepnotfound.foreignExchange;
 
 import android.app.FragmentTransaction;
+import android.nfc.Tag;
 import android.os.Bundle;
 import android.util.Log;
 
@@ -30,8 +31,25 @@ public class ForeignExchangeActivity extends MenuActivity implements CurrencyFra
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_foreign_exchange);
 
-        //Call method to set the fragments
-        setFragments();
+        if(savedInstanceState == null) {
+            //Call method to set the fragments
+            setFragments();
+        }else{
+            optionsFragment = (OptionFragment) getFragmentManager().getFragment(savedInstanceState, "optFrag");
+            currencyFragmentFrom = (CurrencyFragment) getFragmentManager().getFragment(savedInstanceState, "fromFrag");
+            currencyFragmentFrom.setType("From");
+            currencyFragmentTo = (CurrencyFragment) getFragmentManager().getFragment(savedInstanceState, "toFrag");
+            currencyFragmentTo.setType("To");
+        }
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        getFragmentManager().putFragment(outState,"optFrag", optionsFragment);
+        getFragmentManager().putFragment(outState,"fromFrag", currencyFragmentFrom);
+        getFragmentManager().putFragment(outState,"toFrag", currencyFragmentTo);
+
     }
 
     /**
@@ -64,6 +82,8 @@ public class ForeignExchangeActivity extends MenuActivity implements CurrencyFra
      */
     @Override
     public void onCurrencySent(CurrencySelect selected) {
+        Log.d(TAG, selected.getCurrency());
+        Log.d(TAG, selected.getType());
         optionsFragment.updateText(selected);
     }
 }
