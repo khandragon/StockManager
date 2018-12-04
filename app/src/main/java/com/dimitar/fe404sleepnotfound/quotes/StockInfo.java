@@ -35,7 +35,10 @@ public class StockInfo extends MenuActivity {
     private TextView tickerName;
     private TextView tickerCompany;
     private TextView tickerPrice;
-
+    private TextView dayHeight;
+    private TextView dayLowest;
+    private TextView yesturdayClose;
+    private TextView dayChange;
     private String ticker;
 
     @Override
@@ -45,6 +48,10 @@ public class StockInfo extends MenuActivity {
         tickerName = (TextView) findViewById(R.id.tickerName);
         tickerCompany = (TextView) findViewById(R.id.companyName);
         tickerPrice = (TextView) findViewById(R.id.tickerPrice);
+        dayHeight = (TextView) findViewById(R.id.dayHeight);
+        dayLowest = (TextView) findViewById(R.id.dayLowest);
+        yesturdayClose = (TextView) findViewById(R.id.yesturdayClose);
+        dayChange = (TextView) findViewById(R.id.dayChange);
         Bundle extra = getIntent().getExtras();
         ticker = extra.getString("ticker");
         findTickerInfo(ticker);
@@ -114,6 +121,10 @@ public class StockInfo extends MenuActivity {
             String currentPrice = null;
             String currency = null;
             String ticker = null;
+            String dayHigh = null;
+            String dayLow = null;
+            String yesturday = null;
+            String change = null;
             try {
                 Log.i(TAG, result);
                 JSONObject jsonObject = new JSONObject(result);
@@ -124,10 +135,18 @@ public class StockInfo extends MenuActivity {
                     currentPrice = object.getString("price");
                     currency = object.getString("currency");
                     ticker = object.getString("symbol");
+                    dayHigh = object.getString("day_high");
+                    dayLow = object.getString("day_low");
+                    yesturday = object.getString("close_yesterday");
+                    change = object.getString("day_change");
                 }
-                tickerName.setText(tickerName.getText() + ticker);
-                tickerCompany.setText(tickerCompany.getText() + companyName);
+                tickerName.setText(ticker);
+                tickerCompany.setText(companyName);
                 tickerPrice.setText("$" + currentPrice + ", " + currency);
+                dayHeight.setText(dayHeight.getText() + ": $" + dayHigh);
+                dayLowest.setText(dayLowest.getText() + ": $" + dayLow);
+                yesturdayClose.setText(yesturdayClose.getText() + ": $" + yesturday);
+                dayChange.setText(dayChange.getText() + ": $" + change);
 
             } catch (JSONException e) {
                 e.printStackTrace();

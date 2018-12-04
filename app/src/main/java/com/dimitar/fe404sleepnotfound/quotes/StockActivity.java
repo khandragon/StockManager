@@ -79,6 +79,7 @@ public class StockActivity extends MenuActivity {
         mLayoutManager = new LinearLayoutManager(this);
         listView.setLayoutManager(mLayoutManager);
 
+        addBtn.setEnabled(false);
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
         saved.addAll(prefs.getStringSet("savedList", new HashSet<String>()));
         adapter = new StockListAdapter(saved, this);
@@ -138,6 +139,7 @@ public class StockActivity extends MenuActivity {
      * @param view
      */
     public void getTickerQuote(View view) {
+        addBtn.setEnabled(true);
         InputStream stream = null;
         HttpsURLConnection conn = null;
         String ticker = urlText.getText().toString();

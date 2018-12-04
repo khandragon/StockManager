@@ -9,8 +9,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
         android:background="@color/buttonBG"
+        android:orientation="vertical"
         android:paddingTop="5dp">
 
         <TextView
@@ -18,9 +18,9 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
-            android:textSize="30sp"
-            android:textColor="@color/white"
             android:text="@string/ticker"
+            android:textColor="@color/white"
+            android:textSize="30sp"
             tools:context=".HttpExample" />
 
         <TextView
@@ -36,6 +36,42 @@
             android:id="@+id/tickerPrice"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:gravity="center"
+            android:textColor="@color/white"
+            tools:context=".HttpExample" />
+
+        <TextView
+            android:id="@+id/dayHeight"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="@string/high"
+            android:textColor="@color/white"
+            tools:context=".HttpExample" />
+
+        <TextView
+            android:id="@+id/dayLowest"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="@string/low"
+            android:textColor="@color/white"
+            tools:context=".HttpExample" />
+
+        <TextView
+            android:id="@+id/yesturdayClose"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/yesturday"
+            android:gravity="center"
+            android:textColor="@color/white"
+            tools:context=".HttpExample" />
+
+        <TextView
+            android:id="@+id/dayChange"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/difference"
             android:gravity="center"
             android:textColor="@color/white"
             tools:context=".HttpExample" />
