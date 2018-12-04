@@ -16,6 +16,13 @@ import android.widget.Toast;
 import com.dimitar.fe404sleepnotfound.R;
 import com.dimitar.fe404sleepnotfound.menu.MenuActivity;
 
+/**
+ * This activity includes functionality to calculate credit payment information and give the user
+ * the option to share the results calculated by email. The user can lookup a contact by name, retrieve
+ * their email address and open the email in an appropriate application.
+ *
+ * @author Dimitar
+ */
 public class CalculatorActivity extends MenuActivity {
 
     private EditText amount;
