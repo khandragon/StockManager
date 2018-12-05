@@ -10,7 +10,6 @@ import com.dimitar.fe404sleepnotfound.calculator.CalculatorActivity;
 import com.dimitar.fe404sleepnotfound.menu.AboutActivity;
 import com.dimitar.fe404sleepnotfound.menu.MenuActivity;
 import com.dimitar.fe404sleepnotfound.notes.NotesActivity;
-import com.dimitar.fe404sleepnotfound.quotes.StockActivity;
 
 /**
  * Shows the user the application logo, a Menu, a list of launcher buttons for
@@ -51,7 +50,10 @@ public class MainActivity extends MenuActivity {
         Intent openNotes = new Intent(this, NotesActivity.class);
         startActivity(openNotes);
     }
-
+	
+    public void openCalculator(View v){
+        Intent openCalculator = new Intent(this, CalculatorActivity.class);
+        startActivity(openCalculator);
     /**
      * Implementation of the onClick for the Quotes btn that opens the Stock activity
      *

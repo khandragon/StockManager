@@ -40,6 +40,9 @@
     <string name="remove">Remove</string>
     <string name="ticker">Ticker</string>
     <string name="company">Company:</string>
+    <string name="title_activity_notes">NotesActivity</string>
+    <string name="empty_not_saved">Note was empty</string>
+    <string name="button_save">Save</string>
     <string name="add">Add</string>
     <string name="high">Today\'s High </string>
     <string name="low">Today\'s Low</string>
