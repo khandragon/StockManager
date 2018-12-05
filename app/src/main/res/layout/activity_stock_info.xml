@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    android:weightSum="100">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/buttonBG"
+        android:orientation="vertical"
+        android:paddingTop="5dp">
+
+        <TextView
+            android:id="@+id/tickerName"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="@string/ticker"
+            android:textColor="@color/white"
+            android:textSize="30sp"
+            tools:context=".HttpExample" />
+
+        <TextView
+            android:id="@+id/companyName"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="@string/company"
+            android:textColor="@color/white"
+            tools:context=".HttpExample" />
+
+        <TextView
+            android:id="@+id/tickerPrice"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:textColor="@color/white"
+            tools:context=".HttpExample" />
+
+        <TextView
+            android:id="@+id/dayHeight"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="@string/high"
+            android:textColor="@color/white"
+            tools:context=".HttpExample" />
+
+        <TextView
+            android:id="@+id/dayLowest"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="@string/low"
+            android:textColor="@color/white"
+            tools:context=".HttpExample" />
+
+        <TextView
+            android:id="@+id/yesturdayClose"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/yesturday"
+            android:gravity="center"
+            android:textColor="@color/white"
+            tools:context=".HttpExample" />
+
+        <TextView
+            android:id="@+id/dayChange"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/difference"
+            android:gravity="center"
+            android:textColor="@color/white"
+            tools:context=".HttpExample" />
+    </LinearLayout>
+</LinearLayout>

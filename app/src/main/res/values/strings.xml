@@ -1,0 +1,73 @@
+<resources>
+    <string name="app_name">FE404SleepNotFound</string>
+    <string name="settings">Settings</string>
+    <string name="dawson">Dawson</string>
+    <string name="about">About</string>
+    <string name="appDescription">This app provides you with utilities for currency conversion, note taking, calculating credit/loans, view stock quotes, get financial hints and manage your stock portfolio. It was made in the Fall 2018 semester in Dawson College for the Mobile Software Development course (420/-518/-DW)</string>
+    <string name="teamMembers">This app was made by Dimitar, James, Saad, Jean-Claude</string>
+    <string name="na">Not available</string>
+    <string name="username">First and Last name:</string>
+    <string name="email">Email address:</string>
+    <string name="password">Password:</string>
+    <string name="prefCurrency">Preferred currency:</string>
+    <string name="prefExchange">Preferred exchange:</string>
+    <string name="lastUpdated">Last updated:</string>
+    <string name="save">Save changes</string>
+    <string name="noChanges">No changes have been made</string>
+    <string name="exitWithoutSaving">Are you sure you want to exit without saving settings?</string>
+    <string name="yes">Yes, I do not want to save changes</string>
+    <string name="cancel">Cancel</string>
+    <string name="changesSaved">Settings have been successfully saved</string>
+    <string-array name="currencies">
+        <item>CAD</item>
+        <item>USD</item>
+        <item>BTC</item>
+    </string-array>
+    <string-array name="exchanges">
+        <item>TSX</item>
+        <item>NYSE</item>
+        <item>NASDAQ</item>
+    </string-array>
+    <string name="foreignExchange">Foreign exchange</string>
+    <string name="financialHints">Financial hints</string>
+    <string name="stockQuotes">Stock quotes</string>
+    <string name="notes">Notes</string>
+    <string name="calculator">Loan/Credit calculator</string>
+    <string name="portfolio">My Stock Portfolio</string>
+    <string name="noUser">No user has been registered with the app yet - please set it in the settings</string>
+    <string name="fromCur">From:</string>
+    <string name="toCur">To:</string>
+    <string name="totalCur">Total:</string>
+    <string name="exampleTicker">AAPL</string>
+    <string name="explainTicker">Enter URI pls</string>
+    <string name="remove">Remove</string>
+    <string name="ticker">Ticker</string>
+    <string name="company">Company:</string>
+    <string name="title_activity_notes">NotesActivity</string>
+    <string name="empty_not_saved">Note was empty</string>
+    <string name="button_save">Save</string>
+    <string name="add">Add</string>
+    <string name="high">Today\'s High </string>
+    <string name="low">Today\'s Low</string>
+    <string name="yesturday">Yesturday\'s Closing Price</string>
+    <string name="difference">Difference</string>
+    <string name="amount">Amount</string>
+    <string name="minimumPayment">Monthly payment</string>
+    <string name="interestRate">Interest rate (%)</string>
+    <string name="years">Years</string>
+    <string name="calculate">Calculate</string>
+    <string name="clear">Clear</string>
+    <string name="amountLeft">Balance left to pay</string>
+    <string name="interestPaid">Total amount of interest paid</string>
+    <string name="timeLeft">Years left to pay off</string>
+    <string name="sendEmailHeading">Share calculation results</string>
+    <string name="contactName">Name: </string>
+    <string name="lookup">Lookup in contacts</string>
+    <string name="sendEmail">Send email with results to </string>
+    <string name="paymentTooSmall">Monthly payment is too small for this interest rate, this will take forever to pay off! Please increase your monthly payment or lower the APR.</string>
+    <string name="emptyFields">Please fill out all the fields before calculating</string>
+    <string name="notFound">Contact specified was not found</string>
+    <string name="noContactInput">Please input the contact\'s name you are looking for</string>
+    <string name="noEmail">No email has been set. Please look for a contact\'s email by their name</string>
+    <string name="notResults">Nothing has been calculated yet. Input some numbers in the calculator and hit calculate first</string>
+</resources>
