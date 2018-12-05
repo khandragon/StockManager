@@ -61,7 +61,6 @@
             <Button
                 android:id="@+id/stockQuote"
                 android:layout_width="0dp"
-                android:layout_weight="1"
                 android:layout_height="match_parent"
                 android:drawableEnd="@drawable/stocks"
                 android:text="@string/stockQuotes"
@@ -72,8 +71,10 @@
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="match_parent"
+                android:backgroundTint="@color/buttonBG"
                 android:drawableEnd="@drawable/notes"
                 android:text="@string/notes"
+                android:onClick="openNotes"
                 android:backgroundTint="@color/buttonBG"
                 android:textColor="@color/white"/>
         </LinearLayout>

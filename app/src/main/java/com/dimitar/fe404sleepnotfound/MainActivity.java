@@ -57,10 +57,18 @@ public class MainActivity extends MenuActivity {
         Intent openNotes = new Intent(this, NotesActivity.class);
         startActivity(openNotes);
     }
-
+	
     public void openCalculator(View v){
         Intent openCalculator = new Intent(this, CalculatorActivity.class);
         startActivity(openCalculator);
+    /**
+     * Implementation of the onClick for the Quotes btn that opens the Stock activity
+     *
+     * @param view
+     */
+    public void openQuotes(View view) {
+        Intent openQuotes = new Intent(this, StockActivity.class);
+        startActivity(openQuotes);
     }
 
     public void openForeignExchange(View v){

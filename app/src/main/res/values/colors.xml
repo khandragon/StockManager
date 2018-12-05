@@ -4,6 +4,7 @@
     <color name="colorPrimaryDark">#25213f</color>
     <color name="colorAccent">#FF4081</color>
     <color name="buttonBG">#1b998b</color>
+    <color name="textBG">#41decc</color>
     <color name="lightGreen">#c5d86d</color>
     <color name="orange">#f46036</color>
     <color name="pinkishRed">#d7263d</color>
