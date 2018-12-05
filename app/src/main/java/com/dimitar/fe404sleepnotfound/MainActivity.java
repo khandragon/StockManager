@@ -61,4 +61,9 @@ public class MainActivity extends MenuActivity {
         Intent openQuotes = new Intent(this, StockActivity.class);
         startActivity(openQuotes);
     }
+
+    public void openHints(View v) {
+        Intent hintsIntent = new Intent(this, HintActivity.class);
+        startActivity(hintsIntent);
+    }
 }

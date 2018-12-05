@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "745860631319",
+    "firebase_url": "https://fe404sleepnotfound.firebaseio.com",
+    "project_id": "fe404sleepnotfound",
+    "storage_bucket": "fe404sleepnotfound.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:745860631319:android:1def8e20d718db2d",
+        "android_client_info": {
+          "package_name": "com.dimitar.fe404sleepnotfound"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "745860631319-tbd3tclopncn3vks9e1b1lf4dtd25rb6.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.dimitar.fe404sleepnotfound",
+            "certificate_hash": "1df876f4a62e552a007e7201a0fffabaa69c46b3"
+          }
+        },
+        {
+          "client_id": "745860631319-7ugv7g6pq0c6ode76nl021u8ob4gbomf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB_vCa987EG_1-sQ0YbuT4AR0Xv9cyxTKc"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "745860631319-7ugv7g6pq0c6ode76nl021u8ob4gbomf.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

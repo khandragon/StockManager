@@ -22,6 +22,8 @@
         <activity android:name=".notes.NotesActivity" />
         <activity android:name=".quotes.StockActivity"></activity>
         <activity android:name=".quotes.StockInfo"></activity>
+        <activity android:name=".HintActivity" />
+        <activity android:name=".calculator.CalculatorActivity" />
     </application>
     <uses-permission android:name="android.permission.INTERNET" />
 </manifest>
