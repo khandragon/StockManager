@@ -51,9 +51,10 @@ public class MainActivity extends MenuActivity {
         startActivity(openNotes);
     }
 	
-    public void openCalculator(View v){
+    public void openCalculator(View v) {
         Intent openCalculator = new Intent(this, CalculatorActivity.class);
         startActivity(openCalculator);
+    }
     /**
      * Implementation of the onClick for the Quotes btn that opens the Stock activity
      *
