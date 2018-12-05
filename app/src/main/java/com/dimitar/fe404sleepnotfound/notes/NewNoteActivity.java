@@ -2,7 +2,6 @@ package com.dimitar.fe404sleepnotfound.notes;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -10,12 +9,13 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.dimitar.fe404sleepnotfound.R;
+import com.dimitar.fe404sleepnotfound.menu.MenuActivity;
 
 /**
  * NewNoteActivity class to handle all functions of creating a new note or editing a previous one
  * @@Author Saad Khan
  */
-public class NewNoteActivity extends AppCompatActivity {
+public class NewNoteActivity extends MenuActivity {
     public static final String EXTRA_REPLY = "com.example.android.notelistsql.REPLY";
     private EditText mEditnoteView;
     private int noteId;

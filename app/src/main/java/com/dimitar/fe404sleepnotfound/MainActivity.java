@@ -16,6 +16,7 @@ import com.dimitar.fe404sleepnotfound.foreignExchange.ForeignExchangeActivity;
 import com.dimitar.fe404sleepnotfound.menu.AboutActivity;
 import com.dimitar.fe404sleepnotfound.menu.MenuActivity;
 import com.dimitar.fe404sleepnotfound.notes.NotesActivity;
+import com.dimitar.fe404sleepnotfound.quotes.StockActivity;
 
 /**
  * Shows the user the application logo, a Menu, a list of launcher buttons for
