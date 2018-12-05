@@ -55,4 +55,9 @@ public class MainActivity extends MenuActivity {
         Intent openCalculator = new Intent(this, CalculatorActivity.class);
         startActivity(openCalculator);
     }
+
+    public void openHints(View v) {
+        Intent hintsIntent = new Intent(this, HintActivity.class);
+        startActivity(hintsIntent);
+    }
 }

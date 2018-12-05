@@ -46,7 +46,8 @@
                 android:drawableEnd="@drawable/hints"
                 android:text="@string/financialHints"
                 android:backgroundTint="@color/buttonBG"
-                android:textColor="@color/white"/>
+                android:textColor="@color/white"
+                android:onClick="openHints"/>
         </LinearLayout>
 
         <LinearLayout
