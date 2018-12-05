@@ -59,21 +59,24 @@
             <Button
                 android:id="@+id/stockQuote"
                 android:layout_width="0dp"
-                android:layout_weight="1"
                 android:layout_height="match_parent"
-                android:drawableEnd="@drawable/stocks"
-                android:text="@string/stockQuotes"
+                android:layout_weight="1"
                 android:backgroundTint="@color/buttonBG"
-                android:textColor="@color/white"/>
+                android:drawableEnd="@drawable/stocks"
+                android:onClick="openQuotes"
+                android:text="@string/stockQuotes"
+                android:textColor="@color/white" />
+
             <Button
                 android:id="@+id/notes"
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="match_parent"
-                android:drawableEnd="@drawable/notes"
-                android:text="@string/notes"
                 android:backgroundTint="@color/buttonBG"
-                android:textColor="@color/white"/>
+                android:drawableEnd="@drawable/notes"
+                android:onClick="openNotes"
+                android:text="@string/notes"
+                android:textColor="@color/white" />
         </LinearLayout>
 
         <LinearLayout
@@ -90,7 +93,6 @@
                 android:textColor="@color/white"
                 android:layout_height="match_parent"
                 android:drawableEnd="@drawable/calculator"
-                android:onClick="openCalculator"
                 android:text="@string/calculator" />
 
             <Button
