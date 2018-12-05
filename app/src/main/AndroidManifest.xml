@@ -25,6 +25,7 @@
         <activity android:name=".menu.AboutActivity" />
         <activity android:name=".notes.NotesActivity" />
         <activity android:name=".quotes.StockActivity" />
+        <activity android:name=".quotes.StockInfo" />
         <activity android:name=".foreignExchange.ForeignExchangeActivity"/>
         <activity android:name=".notes.NewNoteActivity"/>
         <activity android:name=".calculator.CalculatorActivity">
