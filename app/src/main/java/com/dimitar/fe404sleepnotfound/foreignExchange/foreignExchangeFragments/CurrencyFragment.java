@@ -1,6 +1,5 @@
 package com.dimitar.fe404sleepnotfound.foreignExchange.foreignExchangeFragments;
 import android.app.Fragment;
-import android.app.FragmentManager;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -11,7 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.dimitar.fe404sleepnotfound.R;
-import com.dimitar.fe404sleepnotfound.foreignExchange.foreignExchangeAsync.RetreveCurrencies;
+import com.dimitar.fe404sleepnotfound.foreignExchange.foreignExchangeAsync.RetreiveCurrencyData;
 
 import java.util.ArrayList;
 import java.util.ConcurrentModificationException;
@@ -25,6 +24,7 @@ import java.util.concurrent.ExecutionException;
 public class CurrencyFragment extends Fragment {
 
     private static final String TAG = "CurrencyFragment";
+    private String currencyListUrl = "https://openexchangerates.org/api/currencies.json";
 
     private View fragmentView;
     private Context context;
@@ -51,7 +51,7 @@ public class CurrencyFragment extends Fragment {
      */
     private void getCurrencyList(){
         try{
-            RetreveCurrencies retreveCurrencies = new RetreveCurrencies();
+            RetreiveCurrencyData retreveCurrencies = new RetreiveCurrencyData(currencyListUrl, "");
             String currencyListString = retreveCurrencies.execute().get().toString();
             Log.d(TAG, currencyListString);
             createCurrenciesList(currencyListString);

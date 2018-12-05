@@ -3,7 +3,6 @@ package com.dimitar.fe404sleepnotfound.foreignExchange.foreignExchangeFragments;
 import android.app.Fragment;
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.text.Editable;
@@ -17,7 +16,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.dimitar.fe404sleepnotfound.R;
-import com.dimitar.fe404sleepnotfound.foreignExchange.foreignExchangeAsync.RetrieveRates;
+import com.dimitar.fe404sleepnotfound.foreignExchange.foreignExchangeAsync.RetreiveCurrencyData;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -36,6 +35,8 @@ import java.util.concurrent.ExecutionException;
 public class OptionFragment extends Fragment {
 
     private static final String TAG = "OptionFragment";
+    private String currencyListUrl = "https://openexchangerates.org/api/latest.json?app_id=";
+    private String openExchangeratesKey = "7b0dc9c3d41b40989a3bafcea4683d5f";
     private SharedPreferences settings;
     private JSONObject currencyRates;
 
@@ -145,8 +146,10 @@ public class OptionFragment extends Fragment {
      */
     private void getRatesList(){
         try{
-            RetrieveRates retreveRates = new RetrieveRates();
+            RetreiveCurrencyData retreveRates = new RetreiveCurrencyData(currencyListUrl, openExchangeratesKey);
             String currencyListString = retreveRates.execute().get().toString();
+            JSONObject getRatesJson = new JSONObject(currencyListString);
+            currencyListString = getRatesJson.get("rates").toString();
             this.currencyRates = new JSONObject(currencyListString);
         }catch (ConcurrentModificationException e){
             Log.d(TAG, "ConcurrentModificationException");

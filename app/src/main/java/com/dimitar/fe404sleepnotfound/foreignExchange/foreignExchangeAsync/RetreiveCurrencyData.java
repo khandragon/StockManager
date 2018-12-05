@@ -42,7 +42,7 @@ public class RetreiveCurrencyData extends AsyncTask {
         InputStream is = null;
         HttpURLConnection conn = null;
         try {
-            URL url = new URL(currencyListUrl);
+            URL url = new URL(currencyListUrl + currencyKey);
             conn = (HttpURLConnection) url.openConnection();
             conn.setReadTimeout(10000);
             conn.setConnectTimeout(15000);
