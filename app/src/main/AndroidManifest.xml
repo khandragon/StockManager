@@ -19,7 +19,8 @@
         <activity android:name=".menu.SettingsActivity" />
         <activity android:name=".menu.AboutActivity" />
         <activity android:name=".notes.NotesActivity" />
-        <activity android:name=".calculator.CalculatorActivity"></activity>
+        <activity android:name=".HintActivity" />
+        <activity android:name=".calculator.CalculatorActivity" />
     </application>
 
 </manifest>
