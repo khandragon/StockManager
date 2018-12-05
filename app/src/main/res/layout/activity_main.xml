@@ -37,7 +37,9 @@
                 android:drawableEnd="@drawable/exchange"
                 android:text="@string/foreignExchange"
                 android:backgroundTint="@color/buttonBG"
+                android:onClick="openForeignExchange"
                 android:textColor="@color/white"/>
+
             <Button
                 android:id="@+id/financialHints"
                 android:layout_width="0dp"
