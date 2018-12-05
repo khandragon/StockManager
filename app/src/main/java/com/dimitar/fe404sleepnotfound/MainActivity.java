@@ -67,4 +67,9 @@ public class MainActivity extends MenuActivity {
         Intent openForeignExchange = new Intent(this, ForeignExchangeActivity.class);
         startActivity(openForeignExchange);
     }
+    
+    public void openHints(View v) {
+        Intent hintsIntent = new Intent(this, HintActivity.class);
+        startActivity(hintsIntent);
+    }
 }

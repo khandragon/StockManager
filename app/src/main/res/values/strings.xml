@@ -35,9 +35,26 @@
     <string name="calculator">Loan/Credit calculator</string>
     <string name="portfolio">My Stock Portfolio</string>
     <string name="noUser">No user has been registered with the app yet - please set it in the settings</string>
-
     <string name="fromCur">From:</string>
     <string name="toCur">To:</string>
     <string name="totalCur">Total:</string>
-
+    <string name="amount">Amount</string>
+    <string name="minimumPayment">Monthly payment</string>
+    <string name="interestRate">Interest rate (%)</string>
+    <string name="years">Years</string>
+    <string name="calculate">Calculate</string>
+    <string name="clear">Clear</string>
+    <string name="amountLeft">Balance left to pay</string>
+    <string name="interestPaid">Total amount of interest paid</string>
+    <string name="timeLeft">Years left to pay off</string>
+    <string name="sendEmailHeading">Share calculation results</string>
+    <string name="contactName">Name: </string>
+    <string name="lookup">Lookup in contacts</string>
+    <string name="sendEmail">Send email with results to </string>
+    <string name="paymentTooSmall">Monthly payment is too small for this interest rate, this will take forever to pay off! Please increase your monthly payment or lower the APR.</string>
+    <string name="emptyFields">Please fill out all the fields before calculating</string>
+    <string name="notFound">Contact specified was not found</string>
+    <string name="noContactInput">Please input the contact\'s name you are looking for</string>
+    <string name="noEmail">No email has been set. Please look for a contact\'s email by their name</string>
+    <string name="notResults">Nothing has been calculated yet. Input some numbers in the calculator and hit calculate first</string>
 </resources>
