@@ -15,6 +15,7 @@ import com.dimitar.fe404sleepnotfound.calculator.CalculatorActivity;
 import com.dimitar.fe404sleepnotfound.foreignExchange.ForeignExchangeActivity;
 import com.dimitar.fe404sleepnotfound.menu.AboutActivity;
 import com.dimitar.fe404sleepnotfound.menu.MenuActivity;
+import com.dimitar.fe404sleepnotfound.menu.SettingsActivity;
 import com.dimitar.fe404sleepnotfound.notes.NotesActivity;
 import com.dimitar.fe404sleepnotfound.quotes.StockActivity;
 
@@ -39,7 +40,14 @@ public class MainActivity extends MenuActivity {
 
         //Get the username from SharedPreferences and display in bottom TextView
         SharedPreferences settings = getSharedPreferences("com.dimitar.fe404sleepnotfound", MODE_PRIVATE);
+
         String username = settings.getString("username", getString(R.string.noUser));
+
+        if(!settings.contains("username")) {
+            Intent openSettings = new Intent(this, SettingsActivity.class);
+            startActivity(openSettings);
+        }
+
         TextView userTxtView = findViewById(R.id.username);
         userTxtView.setText(username);
     }
