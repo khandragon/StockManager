@@ -1,11 +1,15 @@
 package com.dimitar.fe404sleepnotfound.stockPortfolio;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.support.v7.widget.RecyclerView;
+import android.text.InputType;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -41,11 +45,31 @@ public class stockRecyclerAdapter extends RecyclerView.Adapter<stockRecyclerAdap
         holder.stockViewLayout.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View view) {
-                Toast.makeText(mContext, "test", Toast.LENGTH_SHORT).show();
-                return true;
+                 Toast.makeText(mContext,"Long Click",Toast.LENGTH_SHORT).show();
+                 AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
+                 builder.setTitle(R.string.sellStock);
+                 builder.setMessage( mContext.getResources().getString(R.string.sellStockQuestion1)+ " " + stocks.get(position).getName() + " " + mContext.getResources().getString(R.string.sellStockQuestion2));
+
+                 //makes a editText of type number so there cannot be a error for string input
+                 EditText input = new EditText(mContext);
+                 input.setInputType(InputType.TYPE_CLASS_NUMBER);
+                 builder.setView(input);
+                 builder.setPositiveButton(R.string.sellStock, new DialogInterface.OnClickListener() {
+                     @Override
+                     public void onClick(DialogInterface dialogInterface, int i) {
+                         //this will be replaced with selling the stock or a error
+                         Toast.makeText(mContext,input.getText().toString(),Toast.LENGTH_SHORT).show();
+                     }
+                 });
+
+                 AlertDialog ad = builder.create();
+                 ad.show();
+                 return true;
             }
         });
     }
+
+
 
     @Override
     public int getItemCount() {
