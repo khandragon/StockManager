@@ -18,6 +18,7 @@ import com.dimitar.fe404sleepnotfound.menu.MenuActivity;
 import com.dimitar.fe404sleepnotfound.menu.SettingsActivity;
 import com.dimitar.fe404sleepnotfound.notes.NotesActivity;
 import com.dimitar.fe404sleepnotfound.quotes.StockActivity;
+import com.dimitar.fe404sleepnotfound.stockPortfolio.stockPortfolioActivity;
 
 /**
  * Shows the user the application logo, a Menu, a list of launcher buttons for
@@ -89,5 +90,10 @@ public class MainActivity extends MenuActivity {
     public void openHints(View v) {
         Intent hintsIntent = new Intent(this, HintActivity.class);
         startActivity(hintsIntent);
+    }
+
+    public void openStockPortfolio(View v){
+        Intent stockPortfolio = new Intent(this, stockPortfolioActivity.class);
+        startActivity(stockPortfolio);
     }
 }

@@ -70,4 +70,5 @@
     <string name="noContactInput">Please input the contact\'s name you are looking for</string>
     <string name="noEmail">No email has been set. Please look for a contact\'s email by their name</string>
     <string name="notResults">Nothing has been calculated yet. Input some numbers in the calculator and hit calculate first</string>
+    <string name="remainingCash">Remaining Cash:</string>
 </resources>
