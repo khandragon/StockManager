@@ -19,9 +19,15 @@ import android.widget.Toast;
 import com.dimitar.fe404sleepnotfound.MainActivity;
 import com.dimitar.fe404sleepnotfound.R;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
@@ -149,6 +155,9 @@ public class SettingsActivity extends MenuActivity {
             settingsEditor.putString("prefCurrency", prefCurrencyTxt);
             settingsEditor.putString("prefExchange", prefExchangeTxt);
             settingsEditor.putString("lastUpdated", lastUpdatedTxt);
+            //Get bearer token and save it to SharedPreferences
+            String url = "http://ass3.test/api/auth/login?email="+emailTxt+"&password="+passwordTxt+"123456";
+            new GetBearerTokenResponse().execute(url);
             //Save all changes
             settingsEditor.commit();
             //Notify user that settings have been saved
@@ -266,7 +275,7 @@ public class SettingsActivity extends MenuActivity {
         }
     }
 
-    private class GetBearerToken extends AsyncTask<String, Void, String>{
+    private class GetBearerTokenResponse extends AsyncTask<String, Void, String>{
 
         @Override
         protected String doInBackground(String... strings) {
@@ -279,12 +288,35 @@ public class SettingsActivity extends MenuActivity {
                 connection.addRequestProperty("Accept", "application/json");
                 connection.addRequestProperty("Content-Type", "application/json");
 
-
+                connection.connect();
+                InputStream stream = connection.getInputStream();
+                reader = new BufferedReader(new InputStreamReader(stream));
+                StringBuffer buffer = new StringBuffer();
+                String line = "";
+                while((line = reader.readLine()) != null){
+                    buffer.append(line+"\n");
+                }
+                connection.disconnect();
+                reader.close();
+                return buffer.toString();
             }
             catch(Exception e){
 
             }
             return null;
+        }
+
+        @Override
+        protected void onPostExecute(String result){
+            super.onPostExecute(result);
+            try {
+                JSONObject json = new JSONObject(result);
+                String token = json.getString("access_token");
+                settingsEditor.putString("token", token);
+            }
+            catch (JSONException e) {
+                e.printStackTrace();
+            }
         }
     }
 }
