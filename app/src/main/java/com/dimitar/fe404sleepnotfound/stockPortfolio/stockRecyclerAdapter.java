@@ -3,6 +3,7 @@ package com.dimitar.fe404sleepnotfound.stockPortfolio;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.support.v7.widget.RecyclerView;
 import android.text.InputType;
 import android.util.Log;
@@ -15,13 +16,18 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.dimitar.fe404sleepnotfound.R;
+import com.dimitar.fe404sleepnotfound.RetreiveData;
 
 import java.util.ArrayList;
+
+import static android.content.Context.MODE_PRIVATE;
 
 public class stockRecyclerAdapter extends RecyclerView.Adapter<stockRecyclerAdapter.ViewHolderStock>{
 
     private ArrayList<stockObject> stocks;
     private Context mContext;
+    private String URL = "http://fe404sleepnotfound.herokuapp.com/api/";
+    private String URLParams = "api/sell?";
 
     public stockRecyclerAdapter(ArrayList<stockObject> stocks, Context mContext) {
         this.stocks = stocks;
@@ -59,6 +65,15 @@ public class stockRecyclerAdapter extends RecyclerView.Adapter<stockRecyclerAdap
                      public void onClick(DialogInterface dialogInterface, int i) {
                          //this will be replaced with selling the stock or a error
                          Toast.makeText(mContext,input.getText().toString(),Toast.LENGTH_SHORT).show();
+                         //Append the ticker and amount to URL params
+                         String urlArgs = "quantity="+stocks.get(position).getAmount()+"&ticker="+stocks.get(position).getSymbol();
+                         URLParams += urlArgs;
+                         //Get the JWT token
+                         SharedPreferences settings = mContext.getSharedPreferences("com.dimitar.fe404sleepnotfound", MODE_PRIVATE);
+                         String token = settings.getString("JWToken", "none");
+                         RetreiveData retreiveData = new RetreiveData(URL, URLParams, "POST", token);
+                         retreiveData.execute();
+
                      }
                  });
 
