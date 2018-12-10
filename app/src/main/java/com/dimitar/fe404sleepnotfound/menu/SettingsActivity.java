@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.MenuItem;
@@ -18,6 +19,14 @@ import android.widget.Toast;
 import com.dimitar.fe404sleepnotfound.MainActivity;
 import com.dimitar.fe404sleepnotfound.R;
 
+import java.io.BufferedOutputStream;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.Calendar;
 
 /**
@@ -254,6 +263,28 @@ public class SettingsActivity extends MenuActivity {
         }
         else{
             return false;
+        }
+    }
+
+    private class GetBearerToken extends AsyncTask<String, Void, String>{
+
+        @Override
+        protected String doInBackground(String... strings) {
+            try {
+                URL url = new URL(strings[0]);
+                BufferedReader reader = null;
+                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+
+                connection.setRequestMethod("GET");
+                connection.addRequestProperty("Accept", "application/json");
+                connection.addRequestProperty("Content-Type", "application/json");
+
+
+            }
+            catch(Exception e){
+
+            }
+            return null;
         }
     }
 }
