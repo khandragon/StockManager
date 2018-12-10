@@ -130,12 +130,18 @@ public class SettingsActivity extends MenuActivity {
         //Save all changes to strings values
         usernameTxt = username.getText().toString();
         emailTxt = email.getText().toString();
+        if(emailTxt.isEmpty()){
+            emailTxt = email.getHint().toString();
+        }
         passwordTxt = password.getText().toString();
         prefExchangeTxt = prefExchange.getSelectedItem().toString();
         prefCurrencyTxt = prefCurrency.getSelectedItem().toString();
         //get API Token
         try {
+            Log.wtf(TAG, emailTxt);
+            Log.wtf(TAG, passwordTxt);
             URLParams = URLParams + "email="+emailTxt+"&password="+passwordTxt;
+            Log.wtf(TAG,URL + URLParams);
             RetreiveData retreiveData = new RetreiveData(URL, URLParams, "POST", "");
             String retreiveDataString = retreiveData.execute().get().toString();
             //String retreiveDataString = "{\"access_token\":\"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9hc3MzLnRlc3RcL2FwaVwvYXV0aFwvbG9naW4iLCJpYXQiOjE1NDQ0NjI2NDksImV4cCI6MTU0NDQ2NjI0OSwibmJmIjoxNTQ0NDYyNjQ5LCJqdGkiOiJqbXZEZ2JrMjhyU3FtalAxIiwic3ViIjoxLCJwcnYiOiI4N2UwYWYxZWY5ZmQxNTgxMmZkZWM5NzE1M2ExNGUwYjA0NzU0NmFhIn0.Qir2UORK9hnaogzg0WUr3gtdqSfoL2s1LLiGeudn3uQ\",\"token_type\":\"bearer\",\"expires_in\":1}";
