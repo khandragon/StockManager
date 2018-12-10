@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.JsonReader;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
@@ -17,13 +19,20 @@ import android.widget.Toast;
 
 import com.dimitar.fe404sleepnotfound.MainActivity;
 import com.dimitar.fe404sleepnotfound.R;
+import com.dimitar.fe404sleepnotfound.RetreiveData;
+
+import org.json.JSONObject;
 
 import java.util.Calendar;
+import java.util.ConcurrentModificationException;
+import java.util.concurrent.ExecutionException;
 
 /**
  * Lets the user set application settings used by other Activities in SharedPreferences.
  */
 public class SettingsActivity extends MenuActivity {
+    private static final String TAG = "SettingsActivity";
+
     private SharedPreferences settings;
     private SharedPreferences.Editor settingsEditor;
     private EditText username;
@@ -38,6 +47,9 @@ public class SettingsActivity extends MenuActivity {
     private String prefCurrencyTxt;
     private String prefExchangeTxt;
     private String lastUpdatedTxt;
+
+    private String URL = "http://ass3.test/api/";
+    private String URLParams = "auth/login?email=j@j.j&password=123456";
 
     /**
      * Custom implementation of the onCreate lifecycle method that sets references to the necessary
@@ -121,6 +133,18 @@ public class SettingsActivity extends MenuActivity {
         passwordTxt = password.getText().toString();
         prefExchangeTxt = prefExchange.getSelectedItem().toString();
         prefCurrencyTxt = prefCurrency.getSelectedItem().toString();
+        //get API Token
+        try {
+            RetreiveData retreveCurrencies = new RetreiveData(URL, URLParams, "POST", "");
+            //String retreiveDataString = retreveCurrencies.execute().get().toString();
+            String retreiveDataString = "{\"access_token\":\"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9hc3MzLnRlc3RcL2FwaVwvYXV0aFwvbG9naW4iLCJpYXQiOjE1NDQ0NjI2NDksImV4cCI6MTU0NDQ2NjI0OSwibmJmIjoxNTQ0NDYyNjQ5LCJqdGkiOiJqbXZEZ2JrMjhyU3FtalAxIiwic3ViIjoxLCJwcnYiOiI4N2UwYWYxZWY5ZmQxNTgxMmZkZWM5NzE1M2ExNGUwYjA0NzU0NmFhIn0.Qir2UORK9hnaogzg0WUr3gtdqSfoL2s1LLiGeudn3uQ\",\"token_type\":\"bearer\",\"expires_in\":1}";
+            JSONObject retreiveData = new JSONObject(retreiveDataString);
+            Log.d(TAG, retreiveData.getString("access_token"));
+            settingsEditor.putString("JWToken", "Bearer  " + retreiveData.getString("access_token"));
+        }catch (Exception e ){
+            Log.d(TAG, "error");
+        }
+
         if(checkIfChangesMade()){
             //Get current date timestamp and save changes in SharedPreferences
             lastUpdatedTxt = Calendar.getInstance().getTime().toString();
