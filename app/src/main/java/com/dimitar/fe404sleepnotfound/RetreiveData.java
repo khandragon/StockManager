@@ -53,21 +53,21 @@ public class RetreiveData extends AsyncTask {
             conn.setConnectTimeout(15000);
             conn.setRequestMethod(type);
             conn.connect();
-            Log.wtf(TAG, "conn connected");
+            Log.d(TAG, "conn connected");
             int response = conn.getResponseCode();
-            Log.wtf(TAG, String.valueOf(response));
+            Log.d(TAG, String.valueOf(response));
             if (response == HttpURLConnection.HTTP_OK){
                 is = conn.getInputStream();
                 currencyListString = readInputStream(is);
-                Log.wtf(TAG, currencyListString);
+                Log.d(TAG, currencyListString);
             }else{
-                Log.wtf(TAG, "invalid response");
+                Log.d(TAG, "invalid response");
             }
         }catch (MalformedURLException e){
-            Log.wtf(TAG,"Wrong URL");
+            Log.d(TAG,"Wrong URL");
         }catch (IOException e){
-            Log.wtf(TAG, e.toString());
-            Log.wtf(TAG,"IO Exception");
+            Log.d(TAG, e.toString());
+            Log.d(TAG,"IO Exception");
         }
         return currencyListString;
     }
@@ -91,7 +91,8 @@ public class RetreiveData extends AsyncTask {
             totalRead += bytesRead;
         }
         writer.flush();
-        Log.wtf(TAG, "Bytes read: " + totalRead + "(-1 means end of reader so max of)");
+        Log.d(TAG, "Bytes read: " + totalRead + "(-1 means end of reader so max of)");
+        //Log.wtf(TAG, byteArrayOutputStream.toString());
         return new String(byteArrayOutputStream.toString());
     }
 }

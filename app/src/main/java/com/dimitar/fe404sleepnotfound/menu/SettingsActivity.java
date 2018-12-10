@@ -157,6 +157,7 @@ public class SettingsActivity extends MenuActivity {
             JSONObject retreiveDataObject = new JSONObject(retreiveDataString);
             Log.wtf(TAG, retreiveDataObject.getString("access_token"));
             settingsEditor.putString("JWToken", "Bearer  " + retreiveDataObject.getString("access_token"));
+            settingsEditor.commit();
         }catch (Exception e ){
             Log.d(TAG, "error");
         }
