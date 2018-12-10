@@ -80,4 +80,5 @@
     <string name="companyName">Company</string>
     <string name="buyPrice">Buy price</string>
     <string name="amountOwned">Amount</string>
+    <string name="buy">Buy</string>
 </resources>

@@ -1,6 +1,8 @@
 package com.dimitar.fe404sleepnotfound.quotes;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -14,6 +16,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.NumberPicker;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -130,6 +133,37 @@ public class StockActivity extends MenuActivity {
         Log.i(TAG, "removing " + ticker);
         //remove from the list
         adapter.remove(ticker);
+    }
+
+    public void buyStocks(View view){
+        LinearLayout linearLayout = (LinearLayout) view.getParent();
+        TextView textView = (TextView) linearLayout.getChildAt(0);
+        String ticker = (String) textView.getText();
+        Log.i(TAG, "buy  " + ticker);
+
+        NumberPicker numberPicker = new NumberPicker(this);
+        numberPicker.setMinValue(1);
+        numberPicker.setMaxValue(10000);
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setView(numberPicker);
+        builder.setTitle("Buy Stocks");
+        builder.setMessage("How many stocks would you like to buy:");
+        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Log.i(TAG,"ok");
+            }
+        });
+
+        builder.setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Log.i(TAG,"cancel");
+            }
+        });
+        AlertDialog alert = builder.create();
+        alert.show();
+
     }
 
     /**
