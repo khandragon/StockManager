@@ -48,8 +48,8 @@ public class SettingsActivity extends MenuActivity {
     private String prefExchangeTxt;
     private String lastUpdatedTxt;
 
-    private String URL = "http://ass3.test/api/";
-    private String URLParams = "auth/login?email=j@j.j&password=123456";
+    private String URL = "http://fe404sleepnotfound.herokuapp.com/api/";
+    private String URLParams = "auth/login?";
 
     /**
      * Custom implementation of the onCreate lifecycle method that sets references to the necessary
@@ -135,12 +135,13 @@ public class SettingsActivity extends MenuActivity {
         prefCurrencyTxt = prefCurrency.getSelectedItem().toString();
         //get API Token
         try {
-            RetreiveData retreveCurrencies = new RetreiveData(URL, URLParams, "POST", "");
-            //String retreiveDataString = retreveCurrencies.execute().get().toString();
-            String retreiveDataString = "{\"access_token\":\"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9hc3MzLnRlc3RcL2FwaVwvYXV0aFwvbG9naW4iLCJpYXQiOjE1NDQ0NjI2NDksImV4cCI6MTU0NDQ2NjI0OSwibmJmIjoxNTQ0NDYyNjQ5LCJqdGkiOiJqbXZEZ2JrMjhyU3FtalAxIiwic3ViIjoxLCJwcnYiOiI4N2UwYWYxZWY5ZmQxNTgxMmZkZWM5NzE1M2ExNGUwYjA0NzU0NmFhIn0.Qir2UORK9hnaogzg0WUr3gtdqSfoL2s1LLiGeudn3uQ\",\"token_type\":\"bearer\",\"expires_in\":1}";
-            JSONObject retreiveData = new JSONObject(retreiveDataString);
-            Log.d(TAG, retreiveData.getString("access_token"));
-            settingsEditor.putString("JWToken", "Bearer  " + retreiveData.getString("access_token"));
+            URLParams = URLParams + "email="+emailTxt+"&password="+passwordTxt;
+            RetreiveData retreiveData = new RetreiveData(URL, URLParams, "POST", "");
+            String retreiveDataString = retreiveData.execute().get().toString();
+            //String retreiveDataString = "{\"access_token\":\"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9hc3MzLnRlc3RcL2FwaVwvYXV0aFwvbG9naW4iLCJpYXQiOjE1NDQ0NjI2NDksImV4cCI6MTU0NDQ2NjI0OSwibmJmIjoxNTQ0NDYyNjQ5LCJqdGkiOiJqbXZEZ2JrMjhyU3FtalAxIiwic3ViIjoxLCJwcnYiOiI4N2UwYWYxZWY5ZmQxNTgxMmZkZWM5NzE1M2ExNGUwYjA0NzU0NmFhIn0.Qir2UORK9hnaogzg0WUr3gtdqSfoL2s1LLiGeudn3uQ\",\"token_type\":\"bearer\",\"expires_in\":1}";
+            JSONObject retreiveDataObject = new JSONObject(retreiveDataString);
+            Log.wtf(TAG, retreiveDataObject.getString("access_token"));
+            settingsEditor.putString("JWToken", "Bearer  " + retreiveDataObject.getString("access_token"));
         }catch (Exception e ){
             Log.d(TAG, "error");
         }
