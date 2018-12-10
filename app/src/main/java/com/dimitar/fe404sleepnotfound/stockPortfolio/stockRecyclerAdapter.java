@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.NumberPicker;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -57,16 +58,19 @@ public class stockRecyclerAdapter extends RecyclerView.Adapter<stockRecyclerAdap
                  builder.setMessage( mContext.getResources().getString(R.string.sellStockQuestion1)+ " " + stocks.get(position).getName() + " " + mContext.getResources().getString(R.string.sellStockQuestion2));
 
                  //makes a editText of type number so there cannot be a error for string input
-                 EditText input = new EditText(mContext);
-                 input.setInputType(InputType.TYPE_CLASS_NUMBER);
-                 builder.setView(input);
+                NumberPicker numberPicker = new NumberPicker(mContext);
+                numberPicker.setMinValue(1);
+                numberPicker.setMaxValue(Integer.parseInt(stocks.get(position).getAmount()));
+                //EditText input = new EditText(mContext);
+                 //input.setInputType(InputType.TYPE_CLASS_NUMBER);
+                 builder.setView(numberPicker);
                  builder.setPositiveButton(R.string.sellStock, new DialogInterface.OnClickListener() {
                      @Override
                      public void onClick(DialogInterface dialogInterface, int i) {
                          //this will be replaced with selling the stock or a error
-                         Toast.makeText(mContext,input.getText().toString(),Toast.LENGTH_SHORT).show();
+                         Toast.makeText(mContext, numberPicker.getValue(),Toast.LENGTH_SHORT).show();
                          //Append the ticker and amount to URL params
-                         String urlArgs = "quantity="+stocks.get(position).getAmount()+"&ticker="+stocks.get(position).getSymbol();
+                         String urlArgs = "quantity="+numberPicker.getValue()+"&ticker="+stocks.get(position).getSymbol();
                          URLParams += urlArgs;
                          //Get the JWT token
                          SharedPreferences settings = mContext.getSharedPreferences("com.dimitar.fe404sleepnotfound", MODE_PRIVATE);
