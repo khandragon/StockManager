@@ -88,8 +88,6 @@ public class stockRecyclerAdapter extends RecyclerView.Adapter<stockRecyclerAdap
         });
     }
 
-
-
     @Override
     public int getItemCount() {
         Log.wtf("test", String.valueOf(stocks.size()));

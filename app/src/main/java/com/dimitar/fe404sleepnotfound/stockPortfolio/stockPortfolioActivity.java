@@ -12,6 +12,7 @@ import com.dimitar.fe404sleepnotfound.R;
 import com.dimitar.fe404sleepnotfound.RetreiveData;
 import com.dimitar.fe404sleepnotfound.foreignExchange.foreignExchangeFragments.RecyclerAdapter;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -25,8 +26,8 @@ public class stockPortfolioActivity extends Activity {
     private String cash;
     private SharedPreferences settings;
 
-    private String URL = "http://ass3.test/api/";
-    private String URLParams = "api/";
+    private String URL = "http://fe404sleepnotfound.herokuapp.com/api/";
+    private String URLParams;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,26 +46,31 @@ public class stockPortfolioActivity extends Activity {
     private void getUserStock(){
         //get API Token
         try {
-            URLParams = URLParams + "cash";
-            RetreiveData RetreiveData = new RetreiveData(URL, URLParams, "POST", settings.getString("JWToken", "none"));
-            //String retreveCash = retreveCurrencies.execute().get().toString();
-            String retreveCashString = "[{\"cash\":\"7843.76\"}]";
-            JSONObject retreiveDataObject = new JSONObject(retreveCashString);
-            cash = retreiveDataObject.getString("cash");
+            URLParams = "api/cash";
+            RetreiveData retreiveData = new RetreiveData(URL, URLParams, "GET", settings.getString("JWToken", "none"));
+            String retreiveDataString = retreiveData.execute().get().toString();
+            JSONObject retreiveDataObject = new JSONObject(retreiveDataString);
+            cashView.setText(retreiveDataObject.getString("cashleft"));
         }catch (Exception e ){
             Log.d(TAG, "error");
         }
 
         try {
-            URLParams = URLParams + "allstocks";
-            RetreiveData RetreiveData = new RetreiveData(URL, URLParams, "POST", settings.getString("JWToken", "none"));
-            //String retreveCash = retreveCurrencies.execute().get().toString();
-            String retreveCashString = "[{\"cash\":\"7843.76\"}]";
-            JSONObject retreiveDataObject = new JSONObject(retreveCashString);
+            URLParams = "api/allstocks";
+            RetreiveData retreiveData = new RetreiveData(URL, URLParams, "GET", settings.getString("JWToken", "none"));
+            String retreiveDataString = retreiveData.execute().get().toString();
+            JSONArray retreiveDataObject = new JSONArray(retreiveDataString);
+            userStock = new ArrayList<>();
+            for(int i = 0; i < retreiveDataObject.length(); i ++){
+                Log.wtf(TAG, retreiveDataObject.getJSONObject(i).toString());
+                JSONObject temoObj = retreiveDataObject.getJSONObject(i);
+                stockObject temp = new stockObject("temp",temoObj.getString("stockTicker"), temoObj.getString("buyPrice"), temoObj.getString("amount"));
+                userStock.add(temp);
+            }
+            displayStocks();
         }catch (Exception e ){
             Log.d(TAG, "error");
         }
-
     }
 
     private void displayStocks(){
