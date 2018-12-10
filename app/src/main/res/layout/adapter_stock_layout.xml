@@ -22,7 +22,15 @@
             android:layout_weight="4"
             android:gravity="center"
             tools:context=".HttpExample" />
-
+        <Button
+            android:id="@+id/buybtn"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:backgroundTint="@color/buttonBG"
+            android:onClick="buyStocks"
+            android:text="@string/buy"
+            android:textColor="@color/white" />
         <Button
             android:id="@+id/removeBtn"
             android:layout_width="0dp"

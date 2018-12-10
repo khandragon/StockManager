@@ -74,4 +74,5 @@
     <string name="sellStock">Sell Stock</string>
     <string name="sellStockQuestion1">How many stocks of </string>
     <string name="sellStockQuestion2"> do you want to sell?</string>
+    <string name="buy">Buy</string>
 </resources>
