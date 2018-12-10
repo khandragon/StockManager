@@ -21,6 +21,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.dimitar.fe404sleepnotfound.R;
+import com.dimitar.fe404sleepnotfound.RetreiveData;
 import com.dimitar.fe404sleepnotfound.menu.MenuActivity;
 
 import org.json.JSONArray;
@@ -62,6 +63,9 @@ public class StockActivity extends MenuActivity {
     private String lastSearch = null;
     private LinearLayoutManager mLayoutManager;
     private StockListAdapter adapter;
+
+    private String URL = "http://fe404sleepnotfound.herokuapp.com/api/";
+    private String URLParams = "api/buy?";
 
     /**
      * Custom impelmentation fo the onCreate lifecycle method. disables the add btn by default
@@ -151,7 +155,14 @@ public class StockActivity extends MenuActivity {
         builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                Log.i(TAG,"ok");
+                int quantity = numberPicker.getValue();
+                String urlArg = "quantity="+quantity+"&ticker="+ticker;
+                URLParams += urlArg;
+                //Get jwt token
+                SharedPreferences settings = getSharedPreferences("com.dimitar.fe404sleepnotfound", MODE_PRIVATE);
+                String token = settings.getString("JWToken", "none");
+                RetreiveData retreiveData = new RetreiveData(URL, URLParams, "POST", token);
+                retreiveData.execute();
             }
         });
 
