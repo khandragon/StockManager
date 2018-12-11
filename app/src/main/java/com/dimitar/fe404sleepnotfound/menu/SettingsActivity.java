@@ -32,6 +32,7 @@ import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.net.URLEncoder;
 import java.util.Calendar;
 import java.util.ConcurrentModificationException;
 import java.util.concurrent.ExecutionException;
@@ -150,6 +151,7 @@ public class SettingsActivity extends MenuActivity {
             Log.wtf(TAG, emailTxt);
             Log.wtf(TAG, passwordTxt);
             URLParams = URLParams + "email="+emailTxt+"&password="+passwordTxt;
+            URLParams = URLEncoder.encode(URLParams, "UTF-8");
             Log.wtf(TAG,URL + URLParams);
             RetreiveData retreiveData = new RetreiveData(URL, URLParams, "POST", "");
             String retreiveDataString = retreiveData.execute().get().toString();
