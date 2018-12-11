@@ -51,7 +51,7 @@ public class StockActivity extends MenuActivity {
     private static final String TAG = "HttpURLConn";
 
     //api password for stock api
-    private String apiToken = "5M6o86SlgPmMOolQYNFdtKISBP2DxCepbNIN1XkIhQqv63Ey872DSvezjkXm";
+    private String apiToken = "UN57mJ2dsqDQxVTJIaJ7diF85Au3B1iU6ERGKlMgEn9pg6z5vOchKpbJCYDz";
 
     private EditText urlText;
     private TextView textView;
@@ -163,6 +163,7 @@ public class StockActivity extends MenuActivity {
                 String token = settings.getString("JWToken", "none");
                 RetreiveData retreiveData = new RetreiveData(URL, URLParams, "POST", token);
                 retreiveData.execute();
+                Toast.makeText(StockActivity.this, "Buying " + quantity +" Stocks From "+ticker, Toast.LENGTH_SHORT).show();
             }
         });
 

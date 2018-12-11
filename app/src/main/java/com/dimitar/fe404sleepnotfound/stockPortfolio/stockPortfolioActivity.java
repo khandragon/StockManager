@@ -30,7 +30,7 @@ public class stockPortfolioActivity extends Activity {
     private String URL = "http://fe404sleepnotfound.herokuapp.com/api/";
     private String URLParams;
     private String WTURL = " https://www.worldtradingdata.com/api/v1/stock?symbol=";
-    private String WTkey = "&api_token=ASX8iHsw80j4fFEXKXRVGhOV1VHV7RmzWASOZj6sjtFxz8de6iYNW40Uw4HQ";
+    private String WTkey = "&api_token=UN57mJ2dsqDQxVTJIaJ7diF85Au3B1iU6ERGKlMgEn9pg6z5vOchKpbJCYDz";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +47,7 @@ public class stockPortfolioActivity extends Activity {
     /**
      * Will query the api from php to get the user stock data
      */
-    private void getUserStock(){
+    public void getUserStock() {
         //get API Token
         try {
             URLParams = "api/cash";
@@ -57,7 +57,7 @@ public class stockPortfolioActivity extends Activity {
             cash = retreiveDataObject.getString("cashleft");
             Log.wtf(TAG, cash);
             cashView.setText(cash);
-        }catch (Exception e ){
+        } catch (Exception e) {
             Log.d(TAG, "error");
         }
 
@@ -67,25 +67,25 @@ public class stockPortfolioActivity extends Activity {
             String retreiveDataString = retreiveData.execute().get().toString();
             JSONArray retreiveDataObject = new JSONArray(retreiveDataString);
             userStock = new ArrayList<>();
-            for(int i = 0; i < retreiveDataObject.length(); i ++){
+            for (int i = 0; i < retreiveDataObject.length(); i++) {
                 JSONObject temoObj = retreiveDataObject.getJSONObject(i);
-                RetreiveData retreiveDataWT = new RetreiveData(WTURL, temoObj.getString("stockTicker")+WTkey, "GET","");
+                RetreiveData retreiveDataWT = new RetreiveData(WTURL, temoObj.getString("stockTicker") + WTkey, "GET", "");
                 String retreiveDataStringWT = retreiveDataWT.execute().get().toString();
                 JSONObject retreiveDataObjectWT = new JSONObject(retreiveDataStringWT);
                 Log.wtf(TAG, retreiveDataObjectWT.get("data").toString());
                 JSONArray tempWTArray = new JSONArray(retreiveDataObjectWT.get("data").toString());
                 JSONObject tempWTObj = new JSONObject(tempWTArray.getJSONObject(0).toString());
                 Log.wtf(TAG, tempWTObj.getString("name"));
-                stockObject temp = new stockObject(tempWTObj.getString("name"),temoObj.getString("stockTicker"), temoObj.getString("buyPrice"), temoObj.getString("amount"));
+                stockObject temp = new stockObject(tempWTObj.getString("name"), temoObj.getString("stockTicker"), temoObj.getString("buyPrice"), temoObj.getString("amount"));
                 userStock.add(temp);
             }
             displayStocks();
-        }catch (Exception e ){
+        } catch (Exception e) {
             Log.d(TAG, "error");
         }
     }
 
-    private void displayStocks(){
+    private void displayStocks() {
         cashView.setText(String.valueOf(cash));
 
         RecyclerView recyclerView = findViewById(R.id.stocksView);
