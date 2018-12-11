@@ -7,7 +7,14 @@ public class stockObject {
     private String price_open;
     private String amount;
 
-
+    /**
+     * Object that is used to represent the data that is in the user portfolio for a given stock
+     *
+     * @param name of stock
+     * @param symbol of the stock
+     * @param price_open price of the stock
+     * @param amount amount of the stock that the user owns
+     */
     public stockObject(String name, String symbol, String price_open, String amount){
         this.name = name;
         this.symbol = symbol;

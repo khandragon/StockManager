@@ -30,11 +30,22 @@ public class stockRecyclerAdapter extends RecyclerView.Adapter<stockRecyclerAdap
     private String URL = "http://fe404sleepnotfound.herokuapp.com/api/";
     private String URLParams = "api/sell?";
 
+    /**
+     * Constructor to set the arraylist and the context for the recycler view
+     * @param stocks arraylist of stockObjects
+     * @param mContext sets the context
+     */
     public stockRecyclerAdapter(ArrayList<stockObject> stocks, Context mContext) {
         this.stocks = stocks;
         this.mContext = mContext;
     }
 
+    /**
+     * Will create the view holder for the recycler view
+     * @param parent the viewGroup for the holder
+     * @param viewType the view type
+     * @return the holder for the recycler activity
+     */
     @Override
     public stockRecyclerAdapter.ViewHolderStock onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_user_stock, parent, false);
@@ -42,21 +53,25 @@ public class stockRecyclerAdapter extends RecyclerView.Adapter<stockRecyclerAdap
         return holder;
     }
 
+    /**
+     * binds the data to the holder and assigns it a position
+     * @param holder
+     * @param position
+     */
     @Override
     public void onBindViewHolder(ViewHolderStock holder, int position) {
         holder.nameView.setText(stocks.get(position).getName());
         holder.amountView.setText(stocks.get(position).getAmount());
         holder.price_openView.setText(stocks.get(position).getPrice_open());
         holder.symbolView.setText(stocks.get(position).getSymbol());
-
+        //creates a on lonc click listner in order to sell a stock that is in your stocks
         holder.stockViewLayout.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View view) {
-                Toast.makeText(mContext, "Long Click", Toast.LENGTH_SHORT).show();
+                Toast.makeText(mContext,"Long Click",Toast.LENGTH_SHORT).show();
                 AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
                 builder.setTitle(R.string.sellStock);
-                builder.setMessage(mContext.getResources().getString(R.string.sellStockQuestion1) + " " + stocks.get(position).getName() + " " + mContext.getResources().getString(R.string.sellStockQuestion2));
-
+                builder.setMessage( mContext.getResources().getString(R.string.sellStockQuestion1)+ " " + stocks.get(position).getName() + " " + mContext.getResources().getString(R.string.sellStockQuestion2));
                 //makes a editText of type number so there cannot be a error for string input
                 NumberPicker numberPicker = new NumberPicker(mContext);
                 numberPicker.setMinValue(1);
@@ -90,19 +105,29 @@ public class stockRecyclerAdapter extends RecyclerView.Adapter<stockRecyclerAdap
         });
     }
 
+    /**
+     * Gets the size of the arraylist
+     * @return size of the arrayList
+     */
     @Override
     public int getItemCount() {
         return stocks.size();
     }
 
-    public class ViewHolderStock extends RecyclerView.ViewHolder {
-
+    /**
+     * ViewHolder class for the stockPortfolio recycler view
+     */
+    public class ViewHolderStock extends RecyclerView.ViewHolder{
         TextView nameView;
         TextView symbolView;
         TextView price_openView;
         TextView amountView;
         RelativeLayout stockViewLayout;
 
+        /**
+         * Creates the view Holder
+         * @param itemView a row int he recycler view
+         */
         public ViewHolderStock(View itemView) {
             super(itemView);
             nameView = itemView.findViewById(R.id.nameView);
