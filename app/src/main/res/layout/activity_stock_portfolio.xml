@@ -67,7 +67,7 @@
                 android:text="@string/companyName"
                 android:gravity="center"
                 android:fontFamily="sans-serif-condensed"
-                android:background="@color/pinkishRed"
+                android:background="@color/orange"
                 android:textStyle="bold"
                 android:textColor="@color/white"
                 android:textSize="24sp"/>
@@ -78,7 +78,7 @@
                 android:text="@string/symbol"
                 android:gravity="center"
                 android:fontFamily="sans-serif-condensed"
-                android:background="@color/pinkishRed"
+                android:background="@color/orange"
                 android:textStyle="bold"
                 android:textColor="@color/white"
                 android:textSize="24sp"/>
@@ -100,7 +100,7 @@
                 android:text="@string/amountOwned"
                 android:gravity="center"
                 android:fontFamily="sans-serif-condensed"
-                android:background="@color/pinkishRed"
+                android:background="@color/orange"
                 android:textColor="@color/white"
                 android:textStyle="bold"
                 android:textSize="24sp"/>
