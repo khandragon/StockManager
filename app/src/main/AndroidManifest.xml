@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.dimitar.fe404sleepnotfound">
-    
-    <uses-permission android:name="android.permission.INTERNET"></uses-permission>
+
+    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-
     <uses-permission android:name="android.permission.READ_CONTACTS" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -24,15 +24,21 @@
         <activity android:name=".menu.SettingsActivity" />
         <activity android:name=".menu.AboutActivity" />
         <activity android:name=".notes.NotesActivity" />
-        <activity android:name=".foreignExchange.ForeignExchangeActivity"></activity>
-        <activity android:name=".notes.NewNoteActivity"></activity>
+        <activity android:name=".quotes.StockActivity" />
+        <activity android:name=".quotes.StockInfo" />
+        <activity android:name=".foreignExchange.ForeignExchangeActivity" />
+        <activity android:name=".notes.NewNoteActivity" />
         <activity android:name=".calculator.CalculatorActivity">
             <intent-filter>
                 <action android:name="android.intent.action.SENDTO" />
+
                 <data android:scheme="mailto" />
+
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
         <activity android:name=".HintActivity" />
+        <activity android:name=".stockPortfolio.stockPortfolioActivity"></activity>
     </application>
+
 </manifest>

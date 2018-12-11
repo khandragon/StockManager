@@ -15,7 +15,10 @@ import com.dimitar.fe404sleepnotfound.calculator.CalculatorActivity;
 import com.dimitar.fe404sleepnotfound.foreignExchange.ForeignExchangeActivity;
 import com.dimitar.fe404sleepnotfound.menu.AboutActivity;
 import com.dimitar.fe404sleepnotfound.menu.MenuActivity;
+import com.dimitar.fe404sleepnotfound.menu.SettingsActivity;
 import com.dimitar.fe404sleepnotfound.notes.NotesActivity;
+import com.dimitar.fe404sleepnotfound.quotes.StockActivity;
+import com.dimitar.fe404sleepnotfound.stockPortfolio.stockPortfolioActivity;
 
 /**
  * Shows the user the application logo, a Menu, a list of launcher buttons for
@@ -38,7 +41,14 @@ public class MainActivity extends MenuActivity {
 
         //Get the username from SharedPreferences and display in bottom TextView
         SharedPreferences settings = getSharedPreferences("com.dimitar.fe404sleepnotfound", MODE_PRIVATE);
+
         String username = settings.getString("username", getString(R.string.noUser));
+
+        if(!settings.contains("username")) {
+            Intent openSettings = new Intent(this, SettingsActivity.class);
+            startActivity(openSettings);
+        }
+
         TextView userTxtView = findViewById(R.id.username);
         userTxtView.setText(username);
     }
@@ -58,9 +68,10 @@ public class MainActivity extends MenuActivity {
         startActivity(openNotes);
     }
 	
-    public void openCalculator(View v){
+    public void openCalculator(View v) {
         Intent openCalculator = new Intent(this, CalculatorActivity.class);
         startActivity(openCalculator);
+    }
     /**
      * Implementation of the onClick for the Quotes btn that opens the Stock activity
      *
@@ -79,5 +90,10 @@ public class MainActivity extends MenuActivity {
     public void openHints(View v) {
         Intent hintsIntent = new Intent(this, HintActivity.class);
         startActivity(hintsIntent);
+    }
+
+    public void openStockPortfolio(View v){
+        Intent stockPortfolio = new Intent(this, stockPortfolioActivity.class);
+        startActivity(stockPortfolio);
     }
 }

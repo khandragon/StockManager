@@ -16,7 +16,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.dimitar.fe404sleepnotfound.R;
-import com.dimitar.fe404sleepnotfound.foreignExchange.foreignExchangeAsync.RetreiveCurrencyData;
+import com.dimitar.fe404sleepnotfound.RetreiveData;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -146,7 +146,7 @@ public class OptionFragment extends Fragment {
      */
     private void getRatesList(){
         try{
-            RetreiveCurrencyData retreveRates = new RetreiveCurrencyData(currencyListUrl, openExchangeratesKey);
+            RetreiveData retreveRates = new RetreiveData(currencyListUrl, openExchangeratesKey, "GET", "");
             String currencyListString = retreveRates.execute().get().toString();
             JSONObject getRatesJson = new JSONObject(currencyListString);
             currencyListString = getRatesJson.get("rates").toString();

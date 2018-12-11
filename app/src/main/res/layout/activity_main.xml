@@ -61,11 +61,13 @@
             <Button
                 android:id="@+id/stockQuote"
                 android:layout_width="0dp"
+                android:layout_weight="1"
                 android:layout_height="match_parent"
                 android:drawableEnd="@drawable/stocks"
                 android:text="@string/stockQuotes"
                 android:backgroundTint="@color/buttonBG"
-                android:textColor="@color/white"/>
+                android:textColor="@color/white"
+                android:onClick="openQuotes"/>
             <Button
                 android:id="@+id/notes"
                 android:layout_width="0dp"
@@ -75,7 +77,6 @@
                 android:drawableEnd="@drawable/notes"
                 android:text="@string/notes"
                 android:onClick="openNotes"
-                android:backgroundTint="@color/buttonBG"
                 android:textColor="@color/white"/>
         </LinearLayout>
 
@@ -99,12 +100,13 @@
             <Button
                 android:id="@+id/stockPortfolioMgmnt"
                 android:layout_width="0dp"
-                android:layout_weight="1"
                 android:layout_height="match_parent"
-                android:drawableEnd="@drawable/portfolio"
-                android:text="@string/portfolio"
+                android:layout_weight="1"
                 android:backgroundTint="@color/buttonBG"
-                android:textColor="@color/white"/>
+                android:drawableEnd="@drawable/portfolio"
+                android:onClick="openStockPortfolio"
+                android:text="@string/portfolio"
+                android:textColor="@color/white" />
         </LinearLayout>
 
         <TextView
