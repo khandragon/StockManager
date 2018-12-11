@@ -38,44 +38,49 @@ public class stockPortfolioActivity extends Activity {
         setContentView(R.layout.activity_stock_portfolio);
 
         settings = getSharedPreferences("com.dimitar.fe404sleepnotfound", MODE_PRIVATE);
-        settings = getSharedPreferences("com.dimitar.fe404sleepnotfound", MODE_PRIVATE);
 
         cashView = findViewById(R.id.cashView);
         getUserStock();
     }
 
     /**
-     * Will query the api from php to get the user stock data
+     * Querrys the php api to get the stocks that the user has
      */
     private void getUserStock(){
-        //get API Token
+        //Will get the cash that the user has in order to
         try {
             URLParams = "api/cash";
+            //all api calls use the RetreiveData object which is a async task
             RetreiveData retreiveData = new RetreiveData(URL, URLParams, "GET", settings.getString("JWToken", "none"));
             String retreiveDataString = retreiveData.execute().get().toString();
             JSONObject retreiveDataObject = new JSONObject(retreiveDataString);
             cash = retreiveDataObject.getString("cashleft");
-            Log.wtf(TAG, cash);
+            Log.d(TAG, cash);
+            //This will set the account balance for the user to display on the stockPortfolio activity
             cashView.setText(cash);
         }catch (Exception e ){
             Log.d(TAG, "error");
         }
 
+        //Will get all stocks that the user has from the php api and add it to a arrayList of stockObjects
         try {
             URLParams = "api/allstocks";
             RetreiveData retreiveData = new RetreiveData(URL, URLParams, "GET", settings.getString("JWToken", "none"));
             String retreiveDataString = retreiveData.execute().get().toString();
             JSONArray retreiveDataObject = new JSONArray(retreiveDataString);
             userStock = new ArrayList<>();
+            //Goes through the Json object to add it to the arraylist
             for(int i = 0; i < retreiveDataObject.length(); i ++){
                 JSONObject temoObj = retreiveDataObject.getJSONObject(i);
+                //Querrys the WT api in order to get the name of the company because only the ticker is sent from the PHP api
                 RetreiveData retreiveDataWT = new RetreiveData(WTURL, temoObj.getString("stockTicker")+WTkey, "GET","");
                 String retreiveDataStringWT = retreiveDataWT.execute().get().toString();
                 JSONObject retreiveDataObjectWT = new JSONObject(retreiveDataStringWT);
-                Log.wtf(TAG, retreiveDataObjectWT.get("data").toString());
+                Log.d(TAG, retreiveDataObjectWT.get("data").toString());
                 JSONArray tempWTArray = new JSONArray(retreiveDataObjectWT.get("data").toString());
                 JSONObject tempWTObj = new JSONObject(tempWTArray.getJSONObject(0).toString());
-                Log.wtf(TAG, tempWTObj.getString("name"));
+                Log.d(TAG, tempWTObj.getString("name"));
+                //Will and a new stock object to the array list so it can later be added to the recycler view
                 stockObject temp = new stockObject(tempWTObj.getString("name"),temoObj.getString("stockTicker"), temoObj.getString("buyPrice"), temoObj.getString("amount"));
                 userStock.add(temp);
             }
@@ -85,13 +90,13 @@ public class stockPortfolioActivity extends Activity {
         }
     }
 
+    /**
+     * Takes the JsonArray of userStocks and fills the recyclerView with the data using a custom adapter
+     */
     private void displayStocks(){
-        cashView.setText(String.valueOf(cash));
-
         RecyclerView recyclerView = findViewById(R.id.stocksView);
         adapter = new stockRecyclerAdapter(userStock, this);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-
     }
 }
