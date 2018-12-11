@@ -10,7 +10,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:weightSum="10">
+        android:weightSum="10"
+        android:layout_margin="10dp">
 
 
         <TextView
@@ -66,6 +67,8 @@
                 android:layout_weight="1"
                 android:text="@string/companyName"
                 android:gravity="center"
+                android:maxLines="1"
+                android:ellipsize="end"
                 android:fontFamily="sans-serif-condensed"
                 android:background="@color/orange"
                 android:textStyle="bold"
@@ -80,6 +83,8 @@
                 android:fontFamily="sans-serif-condensed"
                 android:background="@color/orange"
                 android:textStyle="bold"
+                android:maxLines="1"
+                android:ellipsize="end"
                 android:textColor="@color/white"
                 android:textSize="24sp"/>
             <TextView
@@ -89,9 +94,11 @@
                 android:text="@string/buyPrice"
                 android:gravity="center"
                 android:fontFamily="sans-serif-condensed"
-                android:background="@color/pinkishRed"
+                android:background="@color/orange"
                 android:textColor="@color/white"
                 android:textStyle="bold"
+                android:maxLines="1"
+                android:ellipsize="end"
                 android:textSize="24sp"/>
             <TextView
                 android:layout_width="0dp"
@@ -99,6 +106,8 @@
                 android:layout_weight="1"
                 android:text="@string/amountOwned"
                 android:gravity="center"
+                android:maxLines="1"
+                android:ellipsize="end"
                 android:fontFamily="sans-serif-condensed"
                 android:background="@color/orange"
                 android:textColor="@color/white"
