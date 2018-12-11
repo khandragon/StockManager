@@ -51,7 +51,7 @@ public class StockActivity extends MenuActivity {
     private static final String TAG = "HttpURLConn";
 
     //api password for stock api
-    private String apiToken = "gHYVnybcdk2fooQ9INz7b11s23qqG57Xxn4197VPboOUYmO2hB7ra6bmKwoF";
+    private String apiToken = "5M6o86SlgPmMOolQYNFdtKISBP2DxCepbNIN1XkIhQqv63Ey872DSvezjkXm";
 
     private EditText urlText;
     private TextView textView;
