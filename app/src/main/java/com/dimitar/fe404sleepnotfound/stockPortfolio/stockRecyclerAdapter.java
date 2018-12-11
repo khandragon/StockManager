@@ -68,7 +68,6 @@ public class stockRecyclerAdapter extends RecyclerView.Adapter<stockRecyclerAdap
                      @Override
                      public void onClick(DialogInterface dialogInterface, int i) {
                          //this will be replaced with selling the stock or a error
-                         Toast.makeText(mContext, numberPicker.getValue(),Toast.LENGTH_SHORT).show();
                          //Append the ticker and amount to URL params
                          String urlArgs = "quantity="+numberPicker.getValue()+"&ticker="+stocks.get(position).getSymbol();
                          URLParams += urlArgs;
