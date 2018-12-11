@@ -30,7 +30,7 @@ import javax.net.ssl.HttpsURLConnection;
 
 public class StockInfo extends MenuActivity {
     private static final String TAG = "StockInfo";
-    private String apiToken = "gHYVnybcdk2fooQ9INz7b11s23qqG57Xxn4197VPboOUYmO2hB7ra6bmKwoF";
+    private String apiToken = "UN57mJ2dsqDQxVTJIaJ7diF85Au3B1iU6ERGKlMgEn9pg6z5vOchKpbJCYDz";
 
     private TextView tickerName;
     private TextView tickerCompany;

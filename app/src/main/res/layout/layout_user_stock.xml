@@ -7,30 +7,58 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:weightSum="4">
 
         <TextView
             android:id="@+id/nameView"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:text="Test"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:textSize="22sp"
+            android:fontFamily="sans-serif-smallcaps"
+            android:paddingTop="18dp"
+            android:paddingBottom="18dp"/>
 
         <TextView
             android:id="@+id/symbolView"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:gravity="center"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:textSize="22sp"
+            android:fontFamily="sans-serif-smallcaps"
+            android:paddingTop="18dp"
+            android:paddingBottom="18dp"/>
 
         <TextView
             android:id="@+id/price_openView"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textSize="22sp"
+            android:fontFamily="sans-serif-smallcaps"
+            android:paddingTop="18dp"
+            android:paddingBottom="18dp"/>
 
         <TextView
             android:id="@+id/amountView"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:textSize="22sp"
+            android:fontFamily="sans-serif-smallcaps"
+            android:paddingTop="18dp"
+            android:paddingBottom="18dp"/>
     </LinearLayout>
 </RelativeLayout>

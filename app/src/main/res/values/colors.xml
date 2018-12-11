@@ -11,4 +11,6 @@
     <color name="white">#FFF</color>
     <color name="colorPrimaryLighter">#393360</color>
     <color name="colorPrimaryBG">#514889</color>
+    <color name="evenCol">#FFFF7043</color>
+    <color name="oddCol">#ff8a65</color>
 </resources>

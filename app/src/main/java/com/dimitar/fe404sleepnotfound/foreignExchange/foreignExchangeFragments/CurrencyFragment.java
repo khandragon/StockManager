@@ -10,7 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.dimitar.fe404sleepnotfound.R;
-import com.dimitar.fe404sleepnotfound.foreignExchange.foreignExchangeAsync.RetreiveCurrencyData;
+import com.dimitar.fe404sleepnotfound.RetreiveData;
 
 import java.util.ArrayList;
 import java.util.ConcurrentModificationException;
@@ -51,7 +51,7 @@ public class CurrencyFragment extends Fragment {
      */
     private void getCurrencyList(){
         try{
-            RetreiveCurrencyData retreveCurrencies = new RetreiveCurrencyData(currencyListUrl, "");
+            RetreiveData retreveCurrencies = new RetreiveData(currencyListUrl, "", "GET", "");
             String currencyListString = retreveCurrencies.execute().get().toString();
             Log.d(TAG, currencyListString);
             createCurrenciesList(currencyListString);

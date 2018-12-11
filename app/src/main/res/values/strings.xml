@@ -70,8 +70,15 @@
     <string name="noContactInput">Please input the contact\'s name you are looking for</string>
     <string name="noEmail">No email has been set. Please look for a contact\'s email by their name</string>
     <string name="notResults">Nothing has been calculated yet. Input some numbers in the calculator and hit calculate first</string>
-    <string name="remainingCash">Remaining Cash:</string>
+    <string name="remainingCash">Account balance</string>
     <string name="sellStock">Sell Stock</string>
     <string name="sellStockQuestion1">How many stocks of </string>
     <string name="sellStockQuestion2"> do you want to sell?</string>
+    <string name="portfolioTitle">Manage your portfolio</string>
+    <string name="stockList">Stocks you own</string>
+    <string name="symbol">Ticker symbol</string>
+    <string name="companyName">Company</string>
+    <string name="buyPrice">Buy price</string>
+    <string name="amountOwned">Amount</string>
+    <string name="buy">Buy</string>
 </resources>
