@@ -54,7 +54,9 @@ public class stockPortfolioActivity extends Activity {
             RetreiveData retreiveData = new RetreiveData(URL, URLParams, "GET", settings.getString("JWToken", "none"));
             String retreiveDataString = retreiveData.execute().get().toString();
             JSONObject retreiveDataObject = new JSONObject(retreiveDataString);
-            cashView.setText(retreiveDataObject.getString("cashleft"));
+            cash = retreiveDataObject.getString("cashleft");
+            Log.wtf(TAG, cash);
+            cashView.setText(cash);
         }catch (Exception e ){
             Log.d(TAG, "error");
         }
