@@ -1,6 +1,8 @@
 package com.dimitar.fe404sleepnotfound.quotes;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -14,10 +16,12 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.NumberPicker;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.dimitar.fe404sleepnotfound.R;
+import com.dimitar.fe404sleepnotfound.RetreiveData;
 import com.dimitar.fe404sleepnotfound.menu.MenuActivity;
 
 import org.json.JSONArray;
@@ -47,7 +51,7 @@ public class StockActivity extends MenuActivity {
     private static final String TAG = "HttpURLConn";
 
     //api password for stock api
-    private String apiToken = "gHYVnybcdk2fooQ9INz7b11s23qqG57Xxn4197VPboOUYmO2hB7ra6bmKwoF";
+    private String apiToken = "UN57mJ2dsqDQxVTJIaJ7diF85Au3B1iU6ERGKlMgEn9pg6z5vOchKpbJCYDz";
 
     private EditText urlText;
     private TextView textView;
@@ -59,6 +63,9 @@ public class StockActivity extends MenuActivity {
     private String lastSearch = null;
     private LinearLayoutManager mLayoutManager;
     private StockListAdapter adapter;
+
+    private String URL = "http://fe404sleepnotfound.herokuapp.com/api/";
+    private String URLParams = "api/buy?";
 
     /**
      * Custom impelmentation fo the onCreate lifecycle method. disables the add btn by default
@@ -130,6 +137,45 @@ public class StockActivity extends MenuActivity {
         Log.i(TAG, "removing " + ticker);
         //remove from the list
         adapter.remove(ticker);
+    }
+
+    public void buyStocks(View view){
+        LinearLayout linearLayout = (LinearLayout) view.getParent();
+        TextView textView = (TextView) linearLayout.getChildAt(0);
+        String ticker = (String) textView.getText();
+        Log.i(TAG, "buy  " + ticker);
+
+        NumberPicker numberPicker = new NumberPicker(this);
+        numberPicker.setMinValue(1);
+        numberPicker.setMaxValue(10000);
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setView(numberPicker);
+        builder.setTitle("Buy Stocks");
+        builder.setMessage("How many stocks would you like to buy:");
+        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                int quantity = numberPicker.getValue();
+                String urlArg = "quantity="+quantity+"&ticker="+ticker;
+                URLParams += urlArg;
+                //Get jwt token
+                SharedPreferences settings = getSharedPreferences("com.dimitar.fe404sleepnotfound", MODE_PRIVATE);
+                String token = settings.getString("JWToken", "none");
+                RetreiveData retreiveData = new RetreiveData(URL, URLParams, "POST", token);
+                retreiveData.execute();
+                Toast.makeText(StockActivity.this, "Buying " + quantity +" Stocks From "+ticker, Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        builder.setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Log.i(TAG,"cancel");
+            }
+        });
+        AlertDialog alert = builder.create();
+        alert.show();
+
     }
 
     /**
