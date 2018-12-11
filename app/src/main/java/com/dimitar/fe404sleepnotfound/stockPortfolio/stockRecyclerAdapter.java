@@ -23,7 +23,7 @@ import java.util.ArrayList;
 
 import static android.content.Context.MODE_PRIVATE;
 
-public class stockRecyclerAdapter extends RecyclerView.Adapter<stockRecyclerAdapter.ViewHolderStock>{
+public class stockRecyclerAdapter extends RecyclerView.Adapter<stockRecyclerAdapter.ViewHolderStock> {
 
     private ArrayList<stockObject> stocks;
     private Context mContext;
@@ -76,25 +76,28 @@ public class stockRecyclerAdapter extends RecyclerView.Adapter<stockRecyclerAdap
                 NumberPicker numberPicker = new NumberPicker(mContext);
                 numberPicker.setMinValue(1);
                 numberPicker.setMaxValue(Integer.parseInt(stocks.get(position).getAmount()));
-                //EditText input = new EditText(mContext);
-                //input.setInputType(InputType.TYPE_CLASS_NUMBER);
+
                 builder.setView(numberPicker);
                 builder.setPositiveButton(R.string.sellStock, new DialogInterface.OnClickListener() {
-                     @Override
-                     public void onClick(DialogInterface dialogInterface, int i) {
-                         //this will be replaced with selling the stock or a error
-                         //Append the ticker and amount to URL params
-                         String urlArgs = "quantity="+numberPicker.getValue()+"&ticker="+stocks.get(position).getSymbol();
-                         URLParams += urlArgs;
-                         //Get the JWT token
-                         SharedPreferences settings = mContext.getSharedPreferences("com.dimitar.fe404sleepnotfound", MODE_PRIVATE);
-                         String token = settings.getString("JWToken", "none");
-                         RetreiveData retreiveData = new RetreiveData(URL, URLParams, "POST", token);
-                         retreiveData.execute();
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        //this will be replaced with selling the stock or a error
+                        //Append the ticker and amount to URL params
+                        int quantity = numberPicker.getValue();
+                        String tickerName= stocks.get(position).getSymbol();
+                        String urlArgs = "quantity=" + quantity + "&ticker=" + tickerName;
+                        URLParams += urlArgs;
+                        //Get the JWT token
+                        SharedPreferences settings = mContext.getSharedPreferences("com.dimitar.fe404sleepnotfound", MODE_PRIVATE);
+                        String token = settings.getString("JWToken", "none");
+                        RetreiveData retreiveData = new RetreiveData(URL, URLParams, "POST", token);
+                        retreiveData.execute();
+                        stockRecyclerAdapter.this.notifyDataSetChanged();
+                        ((stockPortfolioActivity) mContext).getUserStock();
+                        Toast.makeText(mContext, "Selling " + quantity +" Stocks From "+tickerName, Toast.LENGTH_SHORT).show();
+                    }
+                });
 
-                     }
-                 });
-                //Displays the alert dialog to sell a stock
                 AlertDialog ad = builder.create();
                 ad.show();
                 return true;

@@ -30,7 +30,7 @@ public class stockPortfolioActivity extends Activity {
     private String URL = "http://fe404sleepnotfound.herokuapp.com/api/";
     private String URLParams;
     private String WTURL = " https://www.worldtradingdata.com/api/v1/stock?symbol=";
-    private String WTkey = "&api_token=ASX8iHsw80j4fFEXKXRVGhOV1VHV7RmzWASOZj6sjtFxz8de6iYNW40Uw4HQ";
+    private String WTkey = "&api_token=UN57mJ2dsqDQxVTJIaJ7diF85Au3B1iU6ERGKlMgEn9pg6z5vOchKpbJCYDz";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,8 +46,8 @@ public class stockPortfolioActivity extends Activity {
     /**
      * Querrys the php api to get the stocks that the user has
      */
-    private void getUserStock(){
-        //Will get the cash that the user has in order to
+    public void getUserStock() {
+        //get API Token
         try {
             URLParams = "api/cash";
             //all api calls use the RetreiveData object which is a async task
@@ -58,7 +58,7 @@ public class stockPortfolioActivity extends Activity {
             Log.d(TAG, cash);
             //This will set the account balance for the user to display on the stockPortfolio activity
             cashView.setText(cash);
-        }catch (Exception e ){
+        } catch (Exception e) {
             Log.d(TAG, "error");
         }
 
@@ -85,7 +85,7 @@ public class stockPortfolioActivity extends Activity {
                 userStock.add(temp);
             }
             displayStocks();
-        }catch (Exception e ){
+        } catch (Exception e) {
             Log.d(TAG, "error");
         }
     }
