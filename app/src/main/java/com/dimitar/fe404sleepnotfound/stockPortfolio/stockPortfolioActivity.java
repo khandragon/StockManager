@@ -2,6 +2,7 @@ package com.dimitar.fe404sleepnotfound.stockPortfolio;
 
 import android.app.Activity;
 import android.content.SharedPreferences;
+import android.nfc.Tag;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -28,12 +29,15 @@ public class stockPortfolioActivity extends Activity {
 
     private String URL = "http://fe404sleepnotfound.herokuapp.com/api/";
     private String URLParams;
+    private String WTURL = " https://www.worldtradingdata.com/api/v1/stock?symbol=";
+    private String WTkey = "&api_token=ASX8iHsw80j4fFEXKXRVGhOV1VHV7RmzWASOZj6sjtFxz8de6iYNW40Uw4HQ";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_stock_portfolio);
 
+        settings = getSharedPreferences("com.dimitar.fe404sleepnotfound", MODE_PRIVATE);
         settings = getSharedPreferences("com.dimitar.fe404sleepnotfound", MODE_PRIVATE);
 
         cashView = findViewById(R.id.cashView);
@@ -62,9 +66,15 @@ public class stockPortfolioActivity extends Activity {
             JSONArray retreiveDataObject = new JSONArray(retreiveDataString);
             userStock = new ArrayList<>();
             for(int i = 0; i < retreiveDataObject.length(); i ++){
-                Log.wtf(TAG, retreiveDataObject.getJSONObject(i).toString());
                 JSONObject temoObj = retreiveDataObject.getJSONObject(i);
-                stockObject temp = new stockObject("temp",temoObj.getString("stockTicker"), temoObj.getString("buyPrice"), temoObj.getString("amount"));
+                RetreiveData retreiveDataWT = new RetreiveData(WTURL, temoObj.getString("stockTicker")+WTkey, "GET","");
+                String retreiveDataStringWT = retreiveDataWT.execute().get().toString();
+                JSONObject retreiveDataObjectWT = new JSONObject(retreiveDataStringWT);
+                Log.wtf(TAG, retreiveDataObjectWT.get("data").toString());
+                JSONArray tempWTArray = new JSONArray(retreiveDataObjectWT.get("data").toString());
+                JSONObject tempWTObj = new JSONObject(tempWTArray.getJSONObject(0).toString());
+                Log.wtf(TAG, tempWTObj.getString("name"));
+                stockObject temp = new stockObject(tempWTObj.getString("name"),temoObj.getString("stockTicker"), temoObj.getString("buyPrice"), temoObj.getString("amount"));
                 userStock.add(temp);
             }
             displayStocks();
