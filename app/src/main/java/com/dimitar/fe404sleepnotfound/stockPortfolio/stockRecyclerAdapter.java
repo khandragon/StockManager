@@ -61,7 +61,6 @@ public class stockRecyclerAdapter extends RecyclerView.Adapter<stockRecyclerAdap
     @Override
     public void onBindViewHolder(ViewHolderStock holder, int position) {
         String price = stocks.get(position).getPrice_open();
-        price = price.substring(0,price.indexOf(".")+3);
         holder.nameView.setText(stocks.get(position).getName());
         holder.amountView.setText(stocks.get(position).getAmount());
         holder.price_openView.setText(price);
