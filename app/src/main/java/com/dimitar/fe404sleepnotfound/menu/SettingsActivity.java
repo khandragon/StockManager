@@ -151,7 +151,6 @@ public class SettingsActivity extends MenuActivity {
             Log.wtf(TAG, emailTxt);
             Log.wtf(TAG, passwordTxt);
             URLParams = URLParams + "email="+emailTxt+"&password="+passwordTxt;
-            URLParams = URLEncoder.encode(URLParams, "UTF-8");
             Log.wtf(TAG,URL + URLParams);
             RetreiveData retreiveData = new RetreiveData(URL, URLParams, "POST", "");
             String retreiveDataString = retreiveData.execute().get().toString();
